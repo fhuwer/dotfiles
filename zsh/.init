@@ -1,0 +1,30 @@
+# ~/.init
+
+if [[ "`hostname`" == "ewpc5" ]]; then
+   # Source ROOT
+   pushd /opt/root-6.08.00 > /dev/null
+   source bin/thisroot.sh
+   popd > /dev/null
+
+   # Load virtualenv
+   export WORKON_HOME=~/.pyenvs
+   [[ ! -a "$WORKON_HOME" ]] && mkdir "$WORKON_HOME"
+   source /usr/local/bin/virtualenvwrapper.sh
+fi
+
+if [[ "`hostname`" == "rathong" ]]; then
+   export PATH=/home/friedemann/bin:$PATH
+
+   # Source ROOT
+   source /opt/root-6.08.04/bin/thisroot.sh
+
+   # Source vte (needed so a new terminal tab opens in the same working directory)
+   source /etc/profile.d/vte.sh
+
+   source /usr/bin/virtualenvwrapper.sh
+fi
+
+# FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PYTHONSTARTUP=$HOME/.pythonrc

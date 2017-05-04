@@ -1,0 +1,24 @@
+// vim:ts=3:sw=3
+{
+   "border": "0",
+   "current_border_width": 0,
+   "floating": "auto_off",
+   "geometry": {
+      "height": 344,
+      "width": 682,
+      "x": 0,
+      "y": 0
+   },
+   "name": "Mozilla Thunderbird",
+   "percent": 1,
+   "swallows": [
+      {
+         "class": "^Thunderbird$",
+         "instance": "^Mail$"
+      // "title": "^Junk\\ E\\-Mail\\ \\-\\ friedemann\\@neuhaus\\-tech\\.de\\ \\-\\ Mozilla\\ Thunderbird$",
+      // "transient_for": "^$",
+      // "window_role": "^3pane$"
+      }
+   ],
+   "type": "con"
+}
