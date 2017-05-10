@@ -13,7 +13,7 @@ syntax on
 " }}}
 
 " Set leader key {{{
-let mapleader = " "
+let mapleader = ";"
 " }}}
 
 " Local directories and functions {{{
@@ -69,29 +69,35 @@ set splitbelow                " New window below active (not above)
 
 " FastEscape {{{
 " Speed up transition from modes
-if ! has('gui_running')
-   set ttimeoutlen=10
-   augroup FastEscape
-      autocmd!
-      au InsertEnter * set timeoutlen=0
-      au InsertLeave * set timeoutlen=1000
-   augroup END
-endif
+"if ! has('gui_running')
+   "set ttimeoutlen=10
+   "augroup FastEscape
+      "autocmd!
+      "au InsertEnter * set timeoutlen=0
+      "au InsertLeave * set timeoutlen=1000
+   "augroup END
+"endif
 " }}}
 
 " Keybindings {{{
 
 " Fast switching of windows
-nnoremap <Leader>h <c-w>h
-nnoremap <Leader>j <c-w>j
-nnoremap <Leader>k <c-w>k
-nnoremap <Leader>l <c-w>l
+nnoremap <S-h> <c-w>h
+nnoremap <S-j> <c-w>j
+nnoremap <S-k> <c-w>k
+nnoremap <S-l> <c-w>l
+
+" Fast moving of windows
+nnoremap <C-S-h> <c-w>H
+nnoremap <C-S-j> <c-w>J
+nnoremap <C-S-k> <c-w>K
+nnoremap <C-S-l> <c-w>L
 
 " Write file
-nnoremap <Leader>s :update<CR>
+nnoremap <S-w> :update<CR>
 
 " Fast sudo write
-command SudoWrite execute ":w !sudo tee %<CR>"
+command! SudoWrite execute ":w !sudo tee %<CR>"
 
 " Paste toggle (,p)
 set pastetoggle=<leader>p
@@ -102,6 +108,12 @@ set clipboard=unnamedplus
 " Use tab and shift+tab for indentation
 vmap <Tab> >gv
 vmap <S-Tab> <gv
+
+" Follow file in new window
+nnoremap <Leader>gg :vertical wincmd f<CR>
+
+" Clear search
+nnoremap <Leader>n :noh<CR>
 
 " Strip trailing whitespace (,ss) {{{
 function! StripWhitespace () " {{{
@@ -117,7 +129,7 @@ endfunction " }}}
 " }}}
 
 " Filetypes ------------------------------------------------------------------
-
+  
 " Plugins {{{
 
 " set the runtime path to include Vundle and initialize
@@ -129,6 +141,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " VimTex
 Plugin 'lervag/vimtex'
+let g:vimtex_view_method = 'zathura'
 
 " Multi-Cursor (like sublime)
 Plugin 'terryma/vim-multiple-cursors'
@@ -142,7 +155,7 @@ Plugin 'raimondi/delimitmate'
 " Nerdtree (Sidebar for files)
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-map <C-o> :NERDTreeToggle<CR>
+map <F8> :NERDTreeToggle<CR>
 
 " Nerdcommenter
 Plugin 'scrooloose/nerdcommenter'
@@ -151,12 +164,22 @@ Plugin 'scrooloose/nerdcommenter'
 let g:ycm_confirm_extra_conf=0
 Plugin 'valloric/youcompleteme'
 
+" Syntax checks
+Plugin 'vim-syntastic/syntastic'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 " Auto align code (:Tabularize /[CHARACTER])
 Plugin 'godlygeek/tabular'
 
 " Display ctags output in sidebar
 Plugin 'majutsushi/tagbar'
-nmap <F8> :TagbarToggle<CR>
+nmap <S-F8> :TagbarToggle<CR>
 
 " fzf (check how to use)
 Plugin 'junegunn/fzf'
@@ -167,10 +190,6 @@ Plugin 'ap/vim-css-color'
 " Fast window resizing
 Plugin 'romgrk/winteract.vim'
 nmap <leader>r :InteractiveWindow<CR>
-
-" Vim Workspace -> Save workspace on end of session
-Plugin 'thaerkh/vim-workspace'
-nnoremap <leader>s :ToggleWorkspace<CR>
 
 " Gitgutter
 Plugin 'airblade/vim-gitgutter'
@@ -186,8 +205,8 @@ Plugin 'tpope/vim-fugitive'
 
 " Dict.cc lookup
 Bundle 'weinshec/vim-dictcc'
-inoremap <c-l> <Esc>:DictCur<CR>
-nnoremap <c-l> :DictCur<CR>
+inoremap <F3> <Esc>:DictCur<CR>
+nnoremap <F3> :DictCur<CR>
 
 " Airline
 let g:airline_powerline_fonts = 1		" Needed for powerline fonts (special chars)
@@ -209,5 +228,5 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 colorscheme solarized
-
+   
 " }}}
