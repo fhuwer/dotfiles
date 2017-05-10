@@ -41,3 +41,10 @@ alias root++=rootpp
 if [[ -a "$HOME/.zsh_aliases_local" ]]; then
    source $HOME/.zsh_aliases_local
 fi
+alias vim="vim --servername vim"
+
+if [[ "`hostname`" == "ewpc5" ]]; then
+   [[ -e "`which nvim | grep -v aliased | head -1`" ]] && alias vim='TERM=tmux-256color nvim'
+else
+   [[ -e "`which nvim | grep -v aliased | head -1`" ]] && alias vim='nvim'
+fi
