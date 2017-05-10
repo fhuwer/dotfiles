@@ -72,9 +72,9 @@
 ! }}}
 
 ! URxvt config {{{
-URxvt*saveLines:         100000
-URxvt*scrollBar:         false
-URxvt*scrollBar_right:   false
+URxvt.saveLines:         100000
+URxvt.scrollBar:         false
+URxvt.scrollBar_right:   false
 
 URxvt.font: xft:InconsolataForPowerline-dz:size=9:antialias=true:hinting=true
 URxvt.boldFont:
@@ -92,6 +92,8 @@ URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 ! Pos1 / End
 URxvt.keysym.Home: \033[1~
 URxvt.keysym.End:  \033[4~
+URxvt.keysym.KP_Home: \033[1~
+URxvt.keysym.KP_End:  \033[4~
 
 ! Ctrl+Arrows
 URxvt.keysym.Control-Left:    \033[1;5D
