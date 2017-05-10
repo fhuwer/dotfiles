@@ -10,6 +10,10 @@ if [[ "`hostname`" == "ewpc5" ]]; then
    export WORKON_HOME=~/.pyenvs
    [[ ! -a "$WORKON_HOME" ]] && mkdir "$WORKON_HOME"
    source /usr/local/bin/virtualenvwrapper.sh
+
+   # Set arduino paths
+   export ARDUINO_DIR=/opt/arduino
+   export ARDMK_DIR=/opt/arduino-mk
 fi
 
 if [[ "`hostname`" == "rathong" ]]; then
@@ -27,4 +31,8 @@ fi
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PYTHONSTARTUP=$HOME/.pythonrc
+# Keybindings for urxvt
+bindkey "\e[1~" beginning-of-line
+bindkey "\e[4~" end-of-line
+
+[[ -a "$HOME/.pythonrc" ]] && export PYTHONSTARTUP=$HOME/.pythonrc
