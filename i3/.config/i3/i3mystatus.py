@@ -11,6 +11,9 @@ hostname = os.uname()[1]
 if hostname == "ewpc5":
    mobile = False
    lanInterface = "eno1"
+if hostname == "sagarmatha":
+   mobile = False
+   lanInterface = "enp4s0"
 
 status = Status()
 
@@ -52,9 +55,9 @@ status.register("mem",
 )
 
 status.register("network",
-   interface="eno1",
-   format_up="eno1: {v4cidr} {network_graph}",
-   format_down="eno1: DOWN",
+   interface=lanInterface,
+   format_up="{interface}: {v4cidr} {network_graph}",
+   format_down="{interface}: DOWN",
    graph_width=20,
    start_color='#859900',
    end_color='#dc312e'
