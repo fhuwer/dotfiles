@@ -1,6 +1,7 @@
 " vim:fdm=marker:foldlevel=0
 " Settings -------------------------------------------------------------------
-
+set encoding=utf-8
+scriptencoding utf-8
 " Syntax and colorscheme {{{
 set t_ut=
 set background=dark
@@ -77,12 +78,16 @@ set splitbelow                " New window below active (not above)
 
 " Custom commands {{{
 
+" Source and edit init
+command! SI :source ~/.config/nvim/init.vim
+command! SE :tabedit ~/.config/nvim/init.vim
+
 " Terminal {{{
-function VTerm()
+function! VTerm()
    execute "vsplit"
    execute "terminal"
 endfunction
-function Term()
+function! Term()
    execute "split"
    execute "terminal"
 endfunction
@@ -122,6 +127,9 @@ set clipboard=unnamedplus
 vmap <Tab> >gv
 vmap <S-Tab> <gv
 
+" Spell check
+nnoremap <F4> :set spell spelllang=en_gb<CR>
+
 " Follow file in new window
 nnoremap <Leader>gg :vertical wincmd f<CR>
 
@@ -158,93 +166,52 @@ endfunction " }}}
 " set the runtime path to include vim-plug and initialize
 call plug#begin('~/.config/nvim/plugged')
 
-" VimTex
-Plug 'lervag/vimtex'
-let g:vimtex_view_method = 'zathura'
-
-" Multi-Cursor (like sublime)
-Plug 'terryma/vim-multiple-cursors'
-let g:multi_cursor_next_key='<C-d>'
-
-Plug 'flazz/vim-colorschemes'
-
-" Auto placing of brackets
-Plug 'raimondi/delimitmate'
-
-" Nerdtree (Sidebar for files)
+" Sidebars
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-map <F8> :NERDTreeToggle<CR>
-
-" Nerdcommenter
 Plug 'scrooloose/nerdcommenter'
-let g:NERDSpaceDelims = 1
-let g:NERDDefaultAlign = 'left'
-
-" YCM (code autocomplete)
-let g:ycm_confirm_extra_conf=0
-Plug 'valloric/youcompleteme'
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-
-" Syntax checks
-Plug 'neomake/neomake'
-let g:neomake_arduino_arduinomk_maker = {
-   \ 'exe': 'make',
-   \ 'args': [],
-   \ 'errorformat': '|| %f|%l col %c %s| %m' 
-\ }
-
-" Auto align code (:Tabularize /[CHARACTER])
-Plug 'godlygeek/tabular'
-
-" Display ctags output in sidebar
 Plug 'majutsushi/tagbar'
-nmap <S-F8> :TagbarToggle<CR>
 
-" fzf (check how to use)
-Plug 'junegunn/fzf'
+" Compiling, code completion/format + snippets
+Plug 'neomake/neomake'
+Plug 'godlygeek/tabular'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi'
+Plug 'raimondi/delimitmate'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
-" Preview hex colors
-Plug 'ap/vim-css-color'
-
-" Fast window resizing
-Plug 'romgrk/winteract.vim'
-nmap <leader>r :InteractiveWindow<CR>
-
-" Gitgutter
+" Git
 Plug 'airblade/vim-gitgutter'
-let g:gitgutter_realtime=1
-let g:gitgutter_map_keys=0
-set updatetime=250
-nnoremap <leader>gp :GitGutterPreviewHunk<CR>
-nnoremap <leader>gu :GitGutterUndoHunk<CR>
-nnoremap <leader>gs :GitGutterStageHunk<CR>
-
-" Fugitive
 Plug 'tpope/vim-fugitive'
 
-" Dict.cc lookup
+" Utilities
+Plug 'terryma/vim-multiple-cursors'
+Plug 'romgrk/winteract.vim'
 Plug 'weinshec/vim-dictcc'
-inoremap <F3> <Esc>:DictCur<CR>
-nnoremap <F3> :DictCur<CR>
-
-" Airline
-let g:airline_powerline_fonts = 1		" Needed for powerline fonts (special chars)
-let g:airline_theme = 'solarized'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-" Solarized color scheme
+Plug 'itchyny/lightline.vim'
+Plug 'zhou13/vim-easyescape'
 Plug 'altercation/vim-colors-solarized'
 
-" EasyEscape
-Plug 'zhou13/vim-easyescape'
-let g:easyescape_chars = { "j": 1, "k": 1 }
-let g:easyescape_timeout = 100
-cnoremap jk <ESC>
-cnoremap kj <ESC>
+" Filetype plugins
+Plug 'lervag/vimtex', { 'for': 'tex' }
+Plug 'vim-scripts/muttrc.vim'
 
-call plug#end()            " required
+call plug#end()
+
+" Load settings
+runtime custom/nerd.vim
+runtime custom/tagbar.vim
+runtime custom/neomake.vim
+runtime custom/deoplete.vim
+runtime custom/ultisnips.vim
+runtime custom/gitgutter.vim
+runtime custom/vim-multiple-cursors.vim
+runtime custom/winteract.vim
+runtime custom/vim-dictcc.vim
+runtime custom/lightline.vim
+runtime custom/easyescape.vim
+runtime custom/vimtex.vim
 
 colorscheme solarized
 
