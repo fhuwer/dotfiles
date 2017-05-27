@@ -24,6 +24,7 @@ exec --no-startup-id "setxkbmap us"
 # Options
 focus_follows_mouse no
 force_focus_wrapping no
+mouse_warping none
 workspace_auto_back_and_forth yes
 
 # Remove borders on floating and only on screen windows
@@ -175,6 +176,9 @@ bindsym $mod+Shift+F11 exec --no-startup-id dbus-send --print-reply --dest=org.m
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioPrev exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+bindsym XF86AudioPlay exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+bindsym XF86AudioNext exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 bindsym $mod+KP_Add exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2%
 bindsym $mod+KP_Subtract exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%
 bindsym $mod+KP_Multiply exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
@@ -241,6 +245,7 @@ exec thunderbird
 # Dropbox, nm-applet
 exec --no-startup-id dropbox start
 exec --no-startup-id nm-applet
+exec --no-startup-id /opt/urserver/urserver-start
 # }}}
 
 # Start i3pystatus {{{
