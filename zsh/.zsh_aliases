@@ -13,9 +13,6 @@ alias l='ls -hl'
 alias space="df -h"
 alias duf="du -d 1 -h -t 50M 2>/dev/null"
 
-# List of installed packages
-alias apt-manual-installed="comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)"
-
 # Alias for Python3
 alias py="python3"
 alias py3="python3"
@@ -27,24 +24,23 @@ alias rzdv="rdesktop -u fneuhaus@uni-mainz.de -g 1366x768 rds.zdv.uni-mainz.de -
 function run() { nohup $@ > /dev/null 2>&1 &; disown; }
 
 # Open
-#function open() { xdg-open $1 &> /dev/null; }
 function open() { xdg-open $1 &> /dev/null; }
+
+# Clean Latex folder
+alias rmtex="latexmk -C --quiet" 
 
 # Disable root splashscreen
 alias root="root -l"
 
-# Compile with root
-function rootpp() { g++ -o $1 $2 `root-config --cflags --glibs`; }
-alias root++=rootpp
-
-# Check for local aliases file
-if [[ -a "$HOME/.zsh_aliases_local" ]]; then
-   source $HOME/.zsh_aliases_local
-fi
-
-if [[ "`hostname`" == "ewpc5" ]]; then
+# Check for neovim
+if [[ "`hostname`" == "ewpc5" ]] || [[ "`hostname`" == "rathong" ]]; then
    [[ -e "`which nvim | grep -v aliased | head -1`" ]] && alias vim='TERM=tmux-256color nvim'
 else
    [[ -e "`which nvim | grep -v aliased | head -1`" ]] && alias vim='nvim'
 fi
 [[ -e "`which nvim | grep -v aliased | head -1`" ]] && export EDITOR="nvim" 
+
+# Check for local aliases file
+if [[ -a "$HOME/.zsh_aliases_local" ]]; then
+   source $HOME/.zsh_aliases_local
+fi
