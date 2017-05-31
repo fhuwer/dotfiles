@@ -33,12 +33,8 @@ alias rmtex="latexmk -C --quiet"
 alias root="root -l"
 
 # Check for neovim
-if [[ "`hostname`" == "ewpc5" ]] || [[ "`hostname`" == "rathong" ]]; then
-   [[ -e "`which nvim | grep -v aliased | head -1`" ]] && alias vim='TERM=tmux-256color nvim'
-else
-   [[ -e "`which nvim | grep -v aliased | head -1`" ]] && alias vim='nvim'
-fi
-[[ -e "`which nvim | grep -v aliased | head -1`" ]] && export EDITOR="nvim" 
+[[ -a "/usr/bin/nvim" ]] && alias vim='nvim'
+[[ -a "/usr/bin/nvim" ]] && export EDITOR="nvim" 
 
 # Check for local aliases file
 if [[ -a "$HOME/.zsh_aliases_local" ]]; then
