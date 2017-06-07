@@ -214,5 +214,6 @@ runtime custom/easyescape.vim
 runtime custom/vimtex.vim
 
 colorscheme solarized
+hi MatchParen cterm=none ctermbg=red ctermfg=white
 
 " }}}
