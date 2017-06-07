@@ -2,11 +2,19 @@ let g:lightline = {
    \ 'colorscheme': 'wombat',
    \ 'active': {
    \   'left': [ [ 'mode', 'paste' ],
-   \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+   \             [ 'fugitive', 'readonly', 'filename', 'modified' ],
+   \             [ 'neomake' ],
+   \   ]
    \ },
    \ 'component_function': {
-      \ 'fugitive': 'LightlineFugitive'
+      \ 'fugitive': 'LightlineFugitive',
    \ },
+   \ 'component_expand': {
+      \ 'neomake': 'LightlineNeomake',
+   \ },
+   \ 'component_type': {
+      \ 'neomake': 'warning',
+   \ }
 \ }
 
 function! LightlineFugitive()
@@ -16,3 +24,16 @@ function! LightlineFugitive()
   endif
   return ''
 endfunction
+
+function! LightlineNeomake()
+  if exists("*neomake#GetJobs")
+    let jobs = neomake#GetJobs()
+    if !empty(jobs)
+      return '*'
+    endif
+  endif
+  return ''
+endfunction
+
+autocmd User NeomakeJobStarted call lightline#update()
+autocmd User NeomakeJobFinished call lightline#update()
