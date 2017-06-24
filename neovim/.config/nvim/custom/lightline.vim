@@ -3,8 +3,12 @@ let g:lightline = {
    \ 'active': {
    \   'left': [ [ 'mode', 'paste' ],
    \             [ 'fugitive', 'readonly', 'filename', 'modified' ],
+   \             [ 'tag' ],
    \             [ 'neomake' ],
    \   ]
+   \ },
+   \ 'component': {
+   \    'tag': '%{tagbar#currenttag("%s", "", "f")}',
    \ },
    \ 'component_function': {
       \ 'fugitive': 'LightlineFugitive',
