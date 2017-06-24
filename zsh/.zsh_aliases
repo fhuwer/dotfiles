@@ -33,8 +33,7 @@ alias rmtex="latexmk -C --quiet"
 alias root="root -l"
 
 # Check for neovim
-[[ -a "/usr/bin/nvim" ]] && alias vim='nvim'
-[[ -a "/usr/bin/nvim" ]] && export EDITOR="nvim" 
+hash nvim 2>/dev/null && alias vim='nvim' && export EDITOR="nvim" && export VISUAL="nvim"
 
 # Check for local aliases file
 if [[ -a "$HOME/.zsh_aliases_local" ]]; then
