@@ -62,6 +62,14 @@ set splitright                " New window on the right (not on the left)
 set splitbelow                " New window below active (not above)
 " }}}
 
+" Python {{{
+" If available use virtualenv for python
+let s:virtualenv_python3 = glob(expand('$WORKON_HOME/neovim/bin/python'))
+if !empty(s:virtualenv_python3)
+   let g:python3_host_prog = s:virtualenv_python3
+endif
+" }}}
+
 " Configuration --------------------------------------------------------------
 
 " FastEscape {{{
