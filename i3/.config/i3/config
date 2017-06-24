@@ -218,10 +218,8 @@ bindsym $mod+shift+d exec setxkbmap de
 bindsym $mod+shift+g exec setxkbmap us
 # }}}
 
-# Dropdown and floating terminals
-exec tilda
-for_window [class="Tilda"] floating enable
-for_window [class="tilda"] floating enable
+# Dropdown terminal
+bindsym F12 "exec ~/projects/kuake/kuake.py"
 
 # Mouse settings
 exec --no-startup-id synclient VertScrollDelta=-100 HorizScrollDelta=-100 TapButton1=1 TapButton2=0 TapButton3=0 HorizTwoFingerScroll=1
