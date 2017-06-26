@@ -4,3 +4,5 @@ set updatetime=250
 nnoremap <leader>gp :GitGutterPreviewHunk<CR>
 nnoremap <leader>gu :GitGutterUndoHunk<CR>
 nnoremap <leader>gs :GitGutterStageHunk<CR>
+nnoremap <leader>gp :GitGutterPrevHunk<CR>
+nnoremap <leader>gn :GitGutterNextHunk<CR>
