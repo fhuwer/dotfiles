@@ -81,6 +81,9 @@ endif
 
 " Configuration --------------------------------------------------------------
 
+" Local custom file to allow for device specific configuration
+runtime custom/local.vim
+
 " Custom commands {{{
 
 " Source and edit init
