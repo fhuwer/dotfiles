@@ -37,8 +37,4 @@ fi
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Keybindings for urxvt
-bindkey "\e[1~" beginning-of-line
-bindkey "\e[4~" end-of-line
-
 [[ -a "$HOME/.pythonrc" ]] && export PYTHONSTARTUP=$HOME/.pythonrc
