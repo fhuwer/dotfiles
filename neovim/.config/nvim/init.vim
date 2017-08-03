@@ -120,7 +120,7 @@ nnoremap <C-K> <c-w>K
 nnoremap <C-L> <c-w>L
 
 " Write file
-nnoremap <S-w> :update<CR>
+nnoremap <leader>w :update<CR>
 
 " Fast sudo write
 command! SudoWrite execute ":w !sudo tee %<CR>"
@@ -181,6 +181,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
 
 " Compiling, code completion/format + snippets
+Plug 'justmao945/vim-clang'
 Plug 'neomake/neomake'
 Plug 'godlygeek/tabular'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -210,6 +211,7 @@ call plug#end()
 " Load settings
 runtime custom/nerd.vim
 runtime custom/tagbar.vim
+runtime custom/vim-clang.vim
 runtime custom/neomake.vim
 runtime custom/deoplete.vim
 runtime custom/ultisnips.vim
