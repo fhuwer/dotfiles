@@ -37,4 +37,4 @@ fi
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-[[ -a "$HOME/.pythonrc" ]] && export PYTHONSTARTUP=$HOME/.pythonrc
+[[ -a "$HOME/.pythonrc.py" ]] && export PYTHONSTARTUP=$HOME/.pythonrc.py
