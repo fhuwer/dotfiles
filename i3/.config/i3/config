@@ -233,6 +233,7 @@ exec --no-startup-id gsettings set org.gnome.desktop.background show-desktop-ico
 
 # Program specific options {{{
 for_window [class="Thunderbird"] border pixel 1
+for_window [class="Firefox"] border pixel 1
 # }}}
 
 # Autostart {{{
