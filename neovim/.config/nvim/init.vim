@@ -13,9 +13,18 @@ let mapleader = ";"
 " }}}
 
 " Local directories and functions {{{
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
-set undodir=~/.vim/undo
+set backupdir=~/.cache/vim/backups
+set directory=~/.cache/vim/swaps
+set undodir=~/.cache/vim/undo
+if ! filewritable("~/.cache/vim/")
+   silent execute '!mkdir "~/.cache/vim"'
+endif
+if ! filewritable(&backupdir)
+   silent execute '!mkdir "'.&backupdir.'"'
+endif
+if ! filewritable(&directory)
+   silent execute '!mkdir "'.&directory.'"'
+endif
 
 " Activate persistent undo
 set undofile
@@ -72,18 +81,6 @@ endif
 
 " Configuration --------------------------------------------------------------
 
-" FastEscape {{{
-" Speed up transition from modes
-"if ! has('gui_running')
-   "set ttimeoutlen=10
-   "augroup FastEscape
-      "autocmd!
-      "au InsertEnter * set timeoutlen=0
-      "au InsertLeave * set timeoutlen=1000
-   "augroup END
-"endif
-" }}}
-
 " Custom commands {{{
 
 " Source and edit init
@@ -112,6 +109,10 @@ nnoremap <S-h> <c-w>h
 nnoremap <S-j> <c-w>j
 nnoremap <S-k> <c-w>k
 nnoremap <S-l> <c-w>l
+inoremap HH <Esc><c-w>h
+inoremap JJ <Esc><c-w>j
+inoremap KK <Esc><c-w>k
+inoremap LL <Esc><c-w>l
 
 " Fast moving of windows
 nnoremap <C-H> <c-w>H
@@ -124,9 +125,6 @@ nnoremap <leader>w :update<CR>
 
 " Fast sudo write
 command! SudoWrite execute ":w !sudo tee %<CR>"
-
-" Paste toggle (,p)
-set pastetoggle=<leader>p
 
 " Use system clipboard
 set clipboard=unnamedplus
@@ -164,7 +162,6 @@ function! StripWhitespace () " {{{
    call setpos('.', save_cursor)
    call setreg('/', old_query)
 endfunction " }}}
-" noremap <leader>ss :call StripWhitespace ()<CR>
 " }}}
 
 " }}}
