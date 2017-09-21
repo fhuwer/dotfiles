@@ -75,6 +75,9 @@
 URxvt.saveLines:         100000
 URxvt.scrollBar:         false
 URxvt.scrollBar_right:   false
+URxvt.scrollTtyOutput:   false
+URxvt.scrollWithBuffer:  true
+URxvt.scrollTtyKeypress: true
 
 URxvt.font: xft:InconsolataForPowerline-dz:size=9:antialias=true:hinting=true
 URxvt.boldFont:
@@ -85,9 +88,11 @@ URxvt.fading: 0
 
 ! Enable copy and paste
 URxvt.iso14755: false
-URxvt.perl-ext-common: default,eval
+URxvt.perl-ext-common: default,eval,matcher
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
 
 ! Ctrl+Arrows
 URxvt.keysym.Control-Left:    \033[1;5D
