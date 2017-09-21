@@ -99,6 +99,14 @@ URxvt.keysym.Control-Left:    \033[1;5D
 URxvt.keysym.Control-Right:   \033[1;5C
 ! }}}
 
+! ROFI Color theme {{{
+rofi.color-enabled: true
+rofi.color-window: #002b37, #224b57, #003642
+rofi.color-normal: #002b37, #819396, #003643, #008ed4, #ffffff
+rofi.color-active: #002b37, #008ed4, #003643, #008ed4, #66c6ff
+rofi.color-urgent: #002b37, #da4281, #003643, #008ed4, #890661
+! }}}
+
 ! Font-Rendering {{{
 Xft.lcdfilter: lcddefault
 Xft.antialias: true
