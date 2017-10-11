@@ -69,6 +69,7 @@ set noshowmode                " Hide mode as airline does this already
 set shortmess=atI             " Don't show the intro message when starting vim
 set splitright                " New window on the right (not on the left)
 set splitbelow                " New window below active (not above)
+set textwidth=99              " Maximum linelength"
 " }}}
 
 " Python {{{
@@ -89,6 +90,18 @@ runtime custom/local.vim
 " Source and edit init
 command! SI :source ~/.config/nvim/init.vim
 command! SE :tabedit ~/.config/nvim/init.vim
+
+" Show / Hide 100 cols line
+function! ToggleShowWidth()
+   if &cc > 0
+      let &cc = 0
+      let &textwidth = 0
+   else
+      let &cc = 100
+      let &textwidth = 99
+   endif
+endfunc
+map <F7> :call ToggleShowWidth()<CR>
 
 " Terminal {{{
 function! VTerm()
@@ -201,6 +214,7 @@ Plug 'weinshec/vim-dictcc'
 Plug 'itchyny/lightline.vim'
 Plug 'zhou13/vim-easyescape'
 Plug 'altercation/vim-colors-solarized'
+Plug 'bronson/vim-trailing-whitespace'
 
 " Filetype plugins
 Plug 'lervag/vimtex', { 'for': 'tex' }
