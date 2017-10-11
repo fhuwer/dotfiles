@@ -36,9 +36,7 @@ set $TERMINAL /usr/bin/urxvt
 # Terminal {{{
 bindsym $mod+Return exec $TERMINAL
 bindsym $mod+shift+Return exec "$TERMINAL --title floating"
-for_window [class="Gnome-terminal"] "border pixel 1"
 for_window [class="Gnome-terminal" window_role="floating"] "floating enable, border pixel 1"
-for_window [class="URxvt"] "border pixel 1"
 for_window [class="URxvt" title="floating"] "floating enable, border pixel 1"
 # }}}
 # }}}
@@ -232,8 +230,11 @@ exec --no-startup-id gsettings set org.nemo.desktop show-desktop-icons false
 exec --no-startup-id gsettings set org.gnome.desktop.background show-desktop-icons false
 
 # Program specific options {{{
+for_window [class="Gnome-terminal"] border pixel 1
+for_window [class="URxvt"] border pixel 1
 for_window [class="Thunderbird"] border pixel 1
 for_window [class="Firefox"] border pixel 1
+for_window [class="Blender"] border pixel 1
 # }}}
 
 # Autostart {{{
