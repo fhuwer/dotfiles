@@ -20,7 +20,9 @@ if [[ "`hostname`" == "rathong" ]]; then
    export PATH=/home/friedemann/bin:$PATH
 
    # Source ROOT
-   source /opt/root-6.08.04/bin/thisroot.sh
+   source /opt/root-git/bin/thisroot.sh
+   alias tbrowser='root -x ~/.config/root/macros/TBrowserOpen.C'
+   alias tb='tbrowser'
 
    # Source vte (needed so a new terminal tab opens in the same working directory)
    source /etc/profile.d/vte.sh
@@ -37,4 +39,6 @@ fi
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-[[ -a "$HOME/.pythonrc.py" ]] && export PYTHONSTARTUP=$HOME/.pythonrc.py
+if [[ -a "$HOME/.pythonrc.py" ]]; then
+   export PYTHONSTARTUP=$HOME/.pythonrc.py
+fi
