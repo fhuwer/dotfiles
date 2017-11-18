@@ -112,8 +112,8 @@ function! Term()
    execute "split"
    execute "terminal"
 endfunction
-command! T call Term() 
-command! VT call VTerm() 
+command! T call Term()
+command! VT call VTerm()
 " }}}
 
 " }}}
@@ -150,7 +150,16 @@ vmap <Tab> >gv
 vmap <S-Tab> <gv
 
 " Spell check
-nnoremap <F4> :set spell spelllang=en_gb<CR>
+function! ToggleSpellCheck()
+   if &spell == 0
+      echo "Spell check enabled"
+      setlocal spell spelllang=en_gb
+   else
+      echo "Spell check disabled"
+      setlocal nospell
+   endif
+endfunc
+nnoremap <F4> :call ToggleSpellCheck()<CR>
 
 " Follow file in new window
 nnoremap <Leader>gg :vertical wincmd f<CR>
@@ -210,15 +219,18 @@ Plug 'tpope/vim-fugitive'
 " Utilities
 Plug 'terryma/vim-multiple-cursors'
 Plug 'romgrk/winteract.vim'
-Plug 'weinshec/vim-dictcc'
+Plug 'fneuhaus/vim-dicts'
 Plug 'itchyny/lightline.vim'
 Plug 'zhou13/vim-easyescape'
 Plug 'altercation/vim-colors-solarized'
 Plug 'bronson/vim-trailing-whitespace'
+Plug 'farmergreg/vim-lastplace'
+Plug 'thaerkh/vim-workspace'
+Plug 'kien/ctrlp.vim'
+Plug 'embear/vim-localvimrc'
 
 " Filetype plugins
 Plug 'lervag/vimtex', { 'for': 'tex' }
-Plug 'vim-scripts/muttrc.vim'
 
 call plug#end()
 
@@ -236,6 +248,8 @@ runtime custom/vim-dictcc.vim
 runtime custom/lightline.vim
 runtime custom/easyescape.vim
 runtime custom/vimtex.vim
+runtime custom/vim-workspace.vim
+runtime custom/vim-localvimrc.vim
 
 colorscheme solarized
 hi MatchParen cterm=none ctermbg=red ctermfg=white
