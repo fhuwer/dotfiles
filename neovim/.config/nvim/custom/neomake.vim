@@ -1,5 +1,6 @@
 let automake_blacklist = [ 'py', 'js', 'pl' ]
-autocmd! BufWritePost * if index(automake_blacklist, &ft) < 0 | Neomake
+let automake_enable = 1
+autocmd! BufWritePost * if index(automake_blacklist, &ft) < 0 && g:automake > 0 | Neomake
 
 nmap <Leader>m  :w<CR>:Neomake!<CR>
 nmap <Leader>mc :w<CR>:NeomakeSh make clean<CR>
