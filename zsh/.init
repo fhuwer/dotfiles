@@ -1,10 +1,14 @@
 # ~/.init
 
 if [[ "`hostname`" == "ewpc5" ]]; then
+   # Set python path
+   export PATH=/opt/python-3.6.2/bin:$PATH
+   export LD_LIBRARY_PATH=/opt/python-3.6.2/lib:$LD_LIBRARY_PATH
+   export VIRTUALENVWRAPPER_PYTHON=/opt/python-3.6.2/bin/python3
+
    # Source ROOT
-   pushd /opt/root-6.08.00 > /dev/null
-   source bin/thisroot.sh
-   popd > /dev/null
+   source /opt/root-git-py3.6/bin/thisroot.sh
+   alias root="root -l"
 
    # Load virtualenv
    export WORKON_HOME=~/.pyenvs
