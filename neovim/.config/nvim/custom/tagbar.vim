@@ -11,5 +11,4 @@ let g:tagbar_type_python = {
     \ ],
 \ }
 
-nmap <S-F8> :TagbarToggle<CR>
 nmap tt :TagbarToggle<CR>

@@ -1,33 +1,37 @@
 " vim:fdm=marker:foldlevel=0
-" Settings -------------------------------------------------------------------
-set encoding=utf-8
+" General settings {{{
+set encoding=utf-8 nobomb
 scriptencoding utf-8
-" Syntax and colorscheme {{{
+
 set t_ut=
 set background=dark
 syntax on
-" }}}
+set mouse=
+set history=1000
+set laststatus=2
+set number
+set noshowmode
+set shortmess=atI
+set splitright
+set splitbelow
+set textwidth=99
 
-" Set leader key {{{
 let mapleader = ";"
 " }}}
 
-" Local directories and functions {{{
-set backupdir=~/.cache/vim/backups
+" Local directories for swap {{{
 set directory=~/.cache/vim/swaps
 set undodir=~/.cache/vim/undo
-if ! filewritable("~/.cache/vim/")
+if ! filewritable(expand("~/.cache/vim/"))
    silent execute '!mkdir "~/.cache/vim"'
 endif
-if ! filewritable(&backupdir)
-   silent execute '!mkdir "'.&backupdir.'"'
-endif
-if ! filewritable(&directory)
-   silent execute '!mkdir "'.&directory.'"'
+if ! filewritable(expand(&directory))
+   silent execute '!mkdir "' . &directory . '"'
 endif
 
-" Activate persistent undo
 set undofile
+set nobackup
+set nowritebackup
 " }}}
 
 " Indentation {{{
@@ -39,48 +43,28 @@ set expandtab
 " }}}
 
 " Folding {{{
-let foldlevel_all_open=20           " Level used as 'open all' level
-set foldenable                      " Enable folding
-set foldcolumn=0                    " Column to show folds
-let &foldlevel=foldlevel_all_open   " Close all folds by default
-set foldmethod=syntax               " Syntax are used to specify folds
-
-nnoremap <leader>fac :set foldlevel=0<CR>
-nnoremap <leader>fao :let &foldlevel=foldlevel_all_open<CR>
+set foldenable
+set foldcolumn=0
+set foldmethod=syntax
 " }}}
 
 " Search {{{
-set hlsearch                  " Highlight search
-set ignorecase                " Ignore case in search
-set smartcase                 " Ignore 'ignorecase' if search pattern contains uppercase
-set incsearch                 " Highlight dinamically as pattern is typed
-set wrapscan                  " Wrap search around end of file
-" }}}
-
-" General settings {{{
-set mouse=                    " Disable mouse
-set encoding=utf-8 nobomb     " UTF-8 without BOM
-set history=1000              " Increase history from 20 to 1000
-set laststatus=2              " Always show airline (even with only one window)
-set number                    " Show line numbers
-set noerrorbells              " Disable error bell
-set visualbell                " Use visual bell instead
-set noshowmode                " Hide mode as airline does this already
-set shortmess=atI             " Don't show the intro message when starting vim
-set splitright                " New window on the right (not on the left)
-set splitbelow                " New window below active (not above)
-set textwidth=99              " Maximum linelength"
+set hlsearch
+set ignorecase
+set smartcase
+set incsearch
+set wrapscan
 " }}}
 
 " Python {{{
 " If available use virtualenv for python
-let s:virtualenv_python3 = glob(expand('$WORKON_HOME/neovim/bin/python'))
-if !empty(s:virtualenv_python3)
-   let g:python3_host_prog = s:virtualenv_python3
+if has('nvim')
+   let s:virtualenv_python3 = glob(expand('$WORKON_HOME/neovim/bin/python'))
+   if !empty(s:virtualenv_python3)
+      let g:python3_host_prog = s:virtualenv_python3
+   endif
 endif
 " }}}
-
-" Configuration --------------------------------------------------------------
 
 " Local custom file to allow for device specific configuration
 runtime custom/local.vim
@@ -119,6 +103,12 @@ command! VT call VTerm()
 " }}}
 
 " Keybindings {{{
+
+" Allow movement in insert mode with ALT
+inoremap <A-h> <Left>
+inoremap <A-j> <Down>
+inoremap <A-k> <Up>
+inoremap <A-l> <Right>
 
 " Fast switching of windows
 nnoremap <S-h> <c-w>h
@@ -170,6 +160,14 @@ nnoremap <Leader>n :noh<CR>
 " GoTo next quickfix in file
 nnoremap <S-F> :cnf<CR>
 
+" Warn when pressing ö (;/: in US layout) in normal mode to warn that the
+" keyboard layout is german.
+function! WarnKeyboardLayout()
+   echo "Caution: Keyboard layout is german!"
+endfunc
+nnoremap ö :call WarnKeyboardLayout()<CR>
+nnoremap Ö :call WarnKeyboardLayout()<CR>
+
 " Terminal
 tnoremap <Esc> <C-\><C-n>
 tnoremap HH <c-\><c-n><c-w>h
@@ -196,62 +194,50 @@ endfunction " }}}
 " set the runtime path to include vim-plug and initialize
 call plug#begin('~/.config/nvim/plugged')
 
-" Sidebars
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
-
-" Compiling, code completion/format + snippets
-Plug 'justmao945/vim-clang'
-Plug 'neomake/neomake'
-Plug 'godlygeek/tabular'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
 Plug 'raimondi/delimitmate'
 Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-
-" Git
+Plug 'tmhedberg/simpylfold'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-
-" Utilities
 Plug 'terryma/vim-multiple-cursors'
 Plug 'romgrk/winteract.vim'
-Plug 'fneuhaus/vim-dicts'
 Plug 'itchyny/lightline.vim'
 Plug 'zhou13/vim-easyescape'
 Plug 'altercation/vim-colors-solarized'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'farmergreg/vim-lastplace'
-Plug 'thaerkh/vim-workspace'
 Plug 'kien/ctrlp.vim'
-Plug 'embear/vim-localvimrc'
-
-" Filetype plugins
 Plug 'lervag/vimtex', { 'for': 'tex' }
+
+if has('nvim')
+   Plug 'neomake/neomake'
+   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+   Plug 'zchee/deoplete-jedi'
+   Plug 'fneuhaus/vim-dicts'
+endif
+
 
 call plug#end()
 
-" Load settings
+" Load plugin settings
 runtime custom/nerd.vim
 runtime custom/tagbar.vim
-runtime custom/vim-clang.vim
-runtime custom/neomake.vim
-runtime custom/deoplete.vim
 runtime custom/ultisnips.vim
 runtime custom/gitgutter.vim
 runtime custom/vim-multiple-cursors.vim
 runtime custom/winteract.vim
-runtime custom/vim-dictcc.vim
 runtime custom/lightline.vim
 runtime custom/easyescape.vim
 runtime custom/vimtex.vim
-runtime custom/vim-workspace.vim
-runtime custom/vim-localvimrc.vim
+
+if has('nvim')
+   runtime custom/neomake.vim
+   runtime custom/deoplete.vim
+   runtime custom/vim-dicts.vim
+endif
 
 colorscheme solarized
 hi MatchParen cterm=none ctermbg=red ctermfg=white
-
 " }}}
