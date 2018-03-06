@@ -1,13 +1,8 @@
 # vim:fdm=marker:foldlevel=0
-# i3 config file (v4)
-#
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-# General options {{{
-
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-font pango:monospace 8
+set $TERMINAL /usr/bin/urxvt
+set $LOCK_PATH /bin/lock
+set $KUAKE_PATH ~/projects/kuake/kuake.py
 
 # Main modifier key
 set $mod Mod4
@@ -15,34 +10,49 @@ set $mod Mod4
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# Disable bell
-exec --no-startup-id "xset -b"
-
-# Default to us layout
-exec --no-startup-id "setxkbmap us"
-
 # Options
 focus_follows_mouse no
 force_focus_wrapping no
 mouse_warping none
 workspace_auto_back_and_forth yes
 
-# Remove borders on floating and only on screen windows
-new_float pixel 1
-
-# Use urxvt as terminal
-set $TERMINAL /usr/bin/urxvt
-
-# Terminal {{{
+# Terminal
 bindsym $mod+Return exec $TERMINAL
 bindsym $mod+shift+Return exec "$TERMINAL --title floating"
-for_window [class="Gnome-terminal" window_role="floating"] "floating enable, border pixel 1"
 for_window [class="URxvt" title="floating"] "floating enable, border pixel 1"
-# }}}
+
+# Style {{{
+font xft:Hack 8
+
+# Set colors (stolen from weinshec)
+set $bkg    #030105
+set $fgr    #343434
+set $pan    #1a1a1a
+set $brd    #767676
+set $fcs    #e98f21
+set $txt    #fefefe
+set $urg    #e89393
+
+# Set colors                border     bkg         text
+client.focused              $fcs       $fcs        $txt
+client.unfocused            $bkg       $bkg        $txt
+client.focused_inactive     $bkg       $bkg        $txt
+client.urgent $urg $urg $txt
+
+# Gaps
+for_window [class="^.*"] border pixel 1
+gaps inner 10
+gaps outer 0
+smart_borders on
+smart_gaps on
+
+# Remove borders on floating and only on screen windows
+hide_edge_borders both
+new_window pixel 1
+new_float pixel 1
 # }}}
 
 # Keybindings {{{
-
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -50,34 +60,29 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id rofi -show run
 bindsym $mod+Shift+s exec --no-startup-id rofi -show ssh
 
-# change focus {{{
+# change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-# }}}
 
-# move focused window {{{
+# move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
-# }}}
 
-# splits {{{
+# splits
 bindsym $mod+g split h
 bindsym $mod+v split v
-# }}}
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -93,50 +98,9 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
+# focus the parent/child container
 bindsym $mod+a focus parent
-
-# focus the child container
-bindsym $mod+y focus child
 bindsym $mod+z focus child
-
-# switch to workspace {{{
-bindsym $mod+1 workspace number 1
-bindsym $mod+2 workspace number 2
-bindsym $mod+3 workspace number 3
-bindsym $mod+4 workspace number 4
-bindsym $mod+5 workspace number 5
-bindsym $mod+6 workspace number 6
-bindsym $mod+7 workspace number 7
-bindsym $mod+8 workspace number 8
-bindsym $mod+9 workspace number 9
-bindsym $mod+0 workspace number 10
-# }}}
-
-# move focused container to workspace {{{
-bindsym $mod+Shift+1 move container to workspace number 1
-bindsym $mod+Shift+2 move container to workspace number 2
-bindsym $mod+Shift+3 move container to workspace number 3
-bindsym $mod+Shift+4 move container to workspace number 4
-bindsym $mod+Shift+5 move container to workspace number 5
-bindsym $mod+Shift+6 move container to workspace number 6
-bindsym $mod+Shift+7 move container to workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+0 move container to workspace number 10
-# }}}
-
-# move focused workspace to other monitor {{{
-bindsym $mod+n move workspace to output left
-bindsym $mod+m move workspace to output right
-# }}}
-
-# move between workspaces {{{
-bindsym $mod+ctrl+Left workspace prev
-bindsym $mod+ctrl+Right workspace next
-bindsym $mod+ctrl+h workspace prev
-bindsym $mod+ctrl+l workspace next
-# }}}
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -154,19 +118,12 @@ mode "resize" {
    bindsym k resize shrink height 10 px or 10 ppt
    bindsym l resize grow width 10 px or 10 ppt
 
-   # same bindings, but for the arrow keys
-   bindsym Left resize shrink width 10 px or 10 ppt
-   bindsym Down resize grow height 10 px or 10 ppt
-   bindsym Up resize shrink height 10 px or 10 ppt
-   bindsym Right resize grow width 10 px or 10 ppt
-
    # back to normal: Enter or Escape
    bindsym Return mode "default"
    bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
 # }}}
-
 # Media keys {{{
 bindsym $mod+Shift+F9 exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 bindsym $mod+Shift+F10 exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
@@ -181,11 +138,6 @@ bindsym $mod+KP_Add exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2
 bindsym $mod+KP_Subtract exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%
 bindsym $mod+KP_Multiply exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 # }}}
-
-# Customization
-bindsym $mod+ctrl+odiaeresis "exec /bin/lock"
-bindsym $mod+ctrl+F8 "exec /bin/lock"
-
 # Powerstates {{{
 set $mode_powerstates Power states: [s]uspend [h]ibernate [S]hutdown [R]eboot
 bindsym $mod+p mode "$mode_powerstates"
@@ -200,7 +152,6 @@ mode "$mode_powerstates" {
    bindsym Return mode "default"
 }
 # }}}
-
 # Laptop bindings {{{
 bindsym XF86TouchpadToggle exec ~/bin/toggle_touchpad
 bindsym XF86ScreenSaver exec /bin/lock
@@ -208,49 +159,54 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 bindsym XF86Launch1 exec ~/bin/toggle_backlight
 # }}}
-
-bindsym $mod+shift+y "sticky toggle; floating toggle; resize set 400 250; move window to position 1520 810;"
-bindsym $mod+alt+y "exec ytl; sticky toggle; floating toggle; resize set 400 250; move window to position 1520 810;"
-
+# Customization {{{
+bindsym $mod+ctrl+F8 "exec $LOCK_PATH"
 bindsym $mod+shift+d exec setxkbmap de
 bindsym $mod+shift+g exec setxkbmap us
+bindsym F12 "exec $KUAKE_PATH"
+# }}}
+# Workspaces {{{
+# switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+# move focused workspace to other monitor
+bindsym $mod+m move workspace to output right
+# }}}
 # }}}
 
-# Dropdown terminal
-bindsym F12 "exec ~/projects/kuake/kuake.py"
-
-# Mouse settings
-exec --no-startup-id synclient VertScrollDelta=-100 HorizScrollDelta=-100 TapButton1=1 TapButton2=0 TapButton3=0 HorizTwoFingerScroll=1
-
-# Set keyboard and mouse settings
-exec xset r rate 500 33
-
-# Disable desktop for file browsers
-exec --no-startup-id gsettings set org.nemo.desktop show-desktop-icons false
-exec --no-startup-id gsettings set org.gnome.desktop.background show-desktop-icons false
-
-# Program specific options {{{
-for_window [class="Gnome-terminal"] border pixel 1
-for_window [class="URxvt"] border pixel 1
-for_window [class="Thunderbird"] border pixel 1
-for_window [class="Firefox"] border pixel 1
-for_window [class="Blender"] border pixel 1
+# Program specifics {{{
+for_window [ title="^pdfpc.*" window_role="presenter" ] move to output left, fullscreen
+for_window [ title="^pdfpc.*" window_role="presentation" ] move to output right, fullscreen
 # }}}
 
-# Autostart {{{
-# Thunderbird on workspace 1
-exec "i3-msg \"workspace 1; append_layout ~/.config/i3/workspace-1.json\""
-exec thunderbird
+# Compton
+exec --no-startup-id compton
 
-# Dropbox, nm-applet
-exec --no-startup-id dropbox start
-exec --no-startup-id nm-applet
-exec --no-startup-id /opt/urserver/urserver-start
-# }}}
+# Autostart
+exec --no-startup-id ~/bin/autostart.sh
 
-# Start i3pystatus {{{
 bar {
    status_command "python3 ~/.config/i3/i3mystatus.py"
    tray_output primary
 }
-# }}}
