@@ -1,0 +1,15 @@
+try:
+    import readline
+except ImportError:
+    print("Module readline not available.")
+else:
+    import rlcompleter
+    readline.parse_and_bind("tab: complete")
+    readline.set_auto_history(True)
+
+import atexit, os, readline, sys
+if sys.version_info >= (3, 0) and hasattr(sys, 'real_prefix'): # in a VirtualEnv
+    PYTHON_HISTORY_FILE = os.path.join(os.environ['HOME'], '.python_history')
+    if os.path.exists(PYTHON_HISTORY_FILE):
+        readline.read_history_file(PYTHON_HISTORY_FILE)
+        atexit.register(readline.write_history_file, PYTHON_HISTORY_FILE)

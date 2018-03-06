@@ -1,32 +1,18 @@
-# ~/.zshrc_aliases
+# ~/.zsh_aliases
 # vim:fdm=marker:foldlevel=0
 
-# Common terminal aliases {{{
+# Common terminal aliases
 # ls
 alias ll='ls -ahlF'
 alias la='ls -A'
 alias l='ls -hl'
 
-# mkdirs
-alias mkdirs='mkdir -p'
-
-# Run detached
-function run() { nohup $@ > /dev/null 2>&1 &; disown; }
-
 # Open
-function open() { xdg-open $1 &> /dev/null; }
+function open() { xdg-open $1 &! }
 
-# Alias for Python3
-alias py="python3"
-alias py3="python3"
-# }}}
+# Alias for Python
+alias py="python"
 
-# Default settings for pdfpc and converter for latex generated notes {{{
-alias pdfpc='pdfpc --current-size=60 --next-height=40'
-alias pnote="sed -i \"s/\\\\\\\\\\\\\\\\/\n/g\" " 
-# }}}
-
-# Utils {{{
 # Space
 alias space="df -h"
 alias duf="du -d 1 -h -t 50M 2>/dev/null"
@@ -35,31 +21,17 @@ alias duf="du -d 1 -h -t 50M 2>/dev/null"
 alias rzdv="rdesktop -u fneuhaus@uni-mainz.de -g 1366x768 rds.zdv.uni-mainz.de -f"
 
 # Clean Latex folder
-alias rmtex="latexmk -C --quiet" 
+alias rmtex="latexmk -C --quiet"
 
-# ls or less
-function lss() {
-   if [[ -d "$1" ]]; then
-      ls "$1"
-   elif [[ -f "$1" ]]; then
-      less "$1"
-   else
-      echo "lss error: '$1' is neither a file nor a directory."
-   fi
-}
-function lls() {
-   if [[ -d "$1" ]]; then
-      ll "$1"
-   elif [[ -f "$1" ]]; then
-      less "$1"
-   else
-      echo "lls error: '$1' is neither a file nor a directory."
-   fi
-}
-# }}}
+# File handlers
+alias -s pdf="open"
 
 # Check for neovim
-hash nvim 2>/dev/null && alias vim='nvim' && export EDITOR="nvim" && export VISUAL="nvim"
+if `hash nvim 2>/dev/null`; then
+   alias vim='nvim'
+   export EDITOR="nvim"
+   export VISUAL="nvim"
+fi
 
 # Check for local aliases file
 if [[ -a "$HOME/.zsh_aliases_local" ]]; then

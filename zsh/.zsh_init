@@ -1,0 +1,26 @@
+# ~/.zsh_init
+# Check for local pre init
+[[ -f "$HOME/.zsh_init_pre" ]] && source "$HOME/.zsh_init_pre"
+
+# Setup local bin
+export PATH=$HOME/bin:$PATH
+
+# Try to load virtualenvwrapper
+source virtualenvwrapper.sh
+
+# Try to setup ROOT
+if [ -f "${ROOT_PATH}/bin/thisroot.sh" ]; then
+   source "${ROOT_PATH}/bin/thisroot.sh"
+   alias root="root -l"
+   alias tbrowser='root -x ~/bin/root_macros/TBrowserOpen.C'
+   alias tb='tbrowser'
+fi
+
+# FZF
+[[ -a $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
+
+# Python startup
+[[ -a "$HOME/bin/pythonrc" ]]  && export PYTHONSTARTUP=$HOME/bin/pythonrc
+
+# Check for local post init
+[[ -a "$HOME/.zsh_init_post" ]] && source "$HOME/.zsh_init_post"
