@@ -1,0 +1,20 @@
+#!/bin/sh
+
+PACKAGE=$1
+if [[ "$PACKAGE" == "" ]]; then
+   echo "Usage: $0 PACKAGE_NAME"
+   exit 0
+fi
+
+
+REQUIRES=`pip show $PACKAGE | grep "Requires" | sed 's/Requires: //g' | sed 's/, /\\\n/g'`
+if [[ "$REQUIRES" == "" ]]; then
+   REQUIRES=`pip download $PACKAGE -d /tmp --no-binary :all: \
+      | grep Collecting \
+      | cut -d' ' -f2 \
+      | grep -v $PACKAGE`
+fi
+
+echo "$PACKAGE requires:"
+echo -e $REQUIRES
+

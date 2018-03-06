@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [[ "$DISPLAY" == "" ]]; then
+   export DISPLAY=":0"
+fi
+
+if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]] \
+      || [[ "$1" == "help" ]] ; then
+   echo "Usage: `basename $0` [option]"
+   echo "Options:"
+   echo "   on             - Enable DPMS and screensaver"
+   echo "   off  [default] - Disable DPMS and screensaver"
+   echo "   soff           - Disable DPMS and screensaver and switch off the screen"
+elif [[ "$1" == "on" ]]; then
+   xset s on
+   xset +dpms
+   echo "DPMS and screensaver enabled"
+elif [[ "$1" == "soff" ]]; then
+   xset dpms force off
+   $0 off
+else
+   xset s off
+   xset -dpms
+   echo "DPMS and screensaver disabled"
+fi

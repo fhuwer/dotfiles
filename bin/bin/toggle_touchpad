@@ -1,0 +1,21 @@
+#!/bin/bash
+
+assets=`dirname $(readlink -f $0)`/assets
+state=$(awk '/TouchpadOff[ ]+=[ ]+([0-1])/ { print $3 }' <(synclient))
+ID=`cat /tmp/.dunst_toggle_touchpad`
+
+if [[ "$state" == "0" ]]; then
+   synclient TouchpadOff=1
+   ICON="$assets/toggle_touchpad_off.png"
+   MESSAGE="Touchpad disabled"
+else
+   synclient TouchpadOff=0
+   ICON="$assets/toggle_touchpad_on.png"
+   MESSAGE="Touchpad enabled"
+fi
+
+if [[ $ID -gt "0" ]]; then
+   dunstify -p -r $ID -i "$ICON" "Touchpad" "$MESSAGE" > /tmp/.dunst_toggle_touchpad
+else
+   dunstify -p -i "$ICON" "Touchpad" "$MESSAGE" > /tmp/.dunst_toggle_touchpad
+fi

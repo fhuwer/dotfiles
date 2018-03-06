@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+if [[ "$1" == "stop" ]]; then
+   notify-send DUNST_COMMAND_PAUSE
+fi
+if [[ "$1" == "start" ]]; then
+   notify-send DUNST_COMMAND_RESUME
+fi
