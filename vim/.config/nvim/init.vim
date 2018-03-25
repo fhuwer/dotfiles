@@ -87,6 +87,16 @@ function! ToggleShowWidth()
 endfunc
 map <F7> :call ToggleShowWidth()<CR>
 
+" Automatic retabbing
+function! Retab(before, after)
+   let &tabstop=a:before
+   set noexpandtab
+   execute '%retab!<CR>'
+   let &tabstop=a:after
+   set expandtab
+   execute '%retab!<CR>'
+endfunc
+
 " Terminal {{{
 function! VTerm()
    execute "vsplit"
