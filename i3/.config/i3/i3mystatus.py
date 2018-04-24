@@ -56,7 +56,7 @@ status.register("mem",
 
 status.register("network",
    interface=lanInterface,
-   format_up="{interface}: {v4cidr} {network_graph}",
+   format_up="{interface}: {v4cidr} {network_graph_recv}",
    format_down="{interface}: DOWN",
    graph_width=20,
    start_color='#859900',

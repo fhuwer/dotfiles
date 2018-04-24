@@ -1,7 +1,7 @@
 # vim:fdm=marker:foldlevel=0
 
 set $TERMINAL /usr/bin/urxvt
-set $LOCK_PATH /bin/lock
+set $LOCK_PATH lock
 set $KUAKE_PATH ~/projects/kuake/kuake.py
 
 # Main modifier key
