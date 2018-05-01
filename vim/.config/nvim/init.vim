@@ -210,6 +210,7 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'farmergreg/vim-lastplace'
 Plug 'kien/ctrlp.vim'
 Plug 'lervag/vimtex', { 'for': 'tex' }
+Plug 'sirtaj/vim-openscad'
 
 if has('nvim')
    Plug 'neomake/neomake'
