@@ -1,0 +1,11 @@
+set spoolfile = "+neuhaus@uni-mainz.de/INBOX"
+set record = "+neuhaus@uni-mainz.de/Sent"
+set postponed = "+neuhaus@uni-mainz.de/Drafts"
+
+set realname  = "Friedemann Neuhaus"
+set from      = neuhaus@uni-mainz.de
+set signature = "~/.mutt/neuhaus@uni-mainz.de.signature"
+
+set imap_user = frneuhau
+set imap_pass = `pass mail/neuhaus@uni-mainz.de`
+set smtp_url = smtp://$imap_user:$imap_pass@mail.uni-mainz.de:587

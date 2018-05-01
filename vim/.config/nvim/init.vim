@@ -36,9 +36,9 @@ set nowritebackup
 
 " Indentation {{{
 set autoindent
-set tabstop=3
-set softtabstop=3
-set shiftwidth=3
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set expandtab
 " }}}
 
@@ -86,6 +86,16 @@ function! ToggleShowWidth()
    endif
 endfunc
 map <F7> :call ToggleShowWidth()<CR>
+
+" Automatic retabbing
+function! Retab(before, after)
+   let &tabstop=a:before
+   set noexpandtab
+   execute '%retab!<CR>'
+   let &tabstop=a:after
+   set expandtab
+   execute '%retab!<CR>'
+endfunc
 
 " Terminal {{{
 function! VTerm()
@@ -211,6 +221,7 @@ Plug 'farmergreg/vim-lastplace'
 Plug 'kien/ctrlp.vim'
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'sirtaj/vim-openscad'
+Plug 'neomutt/neomutt.vim'
 
 if has('nvim')
    Plug 'neomake/neomake'

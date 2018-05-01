@@ -1,5 +1,7 @@
 map <C-d> <Nop>
+let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_next_key='<C-d>'
+let g:multi_cursor_quit_key='<Esc>'
 
 if has('nvim')
    " Called once right before you start selecting multiple cursors

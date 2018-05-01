@@ -1,0 +1,177 @@
+# vim:fdm=marker:foldlevel=0:ft=conf
+[general]
+accounts = friedemann@neuhaus-tech.de, f.neuhaus@yahoo.de, neuhaus@uni-mainz.de, fneuhaus@students.uni-mainz.de, fneuhaus@cern.ch
+maxsyncaccounts = 1
+pythonfile = ~/.offlineimap.py
+
+[mbnames]
+enabled = yes
+filename = ~/.mutt/mailboxes
+header = " "
+peritem = "+%(accountname)s/%(foldername)s"
+sep = "\n"
+footer = "\n"
+
+[DEFAULT]
+autorefresh = 0.5
+quick = 10
+postsynchook = notmuch new
+
+# friedemann@neuhaus-tech.de {{{
+[Account friedemann@neuhaus-tech.de]
+localrepository = friedemann@neuhaus-tech.de-local
+remoterepository = friedemann@neuhaus-tech.de-remote
+
+[Repository friedemann@neuhaus-tech.de-local]
+type = Maildir
+localfolders = ~/mail/friedemann@neuhaus-tech.de
+sep = /
+sync_deletes = yes
+nametrans = lambda foldername: re.sub ('^Sent', 'Gesendete Objekte',
+                               re.sub ('^Trash', 'Gel&APY-schte Objekte',
+                               re.sub ('^Drafts', 'Entw&APw-rfe', foldername)))
+
+[Repository friedemann@neuhaus-tech.de-remote]
+type = IMAP
+
+remotehost = imap.neuhaus-tech.de
+remoteport = 143
+remoteuser = friedemann
+remotepasseval = get_pass("mail/friedemann@neuhaus-tech.de")
+nametrans = lambda foldername: re.sub ('^Gesendete Objekte', 'Sent',
+                               re.sub ('^Gel&APY-schte Objekte', 'Trash',
+                               re.sub ('^Entw&APw-rfe', 'Drafts', foldername)))
+
+starttls = yes
+ssl = no
+sync_deletes = yes
+folderfilter = lambda folder: folder not in ['Archives', 'Archives/2017', 'Public folders', 'Public folders/Non-Spam', 'Public folders/Spam', 'Sent Items']
+keepalive = 60
+holdconnectionopen = yes
+# }}}
+# f.neuhaus@yahoo.de {{{
+[Account f.neuhaus@yahoo.de]
+localrepository = f.neuhaus@yahoo.de-local
+remoterepository = f.neuhaus@yahoo.de-remote
+
+[Repository f.neuhaus@yahoo.de-local]
+type = Maildir
+localfolders = ~/mail/f.neuhaus@yahoo.de
+sep = /
+sync_deletes = yes
+nametrans = lambda foldername: re.sub ('^Sent', 'Gesendete Objekte',
+                               re.sub ('^Trash', 'Gel&APY-schte Objekte',
+                               re.sub ('^Drafts', 'Entw&APw-rfe', foldername)))
+
+[Repository f.neuhaus@yahoo.de-remote]
+type = IMAP
+
+remotehost = imap.neuhaus-tech.de
+remoteport = 143
+remoteuser = friedemann_yahoo
+remotepasseval = get_pass("mail/f.neuhaus@yahoo.de")
+nametrans = lambda foldername: re.sub ('^Gesendete Objekte', 'Sent',
+                               re.sub ('^Gel&APY-schte Objekte', 'Trash',
+                               re.sub ('^Entw&APw-rfe', 'Drafts', foldername)))
+
+starttls = yes
+ssl = no
+sync_deletes = yes
+folderfilter = lambda folder: not expression_match(['Public folders/*', 'INBOX/Gesch&AOQ-ftliches/*', 'Postausgang', 'Gel&APY-schte Objekte/*', 'Archives/*'], folder)
+keepalive = 60
+holdconnectionopen = yes
+# }}}
+# neuhaus@uni-mainz.de {{{
+[Account neuhaus@uni-mainz.de]
+localrepository = neuhaus@uni-mainz.de-local
+remoterepository = neuhaus@uni-mainz.de-remote
+
+[Repository neuhaus@uni-mainz.de-local]
+type = Maildir
+localfolders = ~/mail/neuhaus@uni-mainz.de
+sep = /
+sync_deletes = yes
+nametrans = lambda foldername: re.sub ('^Sent', 'Gesendete Elemente',
+                               re.sub ('^Trash', 'Gel&APY-schte Elemente',
+                               re.sub ('^Drafts', 'Entw&APw-rfe', foldername)))
+
+
+[Repository neuhaus@uni-mainz.de-remote]
+type = IMAP
+
+remotehost = mail.uni-mainz.de
+remoteport = 143
+remoteuser = frneuhau@uni-mainz.de
+remotepasseval = get_pass("mail/neuhaus@uni-mainz.de")
+nametrans = lambda foldername: re.sub ('^Gesendete Elemente', 'Sent',
+                               re.sub ('^Gel&APY-schte Elemente', 'Trash',
+                               re.sub ('^Entw&APw-rfe', 'Drafts', foldername)))
+
+starttls = yes
+ssl = no
+sync_deletes = yes
+folderfilter = lambda folder: folder not in ['Aufgaben', 'Journal', 'Kalender', 'Kalender/Geburtstage', 'Notizen', 'Kontakte', 'Postausgang']
+keepalive = 60
+holdconnectionopen = yes
+# }}}
+# fneuhaus@students.uni-mainz.de {{{
+[Account fneuhaus@students.uni-mainz.de]
+localrepository = fneuhaus@students.uni-mainz.de-local
+remoterepository = fneuhaus@students.uni-mainz.de-remote
+autorefresh = 0.5
+quick  = 10
+
+[Repository fneuhaus@students.uni-mainz.de-local]
+type = Maildir
+localfolders = ~/mail/fneuhaus@students.uni-mainz.de
+sep = /
+sync_deletes = yes
+nametrans = lambda foldername: re.sub ('^Sent', 'Gesendete Elemente',
+                               re.sub ('^Trash', 'Gel&APY-schte Elemente',
+                               re.sub ('^Drafts', 'Entw&APw-rfe', foldername)))
+
+[Repository fneuhaus@students.uni-mainz.de-remote]
+type = IMAP
+
+remotehost = mail.uni-mainz.de
+remoteport = 143
+remoteuser = fneuhaus@uni-mainz.de
+remotepasseval = get_pass("mail/fneuhaus@students.uni-mainz.de")
+nametrans = lambda foldername: re.sub ('^Gesendete Elemente', 'Sent',
+                               re.sub ('^Gel&APY-schte Elemente', 'Trash',
+                               re.sub ('^Entw&APw-rfe', 'Drafts', foldername)))
+
+starttls = yes
+ssl = no
+sync_deletes = yes
+folderfilter = lambda folder: not expression_match(['IACIS/*', 'LSF', 'LubISS', 'NSW/*', 'NSW2/*', 'RD51', 'Kalender/*', 'Notizen', 'Kontakte', 'Postausgang', 'Aufgaben', 'Journal', 'Archives/*'], folder)
+keepalive = 60
+holdconnectionopen = yes
+# }}}
+# fneuhaus@cern.ch {{{
+[Account fneuhaus@cern.ch]
+localrepository = fneuhaus@cern.ch-local
+remoterepository = fneuhaus@cern.ch-remote
+
+[Repository fneuhaus@cern.ch-local]
+type = Maildir
+localfolders = ~/mail/fneuhaus@cern.ch
+sep = /
+sync_deletes = yes
+
+[Repository fneuhaus@cern.ch-remote]
+type = IMAP
+
+remotehost = imap.cern.ch
+remoteport = 993
+remoteuser = fneuhaus
+remotepasseval = get_pass("mail/fneuhaus@cern.ch")
+
+starttls = yes
+ssl = yes
+sslcacertfile = /etc/ssl/certs/COMODO_RSA_Certification_Authority.pem
+sync_deletes = yes
+folderfilter = lambda folder: not expression_match(['Calendar', 'Contacts/*', 'Conversation History', 'Deleted Items', 'Sent Items', 'Tasks', 'Notes', 'Outbox', 'Journal'], folder)
+keepalive = 60
+holdconnectionopen = yes
+# }}}
