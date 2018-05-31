@@ -1,0 +1,12 @@
+set spoolfile = "+friedemann@neuhaus-tech.de/INBOX"
+set record    = "+friedemann@neuhaus-tech.de/Sent"
+set postponed = "+friedemann@neuhaus-tech.de/Drafts"
+
+set realname  = "Friedemann Neuhaus"
+set from      = "friedemann@neuhaus-tech.de"
+set signature = "~/.mutt/friedemann@neuhaus-tech.de.signature"
+
+set imap_user = friedemann
+set imap_pass = `pass mail/friedemann@neuhaus-tech.de`
+set smtp_url = smtps://$imap_user:$imap_pass@mail.neuhaus-tech.de:587
+set ssl_starttls = yes

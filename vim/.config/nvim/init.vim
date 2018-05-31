@@ -36,9 +36,9 @@ set nowritebackup
 
 " Indentation {{{
 set autoindent
-set tabstop=3
-set softtabstop=3
-set shiftwidth=3
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set expandtab
 " }}}
 
@@ -220,6 +220,8 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'farmergreg/vim-lastplace'
 Plug 'kien/ctrlp.vim'
 Plug 'lervag/vimtex', { 'for': 'tex' }
+Plug 'sirtaj/vim-openscad'
+Plug 'neomutt/neomutt.vim'
 
 if has('nvim')
    Plug 'neomake/neomake'

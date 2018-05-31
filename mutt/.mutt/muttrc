@@ -1,0 +1,176 @@
+#______________________________________________________________________________
+#                                                                       GENERAL
+# set header_cache = "~/.cache/mutt"
+
+set print_command = "muttprint"
+set print = ask-yes
+set print_split
+
+set query_command = "khard email --parsable %s"
+set new_mail_command = "notify-send 'New e-mail' '%n new message(s)' &"
+
+source ~/.mutt/solarized-dark-256.muttrc
+
+
+#______________________________________________________________________________
+#                                                                        CRYPTO
+# set pgp_self_encrypt         = yes
+# set pgp_self_encrypt_as      = F162145821DF211E495D0ECE362D3B2DAE51944D
+# set pgp_sign_as              = F162145821DF211E495D0ECE362D3B2DAE51944D
+# set crypt_use_gpgme          = yes
+# set crypt_autosign           = yes
+# set crypt_replysign          = yes
+# set crypt_replyencrypt       = yes
+# set crypt_replysignencrypted = yes
+# set postpone_encrypt         = yes
+
+
+#______________________________________________________________________________
+#                                                                       SIDEBAR
+set sidebar_visible
+set sidebar_format        = "%B %?F? [%F]? %* %?N?%N/?%?S?%S?"
+set sidebar_width         = 35
+set sidebar_divider_char  = '│'
+set sidebar_short_path
+set sidebar_delim_chars   = "/"
+set sidebar_folder_indent
+set sidebar_indent_string = "  "
+set sidebar_sort_method   = unsorted
+set mail_check_stats
+
+
+#______________________________________________________________________________
+#                                                                     MAILBOXES
+set mbox_type=Maildir
+set folder = "~/mail"
+
+source ~/.mutt/friedemann@neuhaus-tech.de
+mailboxes +friedemann@neuhaus-tech.de
+mailboxes `cat ~/.mutt/mailboxes | grep friedemann@neuhaus-tech.de | tr '\n' ' '`
+folder-hook $folder/friedemann@neuhaus-tech.de 'source ~/.mutt/friedemann@neuhaus-tech.de'
+account-hook $folder/friedemann@neuhaus-tech.de "set imap_user=$imap_user imap_pass=$imap_pass"
+macro index <f1> <change-folder>$spoolfile<enter>
+
+source ~/.mutt/f.neuhaus@yahoo.de
+mailboxes +f.neuhaus@yahoo.de
+mailboxes `cat ~/.mutt/mailboxes | grep f.neuhaus@yahoo.de | tr '\n' ' '`
+folder-hook $folder/f.neuhaus@yahoo.de 'source ~/.mutt/f.neuhaus@yahoo.de'
+account-hook $folder/f.neuhaus@yahoo.de "set imap_user=$imap_user imap_pass=$imap_pass"
+macro index <f2> <change-folder>$spoolfile<enter>
+
+source ~/.mutt/neuhaus@uni-mainz.de
+mailboxes "+neuhaus@uni-mainz.de"
+mailboxes `cat ~/.mutt/mailboxes | grep neuhaus@uni-mainz.de | tr '\n' ' '`
+folder-hook $folder/neuhaus@uni-mainz.de 'source ~/.mutt/neuhaus@uni-mainz.de'
+account-hook $folder/neuhaus@uni-mainz.de "set imap_user=$imap_user imap_pass=$imap_pass"
+macro index <f3> <change-folder>$spoolfile<enter>
+
+source ~/.mutt/fneuhaus@students.uni-mainz.de
+mailboxes "+fneuhaus@students.uni-mainz.de"
+mailboxes `cat ~/.mutt/mailboxes | grep fneuhaus@students.uni-mainz.de | tr '\n' ' '`
+folder-hook $folder/fneuhaus@students.uni-mainz.de 'source ~/.mutt/fneuhaus@students.uni-mainz.de'
+account-hook $folder/fneuhaus@students.uni-mainz.de "set imap_user=$imap_user imap_pass=$imap_pass"
+macro index <f4> <change-folder>$spoolfile<enter>
+
+source ~/.mutt/fneuhaus@cern.ch
+mailboxes "+fneuhaus@cern.ch"
+mailboxes `cat ~/.mutt/mailboxes | grep fneuhaus@cern.ch | tr '\n' ' '`
+folder-hook $folder/fneuhaus@cern.ch 'source ~/.mutt/fneuhaus@cern.ch'
+account-hook $folder/fneuhaus@cern.ch "set imap_user=$imap_user imap_pass=$imap_pass"
+macro index <f4> <change-folder>$spoolfile<enter>
+
+source ~/.mutt/neuhaus@uni-mainz.de
+# source ~/.mutt/notmuch
+
+#______________________________________________________________________________
+#                                                                  SENDING MAIL
+set editor=`echo \$EDITOR`
+set edit_headers
+set send_charset = utf-8
+set user_agent = no
+
+
+#______________________________________________________________________________
+#                                                                         INDEX
+set sort = threads
+set sort_aux = last-date-received
+set collapse_all
+set index_format = "%4C [%Z] %?M?↳& ? %{%b %d} |%-30.30L| %s" 
+
+#______________________________________________________________________________
+#                                                                         PAGER
+alternative_order text/plain text/html
+auto_view         text/html
+
+
+#______________________________________________________________________________
+#                                                                      BINDINGS
+bind index,pager \CK sidebar-prev
+bind index,pager \CJ sidebar-next
+bind index,pager \CL sidebar-open
+
+bind index v collapse-thread
+
+bind pager j next-line
+bind pager k previous-line
+bind pager g noop
+bind pager gr group-reply
+bind pager gg top
+bind pager G bottom
+
+bind editor <Tab> complete-query
+
+bind index,pager @ compose-to-sender
+bind index,pager \CV sidebar-toggle-virtual
+
+macro attach s "<save-entry><bol>~/scratch/<eol>" "Save to scratch space"
+
+macro index <f7> "<vfolder-from-query>" "vfolder from notmuch query"
+macro index <f8> "<entire-thread>" "read entire thread of the current message"
+
+
+#______________________________________________________________________________
+#                                                                        COLORS
+# color  status    cyan        black
+# color  error     red         default
+# color  indicator brightblack yellow
+
+# color  sidebar_ordinary  white   default
+# color  sidebar_flagged   red     default
+# color  sidebar_indicator default blue
+# color  sidebar_new       blue    default
+# color  sidebar_divider   cyan    default
+
+# color  index         white   default '.*'
+# color  index_flags   default black   '.*'
+# color  index_flags   red     black   '~F'
+# color  index_flags   blue    black   '~N|~O'
+# color  index_flags   blue    black   '~v~(~N|~O)'
+# color  index_flags   yellow  black   '~T'
+# color  index_author  default black   '.*'
+# color  index_author  blue    black   '~N|~O'
+# color  index_author  blue    black   '~v~(~N|~O)'
+# color  index_author  red     black   '~F'
+# color  index_author  yellow  black   '~T'
+# color  index_subject white   black   '~v'
+# color  index_subject blue    black   '~v~(~N|~O)'
+# color  index_subject blue    default '~N|~O'
+# color  index_subject red     default '~F'
+# color  index_subject yellow  default '~T'
+
+# color  hdrdefault brightgreen  default
+# color  header     cyan         default  "^(Date)"
+# color  header     brightyellow default  "^(From)"
+# color  header     blue         default  "^(Subject)"
+
+# color  attach_headers white         default "^\\[--.*"
+
+# color quoted        blue            default
+# color quoted1       red             default
+# color quoted2       cyan            default
+# color quoted3       yellow          default
+# color quoted4       brightred       default
+
+# color body  red  default  "(BAD signature.*)"
+# color body  cyan default  "(Good signature from.*)"
+# color body  cyan default  "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"

@@ -1,7 +1,7 @@
 # vim:fdm=marker:foldlevel=0
 
 set $TERMINAL /usr/bin/urxvt
-set $LOCK_PATH /bin/lock
+set $LOCK_PATH lock
 set $KUAKE_PATH ~/projects/kuake/kuake.py
 
 # Main modifier key
@@ -164,6 +164,8 @@ bindsym $mod+ctrl+F8 "exec $LOCK_PATH"
 bindsym $mod+shift+d exec setxkbmap de
 bindsym $mod+shift+g exec setxkbmap us
 bindsym F12 "exec $KUAKE_PATH"
+bindsym $mod+F1 "exec $HOME/bin/audioctl move-all built-in"
+bindsym $mod+F2 "exec $HOME/bin/audioctl move-all hdmi"
 # }}}
 # Workspaces {{{
 # switch to workspace
