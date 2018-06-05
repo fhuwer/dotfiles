@@ -8,7 +8,7 @@ alias la='ls -A'
 alias l='ls -hl'
 
 # Open
-function open() { xdg-open $1 &! }
+function open() { xdg-open $1 >/dev/null 2>&1 &! }
 
 # Alias for Python
 alias py="python"
