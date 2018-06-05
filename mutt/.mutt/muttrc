@@ -14,15 +14,15 @@ source ~/.mutt/solarized-dark-256.muttrc
 
 #______________________________________________________________________________
 #                                                                        CRYPTO
-# set pgp_self_encrypt         = yes
-# set pgp_self_encrypt_as      = F162145821DF211E495D0ECE362D3B2DAE51944D
-# set pgp_sign_as              = F162145821DF211E495D0ECE362D3B2DAE51944D
-# set crypt_use_gpgme          = yes
-# set crypt_autosign           = yes
-# set crypt_replysign          = yes
-# set crypt_replyencrypt       = yes
-# set crypt_replysignencrypted = yes
-# set postpone_encrypt         = yes
+set pgp_self_encrypt         = yes
+set pgp_self_encrypt_as      = 790F1AC4875D7008600DDC71DC81ADAF40412E26
+set pgp_sign_as              = 790F1AC4875D7008600DDC71DC81ADAF40412E26
+set crypt_use_gpgme          = yes
+set crypt_autosign           = yes
+set crypt_replysign          = yes
+set crypt_replyencrypt       = yes
+set crypt_replysignencrypted = yes
+set postpone_encrypt         = yes
 
 
 #______________________________________________________________________________
@@ -80,7 +80,7 @@ account-hook $folder/fneuhaus@cern.ch "set imap_user=$imap_user imap_pass=$imap_
 macro index <f4> <change-folder>$spoolfile<enter>
 
 source ~/.mutt/neuhaus@uni-mainz.de
-# source ~/.mutt/notmuch
+source ~/.mutt/notmuch
 
 #______________________________________________________________________________
 #                                                                  SENDING MAIL
@@ -101,6 +101,7 @@ set index_format = "%4C [%Z] %?M?↳& ? %{%b %d} |%-30.30L| %s"
 #                                                                         PAGER
 alternative_order text/plain text/html
 auto_view         text/html
+unset             markers
 
 
 #______________________________________________________________________________
@@ -108,8 +109,14 @@ auto_view         text/html
 bind index,pager \CK sidebar-prev
 bind index,pager \CJ sidebar-next
 bind index,pager \CL sidebar-open
+bind index,pager \CA sidebar-toggle-visible
+
+macro index \CX "<change-folder>?" "Change to folder overview"
 
 bind index v collapse-thread
+bind index i next-unread
+bind index I previous-unread
+bind index \CI next-new
 
 bind pager j next-line
 bind pager k previous-line

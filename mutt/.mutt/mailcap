@@ -2,5 +2,10 @@ text/*;    more
 text/html; lynx -display_charset utf-8 -dump %s; nametemplate=%s.html; copiousoutput
 
 application/pdf; zathura %s
+application/vnd.ms-excel; soffice %s
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; soffice %s &!
+application/msword; soffice %s
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; soffice %s &!
+
 
 image/jpeg; eog %s
