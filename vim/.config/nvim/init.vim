@@ -46,6 +46,7 @@ set expandtab
 set foldenable
 set foldcolumn=0
 set foldmethod=syntax
+set foldlevel=99
 " }}}
 
 " Search {{{
@@ -222,6 +223,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'sirtaj/vim-openscad'
 Plug 'neomutt/neomutt.vim'
+Plug 'tweekmonster/django-plus.vim'
 
 if has('nvim')
    Plug 'neomake/neomake'
