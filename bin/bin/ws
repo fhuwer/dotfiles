@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+import json
+import subprocess
+import sys
+
+
+def get_workspaces():
+	# Get workspaces
+	p = subprocess.Popen(['i3-msg', '-t', 'get_workspaces'], stdout=subprocess.PIPE)
+	out, _ = p.communicate()
+	data = json.loads(out.decode('ascii'))
+	result = {}
+	for ws in data:
+		result[ws['num']] = ws
+	return result		
+
+
+def rename(argv):
+	workspaces = get_workspaces()
+	ws_num = int(argv[0])
+	if ws_num not in workspaces:
+		print('Workspace {} does not exist.'.format(ws_num))
+		return -1
+	ws = workspaces[ws_num]
+	if len(argv) == 2:
+		subprocess.run('i3-msg "rename workspace {0} to {1}:{2}"'.format(ws['name'], ws['num'], argv[1]), shell=True)
+	else:
+		subprocess.run('i3-msg "rename workspace {0} to {1}"'.format(ws['name'], ws['num']), shell=True)
+	return 0
+
+def move(argv):
+	workspaces = get_workspaces()
+	if len(argv) == 2:
+		from_ws = int(argv[0])
+		to_ws = int(argv[1])
+	elif len(argv) == 1:
+		for num, ws in workspaces.items():
+			if ws['focused']:
+				from_ws = num
+		to_ws = int(argv[0])
+
+	if from_ws not in workspaces:
+		print('Workspace {} does not exist.'.format(from_ws))
+		return -1
+	if to_ws in workspaces:
+		print('Workspace {} is already assigned.'.format(to_ws))
+		return -1
+	
+	subprocess.run('i3-msg "rename workspace {0} to {1}"'.format(workspaces[from_ws]['name'], workspaces[from_ws]['name'].replace(str(from_ws), str(to_ws))), shell=True)
+
+if __name__ == "__main__":
+	tool, args = sys.argv[1], sys.argv[2:]
+	if tool == "rename" or tool == "name" or tool == "n":
+		rename(args)
+	if tool == "mv" or tool == "move":
+		move(args)
