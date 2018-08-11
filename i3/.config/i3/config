@@ -166,6 +166,7 @@ bindsym $mod+shift+g exec setxkbmap us
 bindsym F12 "exec $KUAKE_PATH"
 bindsym $mod+F1 "exec $HOME/bin/audioctl move-all built-in"
 bindsym $mod+F2 "exec $HOME/bin/audioctl move-all hdmi"
+bindsym $mod+F3 "exec $HOME/bin/audioctl move-all mid"
 # }}}
 # Workspaces {{{
 # switch to workspace
