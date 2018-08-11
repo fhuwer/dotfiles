@@ -98,6 +98,13 @@ function! Retab(before, after)
    execute '%retab!<CR>'
 endfunc
 
+" Set tabsize
+function! SetTabWidth(width)
+  let &tabstop=a:width
+  let &softtabstop=a:width
+  let &shiftwidth=a:width
+endfunc
+
 " Terminal {{{
 function! VTerm()
    execute "vsplit"
