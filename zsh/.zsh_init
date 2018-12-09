@@ -6,7 +6,7 @@
 export PATH=$HOME/bin:$PATH
 
 # Try to load virtualenvwrapper
-source virtualenvwrapper.sh
+source virtualenvwrapper_lazy.sh
 
 # Try to setup ROOT
 if [ -f "${ROOT_PATH}/bin/thisroot.sh" ]; then
