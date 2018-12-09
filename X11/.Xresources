@@ -83,6 +83,9 @@ URxvt.font: xft:InconsolataForPowerline-dz:size=9:antialias=true:hinting=true
 URxvt.boldFont:
 URxvt.cursorBlink: true
 
+! Disable printing the terminal contents when pressing PrintScreen.
+URxvt.print-pipe: "cat > /dev/null"
+
 ! Dont fade colours when focus lost
 URxvt.fading: 0
 

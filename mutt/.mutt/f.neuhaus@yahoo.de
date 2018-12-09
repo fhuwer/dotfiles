@@ -6,6 +6,6 @@ set realname  = "Friedemann Neuhaus"
 set from      = "f.neuhaus@yahoo.de"
 set signature = "~/.mutt/f.neuhaus@yahoo.de.signature"
 
-set imap_user = friedemann_yahoo
+set imap_user = friedemann_yahoo@neuhaus-tech.de
 set imap_pass = `pass mail/f.neuhaus@yahoo.de`
 set smtp_url = smtps://$imap_user:$imap_pass@mail.neuhaus-tech.de:465

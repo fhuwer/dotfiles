@@ -230,6 +230,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'sirtaj/vim-openscad'
 Plug 'neomutt/neomutt.vim'
+Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'tweekmonster/django-plus.vim'
 
 if has('nvim')
