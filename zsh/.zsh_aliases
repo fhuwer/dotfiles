@@ -7,6 +7,9 @@ alias ll='ls -ahlF'
 alias la='ls -A'
 alias l='ls -hl'
 
+# Short listing of lsvirtualenv
+alias lsvirtualenv='lsvirtualenv -b'
+
 # Open
 function open() { xdg-open $1 >/dev/null 2>&1 &! }
 
