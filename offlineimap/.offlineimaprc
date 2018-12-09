@@ -15,7 +15,6 @@ footer = "\n"
 [DEFAULT]
 autorefresh = 0.5
 quick = 10
-postsynchook = notmuch new
 
 # friedemann@neuhaus-tech.de {{{
 [Account friedemann@neuhaus-tech.de]
@@ -27,25 +26,20 @@ type = Maildir
 localfolders = ~/mail/friedemann@neuhaus-tech.de
 sep = /
 sync_deletes = yes
-nametrans = lambda foldername: re.sub ('^Sent', 'Gesendete Objekte',
-                               re.sub ('^Trash', 'Gel&APY-schte Objekte',
-                               re.sub ('^Drafts', 'Entw&APw-rfe', foldername)))
 
 [Repository friedemann@neuhaus-tech.de-remote]
 type = IMAP
 
-remotehost = imap.neuhaus-tech.de
-remoteport = 143
-remoteuser = friedemann
+remotehost = mail.neuhaus-tech.de
+remoteport = 993
+remoteuser = friedemann@neuhaus-tech.de
 remotepasseval = get_pass("mail/friedemann@neuhaus-tech.de")
-nametrans = lambda foldername: re.sub ('^Gesendete Objekte', 'Sent',
-                               re.sub ('^Gel&APY-schte Objekte', 'Trash',
-                               re.sub ('^Entw&APw-rfe', 'Drafts', foldername)))
 
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 starttls = yes
-ssl = no
+ssl = yes
 sync_deletes = yes
-folderfilter = lambda folder: folder not in ['Archives', 'Archives/2017', 'Public folders', 'Public folders/Non-Spam', 'Public folders/Spam', 'Sent Items']
+folderfilter = lambda folder: not expression_match(['Shared/*', 'Archive/*', 'Trash/*'], folder)
 keepalive = 60
 holdconnectionopen = yes
 # }}}
@@ -59,25 +53,20 @@ type = Maildir
 localfolders = ~/mail/f.neuhaus@yahoo.de
 sep = /
 sync_deletes = yes
-nametrans = lambda foldername: re.sub ('^Sent', 'Gesendete Objekte',
-                               re.sub ('^Trash', 'Gel&APY-schte Objekte',
-                               re.sub ('^Drafts', 'Entw&APw-rfe', foldername)))
 
 [Repository f.neuhaus@yahoo.de-remote]
 type = IMAP
 
-remotehost = imap.neuhaus-tech.de
-remoteport = 143
-remoteuser = friedemann_yahoo
+remotehost = mail.neuhaus-tech.de
+remoteport = 993
+remoteuser = friedemann_yahoo@neuhaus-tech.de
 remotepasseval = get_pass("mail/f.neuhaus@yahoo.de")
-nametrans = lambda foldername: re.sub ('^Gesendete Objekte', 'Sent',
-                               re.sub ('^Gel&APY-schte Objekte', 'Trash',
-                               re.sub ('^Entw&APw-rfe', 'Drafts', foldername)))
 
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 starttls = yes
-ssl = no
+ssl = yes
 sync_deletes = yes
-folderfilter = lambda folder: not expression_match(['Public folders/*', 'INBOX/Gesch&AOQ-ftliches/*', 'Postausgang', 'Gel&APY-schte Objekte/*', 'Archives/*'], folder)
+folderfilter = lambda folder: not expression_match(['Shared/*', 'Archive/*', 'Trash/*'], folder)
 keepalive = 60
 holdconnectionopen = yes
 # }}}
@@ -110,7 +99,7 @@ nametrans = lambda foldername: re.sub ('^Gesendete Elemente', 'Sent',
 starttls = yes
 ssl = no
 sync_deletes = yes
-folderfilter = lambda folder: folder not in ['Aufgaben', 'Journal', 'Kalender', 'Kalender/Geburtstage', 'Notizen', 'Kontakte', 'Postausgang']
+folderfilter = lambda folder: not expression_match(['Aufgaben', 'Trash/*', 'Journal', 'Kalender/*', 'Notizen', 'Kontakte/*', 'Postausgang'], folder)
 keepalive = 60
 holdconnectionopen = yes
 # }}}
@@ -144,7 +133,7 @@ nametrans = lambda foldername: re.sub ('^Gesendete Elemente', 'Sent',
 starttls = yes
 ssl = no
 sync_deletes = yes
-folderfilter = lambda folder: not expression_match(['IACIS/*', 'LSF', 'LubISS', 'NSW/*', 'NSW2/*', 'RD51', 'Kalender/*', 'Notizen', 'Kontakte', 'Postausgang', 'Aufgaben', 'Journal', 'Archives/*'], folder)
+folderfilter = lambda folder: folder in ['INBOX', 'Drafts', 'Junk-E-Mail', 'Sent', 'Gesendete Elemente', 'Entw&APw-rfe']
 keepalive = 60
 holdconnectionopen = yes
 # }}}
@@ -171,7 +160,7 @@ starttls = yes
 ssl = yes
 sslcacertfile = /etc/ssl/certs/COMODO_RSA_Certification_Authority.pem
 sync_deletes = yes
-folderfilter = lambda folder: not expression_match(['Calendar', 'Contacts/*', 'Conversation History', 'Deleted Items', 'Sent Items', 'Tasks', 'Notes', 'Outbox', 'Journal'], folder)
+folderfilter = lambda folder: not expression_match(['Calendar', 'Trash/*', 'Contacts/*', 'Conversation History', 'Deleted Items', 'Sent Items', 'Tasks', 'Notes', 'Outbox', 'Journal'], folder)
 keepalive = 60
 holdconnectionopen = yes
 # }}}

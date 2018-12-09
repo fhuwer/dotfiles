@@ -1,6 +1,6 @@
 #______________________________________________________________________________
 #                                                                       GENERAL
-# set header_cache = "~/.cache/mutt"
+set header_cache = "~/.cache/mutt"
 
 set print_command = "muttprint"
 set print = ask-yes
@@ -9,7 +9,10 @@ set print_split
 set query_command = "khard email --parsable %s"
 set new_mail_command = "notify-send 'New e-mail' '%n new message(s)' &"
 
-source ~/.mutt/solarized-dark-256.muttrc
+set abort_noattach = ask-yes
+set abort_noattach_regex = "\\<(attach(|ed|ments?)|(anhang|anhänge|hängt an))\\>"
+
+source ~/.mutt/solarized-dark-16.muttrc
 
 
 #______________________________________________________________________________
@@ -77,10 +80,10 @@ mailboxes "+fneuhaus@cern.ch"
 mailboxes `cat ~/.mutt/mailboxes | grep fneuhaus@cern.ch | tr '\n' ' '`
 folder-hook $folder/fneuhaus@cern.ch 'source ~/.mutt/fneuhaus@cern.ch'
 account-hook $folder/fneuhaus@cern.ch "set imap_user=$imap_user imap_pass=$imap_pass"
-macro index <f4> <change-folder>$spoolfile<enter>
+macro index <f5> <change-folder>$spoolfile<enter>
 
 source ~/.mutt/neuhaus@uni-mainz.de
-source ~/.mutt/notmuch
+# source ~/.mutt/notmuch
 
 #______________________________________________________________________________
 #                                                                  SENDING MAIL
@@ -94,7 +97,7 @@ set user_agent = no
 #                                                                         INDEX
 set sort = threads
 set sort_aux = last-date-received
-set collapse_all
+set collapse_all = no
 set index_format = "%4C [%Z] %?M?↳& ? %{%b %d} |%-30.30L| %s" 
 
 #______________________________________________________________________________
@@ -134,6 +137,14 @@ macro attach s "<save-entry><bol>~/scratch/<eol>" "Save to scratch space"
 
 macro index <f7> "<vfolder-from-query>" "vfolder from notmuch query"
 macro index <f8> "<entire-thread>" "read entire thread of the current message"
+
+macro attach o \
+"\
+<enter-command>unset wait_key<enter>\
+<shell-escape>rm -f /tmp/mutt-attach<enter>\
+<save-entry><kill-line>/tmp/mutt-attach<enter>\
+<shell-escape> /tmp/mutt-attach &^A\
+"
 
 
 #______________________________________________________________________________
