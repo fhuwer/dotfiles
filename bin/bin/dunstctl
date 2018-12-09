@@ -1,8 +1,9 @@
 #!/usr/bin/bash
 
 if [[ "$1" == "stop" ]]; then
-   notify-send DUNST_COMMAND_PAUSE
-fi
-if [[ "$1" == "start" ]]; then
-   notify-send DUNST_COMMAND_RESUME
+  notify-send DUNST_COMMAND_PAUSE
+elif [[ "$1" == "start" ]]; then
+  notify-send DUNST_COMMAND_RESUME
+else
+  echo "Usage: dunstctl [start|stop]"
 fi
