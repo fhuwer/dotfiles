@@ -1,4 +1,3 @@
-import i3pystatus.mail.thunderbird
 from i3pystatus import Status
 import os
 
@@ -61,13 +60,6 @@ status.register("network",
    graph_width=20,
    start_color='#859900',
    end_color='#dc312e'
-)
-
-status.register("mail",
-   backends=[i3pystatus.mail.thunderbird.Thunderbird()],
-   format="P {unread}",
-   log_level=20,
-   hide_if_null=False
 )
 
 status.register("pulseaudio", format="♪ {volume}%")
