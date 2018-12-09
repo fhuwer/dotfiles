@@ -1,3 +1,4 @@
+nmap <F5> :w<CR>:Neomake!<CR>
 nmap <Leader>m  :w<CR>:Neomake!<CR>
 nmap <Leader>mc :w<CR>:NeomakeSh make clean<CR>
 
