@@ -2,7 +2,7 @@
 
 set $TERMINAL /usr/bin/urxvt
 set $LOCK_PATH lock
-set $KUAKE_PATH ~/projects/kuake/kuake.py
+set $KUAKE_PATH ~/bin/kuake
 
 # Main modifier key
 set $mod Mod4
@@ -201,6 +201,7 @@ bindsym $mod+m move workspace to output right
 # Program specifics {{{
 for_window [ title="^pdfpc.*" window_role="presenter" ] move to output left, fullscreen
 for_window [ title="^pdfpc.*" window_role="presentation" ] move to output right, fullscreen
+for_window [title="^Canvas_.*_Editor$"] floating enable
 # }}}
 
 # Compton

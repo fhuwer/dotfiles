@@ -7,12 +7,12 @@ mobile = True
 lanInterface = "eno1"
 
 hostname = os.uname()[1]
-if hostname == "ewpc5":
+if hostname.startswith("ewpc5"):
    mobile = False
    lanInterface = "eno1"
 if hostname == "sagarmatha":
    mobile = False
-   lanInterface = "enp4s0"
+   lanInterface = "enp3s0"
 
 status = Status()
 
