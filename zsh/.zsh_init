@@ -10,11 +10,14 @@ source virtualenvwrapper_lazy.sh
 
 # Try to setup ROOT
 if [ -f "${ROOT_PATH}/bin/thisroot.sh" ]; then
-   source "${ROOT_PATH}/bin/thisroot.sh"
-   alias root="root -l"
-   alias tbrowser='root -x ~/bin/root_macros/TBrowserOpen.C'
-   alias tb='tbrowser'
+  source "${ROOT_PATH}/bin/thisroot.sh"
 fi
+if `hash root 2>/dev/null`; then
+  alias root="root -l"
+  alias tbrowser='root -x ~/bin/root_macros/TBrowserOpen.C'
+  alias tb='tbrowser'
+fi
+
 
 # FZF
 [[ -a $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
