@@ -105,6 +105,8 @@ function! SetTabWidth(width)
   let &shiftwidth=a:width
 endfunc
 
+cabbr <expr> %% expand('%:p:h')
+
 " Terminal {{{
 function! VTerm()
    execute "vsplit"
