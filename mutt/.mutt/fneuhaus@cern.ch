@@ -10,3 +10,5 @@ set imap_user = fneuhaus
 set imap_pass = `pass mail/fneuhaus@cern.ch`
 set smtp_url = smtp://$imap_user:$imap_pass@smtp.cern.ch:587
 set ssl_starttls = yes
+
+source ~/.mutt/crypt_enable

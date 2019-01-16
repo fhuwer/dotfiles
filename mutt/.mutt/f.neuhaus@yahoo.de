@@ -9,3 +9,5 @@ set signature = "~/.mutt/f.neuhaus@yahoo.de.signature"
 set imap_user = friedemann_yahoo@neuhaus-tech.de
 set imap_pass = `pass mail/f.neuhaus@yahoo.de`
 set smtp_url = smtps://$imap_user:$imap_pass@mail.neuhaus-tech.de:465
+
+source ~/.mutt/crypt_disable

@@ -1,0 +1,5 @@
+set pgp_self_encrypt         = no
+set crypt_autosign           = no
+set crypt_replysign          = no
+set crypt_replyencrypt       = no
+set crypt_replysignencrypted = no

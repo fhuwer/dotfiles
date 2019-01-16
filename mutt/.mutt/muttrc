@@ -17,15 +17,10 @@ source ~/.mutt/solarized-dark-16.muttrc
 
 #______________________________________________________________________________
 #                                                                        CRYPTO
-set pgp_self_encrypt         = yes
-set pgp_self_encrypt_as      = 790F1AC4875D7008600DDC71DC81ADAF40412E26
-set pgp_sign_as              = 790F1AC4875D7008600DDC71DC81ADAF40412E26
-set crypt_use_gpgme          = yes
-set crypt_autosign           = yes
-set crypt_replysign          = yes
-set crypt_replyencrypt       = yes
-set crypt_replysignencrypted = yes
-set postpone_encrypt         = yes
+#
+set pgp_self_encrypt_as      = 8BD4FEA704D8292CE92DA3AAEF8F0819EF2AB094
+set pgp_sign_as              = 8BD4FEA704D8292CE92DA3AAEF8F0819EF2AB094
+source ~/.mutt/crypt_enable
 
 
 #______________________________________________________________________________
@@ -60,6 +55,7 @@ mailboxes `cat ~/.mutt/mailboxes | grep f.neuhaus@yahoo.de | tr '\n' ' '`
 folder-hook $folder/f.neuhaus@yahoo.de 'source ~/.mutt/f.neuhaus@yahoo.de'
 account-hook $folder/f.neuhaus@yahoo.de "set imap_user=$imap_user imap_pass=$imap_pass"
 macro index <f2> <change-folder>$spoolfile<enter>
+macro index <f12> <change-folder>$spoolfile/../Junk<enter>
 
 source ~/.mutt/neuhaus@uni-mainz.de
 mailboxes "+neuhaus@uni-mainz.de"

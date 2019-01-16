@@ -9,3 +9,5 @@ set signature = "~/.mutt/fneuhaus@students.uni-mainz.de.signature"
 set imap_user = fneuhaus
 set imap_pass = `pass mail/fneuhaus@students.uni-mainz.de`
 set smtp_url = smtp://$imap_user:$imap_pass@mail.uni-mainz.de:587
+
+source ~/.mutt/crypt_disable

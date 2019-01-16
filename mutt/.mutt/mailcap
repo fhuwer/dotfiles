@@ -8,4 +8,4 @@ application/msword; soffice %s
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; soffice %s &!
 
 
-image/jpeg; eog %s
+image/jpeg; feh %s
