@@ -94,7 +94,7 @@ set user_agent = no
 set sort = threads
 set sort_aux = last-date-received
 set collapse_all = no
-set index_format = "%4C [%Z] %?M?↳& ? %{%b %d} |%-30.30L| %s" 
+set index_format = "%4C [%Z] %?M?↳& ? %{%b %d} |%-30.30L| %g | %s"
 
 #______________________________________________________________________________
 #                                                                         PAGER
@@ -128,6 +128,15 @@ bind editor <Tab> complete-query
 
 bind index,pager @ compose-to-sender
 bind index,pager \CV sidebar-toggle-virtual
+
+bind index,pager V noop
+macro attach V \
+"\
+<pipe-entry>cat >/home/fneuhaus/.cache/mutt_mail.html\
+&& firefox ~/.cache/mutt_mail.html\
+&& sleep 3\
+&& rm ~/.cache/mutt_mail.html<enter>\
+"
 
 macro attach s "<save-entry><bol>~/scratch/<eol>" "Save to scratch space"
 
