@@ -11,7 +11,8 @@ def get_pass(account):
 def transform_expression(expr):
    expr_split = expr.split('/')
    if len(expr_split) > 1:
-      expr = '({}|{})'.format('/'.join(expr_split[:-1]), '/'.join(expr_split))
+      if expr_split[-1] == '*':
+         expr = '({}|{})'.format('/'.join(expr_split[:-1]), '/'.join(expr_split))
    return expr.replace('*', '.*') + '$'
 
 

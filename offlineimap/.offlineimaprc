@@ -160,7 +160,7 @@ starttls = yes
 ssl = yes
 sslcacertfile = /etc/ssl/certs/COMODO_RSA_Certification_Authority.pem
 sync_deletes = yes
-folderfilter = lambda folder: not expression_match(['Calendar', 'Trash/*', 'Contacts/*', 'Conversation History', 'Deleted Items', 'Sent Items', 'Tasks', 'Notes', 'Outbox', 'Journal'], folder)
+folderfilter = lambda folder: not expression_match(['Calendar', 'Trash/*', 'Contacts/*', 'Conversation History', 'INBOX/faser', 'INBOX/lbyl', 'Deleted Items/*', 'Sent Items', 'Tasks', 'Notes', 'Outbox', 'Journal'], folder)
 keepalive = 60
 holdconnectionopen = yes
 # }}}
