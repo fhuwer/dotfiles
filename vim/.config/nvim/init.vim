@@ -5,6 +5,7 @@ scriptencoding utf-8
 
 set t_ut=
 set background=dark
+set termguicolors
 syntax on
 set mouse=
 set history=1000
@@ -104,6 +105,18 @@ function! SetTabWidth(width)
   let &softtabstop=a:width
   let &shiftwidth=a:width
 endfunc
+
+" Switch between source and header file (specific to athena based analysis projects)
+function! AthenaSwitchHeaderSource()
+  let folder=expand("%:p:h")
+  let parentfolder=expand("%:p:h:h")
+  let filename=expand("%:t:r")
+  let extension=expand("%:e")
+  let otherfile=parentfolder . "/**/" . filename . "." . (extension == "h" ? "cxx" : "h")
+  exec 'edit' otherfile
+endfunction
+command! THS call AthenaSwitchHeaderSource()
+map <F11> :call AthenaSwitchHeaderSource()<CR>
 
 cabbr <expr> %% expand('%:p:h')
 
@@ -229,11 +242,10 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'farmergreg/vim-lastplace'
 Plug 'kien/ctrlp.vim'
-Plug 'lervag/vimtex', { 'for': 'tex' }
-Plug 'sirtaj/vim-openscad'
 Plug 'neomutt/neomutt.vim'
-Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'tweekmonster/django-plus.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'icymind/NeoSolarized'
+Plug 'mhartington/oceanic-next'
 
 if has('nvim')
    Plug 'neomake/neomake'
@@ -262,6 +274,7 @@ if has('nvim')
    runtime custom/vim-dicts.vim
 endif
 
-colorscheme solarized
-hi MatchParen cterm=none ctermbg=red ctermfg=white
+" colorscheme NeoSolarized
+colorscheme OceanicNext
+" hi MatchParen cterm=none ctermbg=red ctermfg=white
 " }}}
