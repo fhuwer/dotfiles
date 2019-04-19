@@ -21,10 +21,13 @@ alias space="df -h"
 alias duf="du -d 1 -h -t 50M 2>/dev/null"
 
 # Remote Desktop
-alias rzdv="rdesktop -u fneuhaus@uni-mainz.de -g 1366x768 rds.zdv.uni-mainz.de -f"
+alias rzdv="rdesktop -u frneuhau@uni-mainz.de -g 1366x768 rds.zdv.uni-mainz.de -f"
 
 # Clean Latex folder
 alias rmtex="latexmk -C --quiet"
+function mkslides() {
+  cp -r $HOME/cloud/projects/latex_templates/neuhaus-beamer-template/ $1
+}
 
 # File handlers
 alias -s pdf="open"

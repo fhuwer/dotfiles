@@ -3,7 +3,7 @@
 [[ -f "$HOME/.zsh_init_pre" ]] && source "$HOME/.zsh_init_pre"
 
 # Setup local bin
-export PATH=$HOME/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 # Try to load virtualenvwrapper
 source virtualenvwrapper_lazy.sh
