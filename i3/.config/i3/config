@@ -1,6 +1,6 @@
 # vim:fdm=marker:foldlevel=0
 
-set $TERMINAL /usr/bin/urxvt
+set $TERMINAL /usr/bin/alacritty
 set $LOCK_PATH lock
 set $KUAKE_PATH ~/bin/kuake
 
@@ -18,8 +18,9 @@ workspace_auto_back_and_forth yes
 
 # Terminal
 bindsym $mod+Return exec $TERMINAL
-bindsym $mod+shift+Return exec "$TERMINAL --title floating"
+bindsym $mod+shift+Return exec "$TERMINAL --title floating -d 80 20"
 for_window [class="URxvt" title="floating"] "floating enable, border pixel 1"
+for_window [class="Alacritty" title="floating"] "floating enable, border pixel 1"
 
 # Style {{{
 font xft:Hack 8
