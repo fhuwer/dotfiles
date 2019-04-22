@@ -1,9 +1,10 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
 # Environment variables
-#env:
+env:
   # TERM variable (leave default will select alacritty or xterm depending on availability)
   #TERM: xterm-256color
+  WINIT_HIDPI_FACTOR: 1.0
 
 window:
   # Window dimensions)
@@ -43,7 +44,7 @@ font:
   italic:
     family: Source Code Pro for Powerline
     style: Regular
-  size: 9
+  size: 8
 
   offset:
     x: 0
@@ -61,7 +62,7 @@ draw_bold_text_with_bright_colors: true
 # Solarized colorscheme
 colors:
   primary:
-    background: '0x002b36' # base03
+    background: '0x1b2b34' # bg color from OceanicNext
     foreground: '0x839496' # base0
 
   normal:
@@ -141,7 +142,7 @@ mouse:
 
   url:
     launcher: xdg-open
-    modifiers: Ctrl
+    modifiers: Control
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
