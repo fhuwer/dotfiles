@@ -7,6 +7,9 @@ alias ll='ls -ahlF'
 alias la='ls -A'
 alias l='ls -hl'
 
+# Grep options
+export GREP_OPTIONS='--color=auto -n'
+
 # Short listing of lsvirtualenv
 alias lsvirtualenv='lsvirtualenv -b'
 
