@@ -246,6 +246,7 @@ Plug 'neomutt/neomutt.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'icymind/NeoSolarized'
 Plug 'mhartington/oceanic-next'
+Plug 'fneuhaus/oceanic-neo'
 
 if has('nvim')
    Plug 'neomake/neomake'
@@ -275,6 +276,5 @@ if has('nvim')
 endif
 
 " colorscheme NeoSolarized
-colorscheme OceanicNext
-" hi MatchParen cterm=none ctermbg=red ctermfg=white
+colorscheme oceanic-neo
 " }}}
