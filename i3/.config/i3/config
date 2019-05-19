@@ -18,7 +18,7 @@ workspace_auto_back_and_forth yes
 
 # Terminal
 bindsym $mod+Return exec $TERMINAL
-bindsym $mod+shift+Return exec "$TERMINAL --title floating -d 80 20"
+bindsym $mod+shift+Return exec "$TERMINAL --title floating -d 93 26"
 for_window [class="URxvt" title="floating"] "floating enable, border pixel 1"
 for_window [class="Alacritty" title="floating"] "floating enable, border pixel 1"
 
@@ -52,7 +52,6 @@ hide_edge_borders both
 new_window pixel 1
 new_float pixel 1
 # }}}
-
 # Keybindings {{{
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -114,14 +113,14 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # resize window {{{
 mode "resize" {
-   bindsym h resize shrink width 10 px or 10 ppt
-   bindsym j resize grow height 10 px or 10 ppt
-   bindsym k resize shrink height 10 px or 10 ppt
-   bindsym l resize grow width 10 px or 10 ppt
+  bindsym h resize shrink width 10 px or 10 ppt
+  bindsym j resize grow height 10 px or 10 ppt
+  bindsym k resize shrink height 10 px or 10 ppt
+  bindsym l resize grow width 10 px or 10 ppt
 
-   # back to normal: Enter or Escape
-   bindsym Return mode "default"
-   bindsym Escape mode "default"
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
 # }}}
@@ -139,18 +138,24 @@ bindsym $mod+KP_Add exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2
 bindsym $mod+KP_Subtract exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2%
 bindsym $mod+KP_Multiply exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 # }}}
+# Pass through mode (for program keybindings conflicting i3 keybindings) {{{
+mode "passthrough" {
+  bindsym $mod+Shift+p mode "default"
+}
+bindsym $mod+Shift+p mode "passthrough"; exec sh -c 'sleep 2 && i3-msg mode "default"'
+# }}}
 # Powerstates {{{
 set $mode_powerstates Power states: [s]uspend [h]ibernate [S]hutdown [R]eboot
 bindsym $mod+p mode "$mode_powerstates"
 
 mode "$mode_powerstates" {
-   bindsym s exec "systemctl suspend"
-   bindsym h exec "systemctl hibernate"
-   bindsym shift+r exec "systemctl restart"
-   bindsym shift+s exec "systemctl halt"
+  bindsym s exec "systemctl suspend"
+  bindsym h exec "systemctl hibernate"
+  bindsym shift+r exec "systemctl restart"
+  bindsym shift+s exec "systemctl halt"
 
-   bindsym Escape mode "default"
-   bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym Return mode "default"
 }
 # }}}
 # Laptop bindings {{{
@@ -198,7 +203,6 @@ bindsym $mod+Shift+0 move container to workspace number 10
 bindsym $mod+m move workspace to output right
 # }}}
 # }}}
-
 # Program specifics {{{
 for_window [ title="^pdfpc.*" window_role="presenter" ] move to output left, fullscreen
 for_window [ title="^pdfpc.*" window_role="presentation" ] move to output right, fullscreen
@@ -212,6 +216,6 @@ exec --no-startup-id compton
 exec --no-startup-id ~/bin/autostart.sh
 
 bar {
-   status_command "python3 ~/.config/i3/i3mystatus.py"
-   tray_output primary
+  status_command "python3 ~/.config/i3/i3mystatus.py"
+  tray_output primary
 }
