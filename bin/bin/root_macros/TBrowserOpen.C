@@ -1,3 +1,7 @@
+#include "AtlasStyle.C"
+#include "AtlasLabels.C"
+#include "AtlasUtils.C"
+
 TBrowser *browser;
 
 TString get_tbrowser_draw_option(std::string additional_option = "") {
@@ -29,6 +33,32 @@ void tbrowser_quick_close(TObject *c) {
 void tbrowser_draw_same(TObject *c) {
   c->Draw(get_tbrowser_draw_option("same"));
   update_canvases();
+}
+
+void tbrowser_draw_normed(TObject *c) {
+  TH1F *h1 = (TH1F*)c;
+  TH1F *h2 = (TH1F*)h1->Clone();
+  h2->Scale(1 / h2->GetEntries());
+  h2->Draw(get_tbrowser_draw_option());
+  update_canvases();
+}
+
+void tbrowser_draw_normed_same(TObject *c) {
+  TH1F *h1 = (TH1F*)c;
+  TH1F *h2 = (TH1F*)h1->Clone();
+  h2->Scale(1 / h2->GetEntries());
+  h2->Draw(get_tbrowser_draw_option("same"));
+  update_canvases();
+}
+
+void tbrowser_draw_atlas(TObject *c, double x, double y, char *label) {
+  SetAtlasStyle();
+  c->Draw();
+  ATLASLabel(x, y, label);
+}
+
+void tbrowser_draw_atlas_upper_right(TObject *c, char *label) {
+  tbrowser_draw_atlas(c, 0.8, 0.8, label);
 }
 
 void tbrowser_set_red(TObject *c) {
@@ -104,6 +134,13 @@ void TBrowserOpen() {
     add_item(class_name, "Draw same", "tbrowser_draw_same", "TObject*", 2);
     add_item(class_name, "Set red", "tbrowser_set_red", "TObject*", 2);
     add_item(class_name, "Print address to console", "tbrowser_print_address", "TObject*", 2);
+    add_item(class_name, "Draw ATLAS Style", "tbrowser_draw_atlas", "TObject*,double,double,char*", 0);
+    add_item(class_name, "Draw ATLAS Style (ur)", "tbrowser_draw_atlas_upper_right", "TObject*,char*", 0);
+
+  }
+  for (auto class_name : {"TH1C", "TH1S", "TH1I", "TH1F", "TH1D"}) {
+    add_item(class_name, "Draw normed", "tbrowser_draw_normed", "TObject*", 2);
+    add_item(class_name, "Draw normed same", "tbrowser_draw_normed_same", "TObject*", 2);
   }
 
   browser = new TBrowser();
