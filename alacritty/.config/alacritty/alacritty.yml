@@ -4,7 +4,7 @@
 env:
   # TERM variable (leave default will select alacritty or xterm depending on availability)
   #TERM: xterm-256color
-  WINIT_HIDPI_FACTOR: 1.0
+  WINIT_HIDPI_FACTOR: "1.0"
 
 window:
   # Window dimensions)
@@ -18,7 +18,6 @@ window:
 
   dynamic_padding: false
   decorations: full
-  start_maximized: false
 
 scrolling:
   history: 10000
@@ -55,8 +54,6 @@ font:
     x: 0
     y: 0
 
-render_timer: false
-persistent_logging: false
 draw_bold_text_with_bright_colors: true
 
 # Solarized colorscheme
