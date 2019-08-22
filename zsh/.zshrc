@@ -2,7 +2,7 @@
 export ZSH=~/.oh-my-zsh
 
 ZSH_THEME="agnoster"
-plugins=(git docker zsh-syntax-highlighting ssh-agent)
+plugins=(git docker zsh-syntax-highlighting ssh-agent pj)
 
 source $ZSH/oh-my-zsh.sh
 
