@@ -43,14 +43,16 @@ set mbox_type=Maildir
 set folder = "~/mail"
 
 source ~/.mutt/friedemann@neuhaus-tech.de
-mailboxes +friedemann@neuhaus-tech.de
+named-mailboxes "friedemann@neuhaus-tech.de" =-friedemann@neuhaus-tech.de-
+mailboxes =-friedemann@neuhaus-tech.de-
 mailboxes `cat ~/.mutt/mailboxes | grep friedemann@neuhaus-tech.de | tr '\n' ' '`
 folder-hook $folder/friedemann@neuhaus-tech.de 'source ~/.mutt/friedemann@neuhaus-tech.de'
 account-hook $folder/friedemann@neuhaus-tech.de "set imap_user=$imap_user imap_pass=$imap_pass"
 macro index <f1> <change-folder>$spoolfile<enter>
 
 source ~/.mutt/f.neuhaus@yahoo.de
-mailboxes +f.neuhaus@yahoo.de
+named-mailboxes "f.neuhaus@yahoo.de" =-f.neuhaus@yahoo.de-
+mailboxes =-f.neuhaus@yahoo.de-
 mailboxes `cat ~/.mutt/mailboxes | grep f.neuhaus@yahoo.de | tr '\n' ' '`
 folder-hook $folder/f.neuhaus@yahoo.de 'source ~/.mutt/f.neuhaus@yahoo.de'
 account-hook $folder/f.neuhaus@yahoo.de "set imap_user=$imap_user imap_pass=$imap_pass"
@@ -58,21 +60,24 @@ macro index <f2> <change-folder>$spoolfile<enter>
 macro index <f12> <change-folder>$spoolfile/../Junk<enter>
 
 source ~/.mutt/neuhaus@uni-mainz.de
-mailboxes "+neuhaus@uni-mainz.de"
+named-mailboxes "neuhaus@uni-mainz.de" =-neuhaus@uni-mainz.de-
+mailboxes =-neuhaus@uni-mainz.de-
 mailboxes `cat ~/.mutt/mailboxes | grep neuhaus@uni-mainz.de | tr '\n' ' '`
 folder-hook $folder/neuhaus@uni-mainz.de 'source ~/.mutt/neuhaus@uni-mainz.de'
 account-hook $folder/neuhaus@uni-mainz.de "set imap_user=$imap_user imap_pass=$imap_pass"
 macro index <f3> <change-folder>$spoolfile<enter>
 
 source ~/.mutt/fneuhaus@students.uni-mainz.de
-mailboxes "+fneuhaus@students.uni-mainz.de"
+named-mailboxes "fneuhaus@students.uni-mainz.de" =-fneuhaus@students.uni-mainz.de-
+mailboxes =-fneuhaus@students.uni-mainz.de-
 mailboxes `cat ~/.mutt/mailboxes | grep fneuhaus@students.uni-mainz.de | tr '\n' ' '`
 folder-hook $folder/fneuhaus@students.uni-mainz.de 'source ~/.mutt/fneuhaus@students.uni-mainz.de'
 account-hook $folder/fneuhaus@students.uni-mainz.de "set imap_user=$imap_user imap_pass=$imap_pass"
 macro index <f4> <change-folder>$spoolfile<enter>
 
 source ~/.mutt/fneuhaus@cern.ch
-mailboxes "+fneuhaus@cern.ch"
+named-mailboxes "fneuhaus@cern.ch" =-fneuhaus@cern.ch-
+mailboxes =-fneuhaus@cern.ch-
 mailboxes `cat ~/.mutt/mailboxes | grep fneuhaus@cern.ch | tr '\n' ' '`
 folder-hook $folder/fneuhaus@cern.ch 'source ~/.mutt/fneuhaus@cern.ch'
 account-hook $folder/fneuhaus@cern.ch "set imap_user=$imap_user imap_pass=$imap_pass"
