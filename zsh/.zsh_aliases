@@ -27,7 +27,7 @@ alias duf="du -d 1 -h -t 50M 2>/dev/null"
 alias rzdv="rdesktop -u frneuhau@uni-mainz.de -g 1366x768 rds.zdv.uni-mainz.de -f"
 
 # Clean Latex folder
-alias rmtex="latexmk -C --quiet"
+alias rmtex="latexmk -C --quiet && rm -f *.bbl *.run.xml"
 function mkslides() {
   cp -r $HOME/cloud/projects/latex_templates/neuhaus-beamer-template/ $1
 }
