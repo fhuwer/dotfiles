@@ -26,7 +26,7 @@ scrolling:
   multiplier: 3
 
   # Faux Scrolling (for mouse interactions in something like `man`)
-  faux_multiplier: 3
+  multiplier: 3
 
   # Scroll to the bottom when new text is written to the terminal.
   auto_scroll: false
