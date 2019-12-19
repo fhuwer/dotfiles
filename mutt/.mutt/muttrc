@@ -119,7 +119,7 @@ macro index \CX "<change-folder>?" "Change to folder overview"
 
 bind index v collapse-thread
 bind index i next-unread
-bind index I previous-unread
+macro index I "<search>~F\n"
 bind index \CI next-new
 
 bind pager j next-line
