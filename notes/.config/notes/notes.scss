@@ -1,0 +1,152 @@
+$pagewidth: 980px;
+$border-color: #d1d5da;
+$header-bg: #f6f8fa;
+
+$margin-sides: 40px;
+$margin-tops: 46px;
+
+$code-background: #f6f8fa;
+$syntax-keyword: #22863a;
+$syntax-ot: #6f42c1;
+$syntax-st: #032f62;
+$syntax-fu: #6f42c1;
+$syntax-im: #d73a49;
+$syntax-number: #005cc5;
+$syntax-dt: #d73a49;
+$syntax-comment: #6a737d;
+$syntax-pp: #d73a49;
+$syntax-cf: #d73a49;
+$syntax-bu: #005cc5;
+$syntax-operator: #d73a49;
+$syntax-va: #005cc5;
+
+
+body {
+  color: #24292e;
+  width: $pagewidth;
+  margin: 1em auto;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+  font-size: 16px;
+  border: 1px solid $border-color;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+header {
+  padding: 8px 16px;
+  background: $header-bg;
+  border-bottom: 1px solid $border-color;
+  display: flex;
+  justify-content: space-between;
+
+  h1 {
+    font-weight: 600;
+  }
+
+  h1, p {
+    line-height: 1.25;
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.main {
+  padding: 40px;
+
+  h1, h2, h3, h4, h5, h6 {
+    padding-bottom: .3em;
+    border-bottom: 1px solid #eaecef;
+  }
+
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.5em; }
+  h3 { font-size: 1.25em; }
+  h4 { font-size: 1em; }
+  h5 { font-size: 0.875em; }
+  h6 { font-size: 0.85em; }
+}
+
+blockquote {
+  margin: 0;
+  color: #6a737d;
+  border-left: 5px solid #3d7e9a;
+  background: #eee;
+
+  p {
+    padding: 15px;
+  }
+}
+
+div.sourceCode {
+  margin-bottom: 16px;
+
+  pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: $code-background;
+    border-radius: 3px;
+
+    .kw { color: $syntax-keyword; }
+    .ot { color: $syntax-ot; }
+    .st { color: $syntax-st; }
+    .fu { color: $syntax-fu; }
+    .im { color: $syntax-im; }
+    .dv, .fl { color: $syntax-number; }
+    .dt { color: $syntax-dt; }
+    .co { color: $syntax-comment; }
+    .pp { color: $syntax-pp; }
+    .pp + .im { color: #032f62; }
+    .cf { color: $syntax-cf; }
+    .bu { color: $syntax-bu; }
+    .op { color: $syntax-operator; }
+    .va { color: $syntax-va; }
+
+  }
+  pre.numberSource code {
+    counter-reset: source-line 0;
+    > span {
+      position: relative;
+      left:0em;
+      counter-increment: source-line;
+
+      > a:first-child::before {
+        content: counter(source-line);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border-right: 1px solid #aaaaaa;
+        display: inline-block;
+        padding: 0 4px;
+        width: 3em;
+        color: #aaaaaa;
+      }
+    }
+  }
+}
+
+li {
+  input { vertical-align: middle; }
+}
+
+img {
+  max-width: 100%;
+}
+
+figure {
+  img {
+    display: block;
+    padding: 0;
+    margin: 0;
+  }
+
+  figcaption {
+    display: block;
+    margin: 0;
+    background: $code-background;
+    padding: 10px;
+  }
+}

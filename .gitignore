@@ -1,3 +1,4 @@
 neovim/.config/nvim/custom/local.vim
 bin/bin/root_macros/Atlas*.C
 bin/bin/root_macros/Atlas*.h
+*.css.map
