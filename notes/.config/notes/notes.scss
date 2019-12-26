@@ -23,7 +23,8 @@ $syntax-va: #005cc5;
 
 body {
   color: #24292e;
-  width: $pagewidth;
+  width: 90%;
+  max-width: $pagewidth;
   margin: 1em auto;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
   font-size: 16px;
