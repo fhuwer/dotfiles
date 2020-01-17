@@ -18,12 +18,18 @@ if `hash root 2>/dev/null`; then
   alias tb='tbrowser'
 fi
 
+# Check for exa and replace ls if so
+if `hash exa 2>/dev/null`; then
+  alias ls="exa"
+  alias ll="exa -l"
+  alias lg="exa -l --git"
+fi
 
 # FZF
-[[ -a $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
+[[ -a $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh || true
 
 # Python startup
-[[ -a "$HOME/bin/pythonrc" ]]  && export PYTHONSTARTUP=$HOME/bin/pythonrc
+[[ -a "$HOME/bin/pythonrc" ]]  && export PYTHONSTARTUP=$HOME/bin/pythonrc || true
 
 # Check for local post init
-[[ -a "$HOME/.zsh_init_post" ]] && source "$HOME/.zsh_init_post"
+[[ -a "$HOME/.zsh_init_post" ]] && source "$HOME/.zsh_init_post" || true
