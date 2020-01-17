@@ -1,0 +1,171 @@
+IMAPAccount neuhaus-tech
+Host mail.neuhaus-tech.de
+User friedemann@neuhaus-tech.de
+PassCmd "pass mail/friedemann@neuhaus-tech.de"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore neuhaus-tech-remote
+Account neuhaus-tech
+
+MaildirStore neuhaus-tech-local
+Subfolders Verbatim
+Path ~/mail/friedemann@neuhaus-tech.de/
+Inbox ~/mail/friedemann@neuhaus-tech.de/INBOX
+
+Channel neuhaus-tech-default
+Master :neuhaus-tech-remote:
+Slave :neuhaus-tech-local:
+Patterns "INBOX" "Drafts" "Sent" "Junk"
+Create Both
+Expunge Both
+SyncState *
+
+Group friedemann@neuhaus-tech.de
+Channel neuhaus-tech-default
+
+################################################
+
+IMAPAccount yahoo
+Host mail.neuhaus-tech.de
+User friedemann_yahoo@neuhaus-tech.de
+PassCmd "pass mail/f.neuhaus@yahoo.de"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore yahoo-remote
+Account yahoo
+
+MaildirStore yahoo-local
+Subfolders Verbatim
+Path ~/mail/f.neuhaus@yahoo.de/
+Inbox ~/mail/f.neuhaus@yahoo.de/INBOX
+
+Channel yahoo-default
+Master :yahoo-remote:
+Slave :yahoo-local:
+Patterns "INBOX" "INBOX/*" "Drafts" "Sent" "Junk"
+Create Both
+Expunge Both
+SyncState *
+
+Group f.neuhaus@yahoo.de
+Channel yahoo-default
+
+################################################
+IMAPAccount cern
+Host imap.cern.ch
+User fneuhaus
+PassCmd "pass mail/fneuhaus@cern.ch"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore cern-remote
+Account cern
+
+MaildirStore cern-local
+Subfolders Verbatim
+Path ~/mail/fneuhaus@cern.ch/
+Inbox ~/mail/fneuhaus@cern.ch/INBOX
+
+Channel cern-default
+Master :cern-remote:
+Slave :cern-local:
+Patterns "INBOX" "INBOX/*" "Drafts" "Junk E-Mail"
+Create Both
+Expunge Both
+SyncState *
+
+Channel cern-sent
+Master :cern-remote:"Sent Items"
+slave  :cern-local:"Sent"
+Expunge Both
+SyncState *
+
+Group fneuhaus@cern.ch
+Channel cern-default
+Channel cern-sent
+
+################################################
+
+IMAPAccount students
+Host mail.uni-mainz.de
+User fneuhaus@uni-mainz.de
+PassCmd "pass mail/fneuhaus@students.uni-mainz.de"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore students-remote
+Account students
+
+MaildirStore students-local
+Subfolders Verbatim
+Path ~/mail/fneuhaus@students.uni-mainz.de/
+Inbox ~/mail/fneuhaus@students.uni-mainz.de/INBOX
+
+Channel students-default
+Master :students-remote:
+Slave :students-local:
+Patterns "INBOX" "Junk-E-Mail"
+Create Both
+Expunge Both
+SyncState *
+
+Channel students-drafts
+Master :students-remote:"Entw&APw-rfe"
+slave  :students-local:Drafts
+Expunge Both
+SyncState *
+
+Channel students-sent
+Master :students-remote:"Gesendete Elemente"
+slave  :students-local:Sent
+Expunge Both
+SyncState *
+
+Group fneuhaus@students.uni-mainz.de
+Channel students-default
+Channel students-drafts
+Channel students-sent
+
+################################################
+
+IMAPAccount frneuhau@uni-mainz.de
+Host mail.uni-mainz.de
+User frneuhau@uni-mainz.de
+PassCmd "pass mail/neuhaus@uni-mainz.de"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore frneuhau@uni-mainz.de-remote
+Account frneuhau@uni-mainz.de
+
+MaildirStore frneuhau@uni-mainz.de-local
+Subfolders Verbatim
+Path ~/mail/neuhaus@uni-mainz.de/
+Inbox ~/mail/neuhaus@uni-mainz.de/INBOX
+
+Channel frneuhau@uni-mainz.de-default
+Master :frneuhau@uni-mainz.de-remote:
+Slave :frneuhau@uni-mainz.de-local:
+Patterns "INBOX" "Junk-E-Mail"
+Create Both
+Expunge Both
+SyncState *
+
+Channel frneuhau@uni-mainz.de-drafts
+Master :frneuhau@uni-mainz.de-remote:"Entw&APw-rfe"
+slave  :frneuhau@uni-mainz.de-local:Drafts
+Expunge Both
+SyncState *
+
+Channel frneuhau@uni-mainz.de-sent
+Master :frneuhau@uni-mainz.de-remote:"Gesendete Elemente"
+slave  :frneuhau@uni-mainz.de-local:Sent
+Expunge Both
+SyncState *
+
+Group neuhaus@uni-mainz.de
+Channel frneuhau@uni-mainz.de-default
+Channel frneuhau@uni-mainz.de-drafts
+Channel frneuhau@uni-mainz.de-sent
