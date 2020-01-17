@@ -64,6 +64,8 @@ if has('nvim')
    let s:virtualenv_python3 = glob(expand('$WORKON_HOME/neovim/bin/python'))
    if !empty(s:virtualenv_python3)
       let g:python3_host_prog = s:virtualenv_python3
+    else
+      let g:python3_host_prog = "/usr/bin/python"
    endif
 endif
 " }}}
@@ -148,10 +150,10 @@ nnoremap <S-h> <c-w>h
 nnoremap <S-j> <c-w>j
 nnoremap <S-k> <c-w>k
 nnoremap <S-l> <c-w>l
-inoremap HH <Esc><c-w>h
-inoremap JJ <Esc><c-w>j
-inoremap KK <Esc><c-w>k
-inoremap LL <Esc><c-w>l
+" inoremap HH <Esc><c-w>h
+" inoremap JJ <Esc><c-w>j
+" inoremap KK <Esc><c-w>k
+" inoremap LL <Esc><c-w>l
 
 " Fast moving of windows
 nnoremap <C-H> <c-w>H
@@ -238,15 +240,11 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'romgrk/winteract.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'zhou13/vim-easyescape'
-Plug 'altercation/vim-colors-solarized'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'farmergreg/vim-lastplace'
 Plug 'kien/ctrlp.vim'
 Plug 'neomutt/neomutt.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'sirtaj/vim-openscad'
-Plug 'icymind/NeoSolarized'
-Plug 'mhartington/oceanic-next'
 Plug 'fneuhaus/oceanic-neo'
 
 if has('nvim')
@@ -268,7 +266,6 @@ runtime custom/vim-multiple-cursors.vim
 runtime custom/winteract.vim
 runtime custom/lightline.vim
 runtime custom/easyescape.vim
-runtime custom/vimtex.vim
 
 if has('nvim')
    runtime custom/neomake.vim
