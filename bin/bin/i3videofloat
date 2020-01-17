@@ -1,0 +1,60 @@
+#!/usr/bin/env python3
+from subprocess import Popen, PIPE
+import json
+
+
+def send_msg(*params):
+    ''' Execute a i3-msg request and return the tree. '''
+    process = Popen(['i3-msg',] + list(params), stdout=PIPE)
+    (output, err) = process.communicate()
+    exit_code = process.wait()
+    try:
+        output = json.loads(output.decode())
+    except:
+        output = False
+
+    return output
+
+
+def find_element(func, tree=None):
+    if tree is None:
+        tree = send_msg('-t', 'get_tree')
+
+    try:
+        if func(tree):
+            return [tree,]
+    except:
+        pass
+
+    matches = []
+    for nodes in ['nodes', 'floating_nodes',]:
+        if nodes in tree:
+            for node in tree[nodes]:
+                matches += find_element(func, node)
+    return matches
+
+
+def get_current_screen_size():
+    tree = send_msg('-t', 'get_tree')
+    current_screen = find_element(lambda x: x['id'] == tree['focus'][0])
+    return current_screen[0]['rect']
+
+
+def main():
+    try:
+        window = find_element(
+            func=lambda x: x['window_properties']['window_role'].lower() == 'pictureinpicture')[0]
+    except IndexError:
+        exit()
+
+    try:
+        screen = get_current_screen_size()
+        x = int(screen['x']) + int(screen['width']) - int(window['window_rect']['width']) - 15
+        y = int(screen['y']) + int(screen['height']) - int(window['window_rect']['height']) - 25
+        send_msg(f'[con_id={int(window["id"])}]', f'move position {x}px {y}px')
+    except ValueError:
+        exit(1)
+
+
+if __name__ == '__main__':
+    main()

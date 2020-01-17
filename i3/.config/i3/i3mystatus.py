@@ -7,7 +7,7 @@ mobile = True
 lanInterface = "eno1"
 
 hostname = os.uname()[1]
-if hostname.startswith("ewpc5"):
+if hostname.startswith("ewpc7"):
    mobile = False
    lanInterface = "eno1"
 if hostname == "sagarmatha":
@@ -19,7 +19,7 @@ status = Status()
 status.register("clock", format="%a %-d %b %X")
 
 status.register("shell",
-   command = "xkblayout-state print %s",
+   command = "$HOME/bin/xkblayout-state print %s",
    interval = 5,
    on_leftclick = "xkblayout-state set +1",
    on_rightclick = "run",
@@ -55,7 +55,7 @@ status.register("mem",
 
 status.register("network",
    interface=lanInterface,
-   format_up="{interface}: {v4cidr} {network_graph_recv}",
+   format_up="{interface}: {v4cidr} {network_graph}",
    format_down="{interface}: DOWN",
    graph_width=20,
    start_color='#859900',
