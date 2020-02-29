@@ -229,6 +229,9 @@ endfunction " }}}
 " set the runtime path to include vim-plug and initialize
 call plug#begin('~/.config/nvim/plugged')
 
+" Polyglot disable has to be set before loading it
+let g:polyglot_disabled = ['csv']
+
 Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
 Plug 'raimondi/delimitmate'
