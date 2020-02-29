@@ -130,11 +130,21 @@ div.sourceCode {
 }
 
 li {
+  margin-bottom: 4px;
   input { vertical-align: middle; }
+}
+
+ul {
+  padding-inline-start: 20px;
+  ul {
+    margin-top: 2px;
+    padding-inline-start: 30px;
+  }
 }
 
 img {
   max-width: 100%;
+  padding: 10px 0;
 }
 
 figure {
@@ -150,4 +160,8 @@ figure {
     background: $code-background;
     padding: 10px;
   }
+}
+
+.done {
+  color: green;
 }
