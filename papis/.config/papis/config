@@ -1,0 +1,11 @@
+[papers]
+dir = ~/cloud/papers
+
+[documents]
+dir = ~/cloud/documents
+
+[settings]
+default-library = papers
+editor = nvim
+file-browser = ranger
+add-edit = True
