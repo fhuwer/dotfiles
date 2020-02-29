@@ -1,0 +1,89 @@
+#!/usr/bin/env python
+import sys
+from time import sleep
+from subprocess import check_output, CalledProcessError
+
+
+def get_sessions():
+    try:
+        sessions = check_output(['tmux', 'list-sessions', '-F',
+                                 '#{session_name}',]).decode().splitlines()
+    except CalledProcessError as e:
+        print(e)
+        return []
+    return [s.strip() for s in sessions]
+
+
+def get_windows(session, format_='#{window_index} #{window_name}'):
+    try:
+        windows = check_output(['tmux', 'list-windows', '-t', session, '-F',
+                                format_]).decode().splitlines()
+    except CalledProcessError as e:
+        print(e)
+        return []
+    return [w.strip().split(' ') for w in windows]
+
+
+def get_panes(session, window):
+    try:
+        panes = check_output(['tmux', 'list-panes', '-t', f'{session}:{window}', '-F',
+                              '#{pane_index} #{pane_pid}']).decode().splitlines()
+        print(panes)
+    except CalledProcessError as e:
+        print(e)
+        return []
+    return [p.strip().split(' ') for p in panes]
+
+
+def get_child_processes(pid):
+    try:
+        processes = check_output(['ps', '-o', 'pid,cmd', '--no-headers', '--ppid',
+                                  pid]).decode().splitlines()
+    except CalledProcessError as e:
+        print(e)
+        return []
+    return [p.split(' ', maxsplit=1) for p in processes]
+
+
+def send_keys(session, window, pane, keys):
+    try:
+        check_output(['tmux', 'send-keys', '-t', f'{session}:{window}.{pane}', *keys])
+    except CalledProcessError as e:
+        print(e)
+
+
+def check_process_and_send(display, session, window, pane, cmds):
+    if len(cmds) == 0:
+        send_keys(session, window, pane, [f' export DISPLAY={display}', 'Enter'])
+        return
+    cmd = cmds[0][1].split()[0]
+    if cmd.endswith('vim'):
+        send_keys(session, window, pane, ['Escape',])
+        sleep(0.5)
+        send_keys(session, window, pane, [f':let $DISPLAY="{display}"', 'Enter'])
+
+
+def main(argv):
+    if len(argv) == 1:
+        # Get all sessions and set displays to parameter
+        sessions = get_sessions()
+        display = argv[0]
+    elif len(argv) == 2:
+        # Set display for this session
+        sessions = [argv[0],]
+        display = argv[1]
+    else:
+        print('Usage: tmuxd [session] display')
+        exit(1)
+
+    for session in sessions:
+        windows = get_windows(session)
+        for index, name in windows:
+            panes = get_panes(session, index)
+            for p_index, p_pid in get_panes(session, index):
+                check_process_and_send(display, session, index, p_index,
+                                       get_child_processes(p_pid))
+
+
+if __name__ == '__main__':
+    main(sys.argv[1:])

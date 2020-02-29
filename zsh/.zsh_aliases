@@ -35,6 +35,11 @@ function mkslides() {
 # File handlers
 alias -s pdf="open"
 
+# tmux display setter
+tmuxad () {
+	tmuxd $1 $DISPLAY && tmux a -t $1
+}
+
 # Check for neovim
 if `hash nvim 2>/dev/null`; then
    alias vim='nvim'
