@@ -28,11 +28,6 @@ scrolling:
   # Faux Scrolling (for mouse interactions in something like `man`)
   multiplier: 3
 
-  # Scroll to the bottom when new text is written to the terminal.
-  auto_scroll: false
-
-tabspaces: 8
-
 font:
   normal:
     family: Source Code Pro for Powerline
