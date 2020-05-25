@@ -1,6 +1,6 @@
-#include "AtlasStyle.C"
-#include "AtlasLabels.C"
-#include "AtlasUtils.C"
+// #include "AtlasStyle.C"
+// #include "AtlasLabels.C"
+// #include "AtlasUtils.C"
 
 TBrowser *browser;
 
@@ -38,7 +38,7 @@ void tbrowser_draw_same(TObject *c) {
 void tbrowser_draw_normed(TObject *c) {
   TH1F *h1 = (TH1F*)c;
   TH1F *h2 = (TH1F*)h1->Clone();
-  h2->Scale(1 / h2->GetEntries());
+  h2->Scale(1 / h2->Integral());
   h2->Draw(get_tbrowser_draw_option());
   update_canvases();
 }
@@ -46,15 +46,15 @@ void tbrowser_draw_normed(TObject *c) {
 void tbrowser_draw_normed_same(TObject *c) {
   TH1F *h1 = (TH1F*)c;
   TH1F *h2 = (TH1F*)h1->Clone();
-  h2->Scale(1 / h2->GetEntries());
+  h2->Scale(1 / h2->Integral());
   h2->Draw(get_tbrowser_draw_option("same"));
   update_canvases();
 }
 
 void tbrowser_draw_atlas(TObject *c, double x, double y, char *label) {
-  SetAtlasStyle();
+  // SetAtlasStyle();
   c->Draw();
-  ATLASLabel(x, y, label);
+  // ATLASLabel(x, y, label);
 }
 
 void tbrowser_draw_atlas_upper_right(TObject *c, char *label) {
@@ -67,8 +67,28 @@ void tbrowser_set_red(TObject *c) {
   update_canvases();
 }
 
-void tbrowser_print_address(TObject *c) {
-  std::cout << c << std::endl;
+void tbrowser_create_hist_autoname(TObject *c) {
+  int i = 1;
+  for (i = 1; i < 100; i++) {
+    std::stringstream ss;
+    ss << "h" << i;
+    if (gROOT->GetListOfGlobals()->FindObject(ss.str().c_str()) == nullptr) {
+      break;
+    }
+  }
+  std::stringstream ss_command;
+  ss_command << "TH1F *h" << i << " = (TH1F*)" << c << ";";
+  gInterpreter->ProcessLine(ss_command.str().c_str());
+  std::cout << "h" << i << std::endl;
+}
+
+void tbrowser_create_hist_histname(TObject *c) {
+  if (gROOT->GetListOfGlobals()->FindObject(c->GetName()) == nullptr) {
+    return;
+  }
+  std::stringstream ss_command;
+  ss_command << "TH1F *" << c->GetName() << " = (TH1F*)" << c << ";";
+  gInterpreter->ProcessLine(ss_command.str().c_str());
 }
 
 void tbrowser_draw_range(TObject *c, int nbins, double xlow, double xup) {
@@ -133,7 +153,8 @@ void TBrowserOpen() {
   for (auto class_name : {"TH1C", "TH1S", "TH1I", "TH1F", "TH1D", "TH2C", "TH2S", "TH2I", "TH2F", "TH2D"}) {
     add_item(class_name, "Draw same", "tbrowser_draw_same", "TObject*", 2);
     add_item(class_name, "Set red", "tbrowser_set_red", "TObject*", 2);
-    add_item(class_name, "Print address to console", "tbrowser_print_address", "TObject*", 2);
+    add_item(class_name, "Create hist in console (autoname)", "tbrowser_create_hist_autoname", "TObject*", 2);
+    add_item(class_name, "Create hist in console (h_histname)", "tbrowser_create_hist_histname", "TObject*", 2);
     add_item(class_name, "Draw ATLAS Style", "tbrowser_draw_atlas", "TObject*,double,double,char*", 0);
     add_item(class_name, "Draw ATLAS Style (ur)", "tbrowser_draw_atlas_upper_right", "TObject*,char*", 0);
 
