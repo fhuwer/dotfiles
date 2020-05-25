@@ -215,7 +215,7 @@ for_window [window_role="PictureInPicture"] sticky enable, exec "i3videofloat"
 # }}}
 
 # Compton
-exec --no-startup-id compton
+exec --no-startup-id picom
 
 # Autostart
 exec --no-startup-id ~/bin/autostart.sh
