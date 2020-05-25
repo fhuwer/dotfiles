@@ -19,6 +19,12 @@ function open() { xdg-open $1 >/dev/null 2>&1 &! }
 # Alias for Python
 alias py="python"
 
+# Alias for pdfdiff
+function gdp() {
+  yes | git difftool --tool=pdfdiff $1 >/dev/null
+}
+compdef _git gdp=git-diff
+
 # Space
 alias space="df -h"
 alias duf="du -d 1 -h -t 50M 2>/dev/null"
@@ -51,3 +57,5 @@ fi
 if [[ -a "$HOME/.zsh_aliases_local" ]]; then
    source $HOME/.zsh_aliases_local
 fi
+
+alias rpass="< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;"
