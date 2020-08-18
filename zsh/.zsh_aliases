@@ -28,6 +28,7 @@ compdef _git gdp=git-diff
 # Space
 alias space="df -h"
 alias duf="du -d 1 -h -t 50M 2>/dev/null"
+function dufs() { du -d 1 -h -t 50M $1 2>/dev/null | sort -h -r }
 
 # Remote Desktop
 alias rzdv="rdesktop -u frneuhau@uni-mainz.de -g 1366x768 rds.zdv.uni-mainz.de -f"
@@ -59,3 +60,6 @@ if [[ -a "$HOME/.zsh_aliases_local" ]]; then
 fi
 
 alias rpass="< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;"
+function lesscsv() {
+  cat $1 | perl -pe 's/((?<=,)|(?<=^)),/ ,/g;' | column -t -s, | less -s
+}

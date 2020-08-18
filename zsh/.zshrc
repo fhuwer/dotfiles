@@ -1,6 +1,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
+zstyle :omz:plugins:ssh-agent identities id_rsa certificates/university certificates/gitlab.cern.ch certificates/iregistry@github
+
 ZSH_THEME="agnoster"
 plugins=(git pass docker zsh-syntax-highlighting ssh-agent pj)
 
