@@ -46,7 +46,7 @@ set expandtab
 " Folding {{{
 set foldenable
 set foldcolumn=0
-set foldmethod=syntax
+" set foldmethod=syntax
 set foldlevel=99
 " }}}
 
@@ -164,6 +164,9 @@ nnoremap <C-L> <c-w>L
 " Write file
 nnoremap <leader>w :update<CR>
 
+" Run black on the file
+nnoremap <leader>b :Black<CR>
+
 " Fast sudo write
 command! SudoWrite execute ":w !sudo tee %<CR>"
 
@@ -236,19 +239,24 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
 Plug 'raimondi/delimitmate'
 Plug 'SirVer/ultisnips'
-Plug 'tmhedberg/simpylfold'
+" Plug 'tmhedberg/simpylfold'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'romgrk/winteract.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'zhou13/vim-easyescape'
-Plug 'ntpeters/vim-better-whitespace'
 Plug 'farmergreg/vim-lastplace'
 Plug 'kien/ctrlp.vim'
 Plug 'neomutt/neomutt.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'fneuhaus/oceanic-neo'
+Plug 'inkarkat/vim-ingo-library'
+Plug 'inkarkat/vim-SpellCheck'
+Plug 'lervag/vimtex'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'troydm/zoomwintab.vim'
+Plug 'psf/black'
 
 if has('nvim')
    Plug 'neomake/neomake'
@@ -269,6 +277,8 @@ runtime custom/vim-multiple-cursors.vim
 runtime custom/winteract.vim
 runtime custom/lightline.vim
 runtime custom/easyescape.vim
+runtime custom/vim_tmux_navigator.vim
+runtime custom/zoomwintab.vim
 
 if has('nvim')
    runtime custom/neomake.vim
