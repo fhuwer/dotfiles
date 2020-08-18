@@ -137,7 +137,7 @@ bind index,pager \CV sidebar-toggle-virtual
 bind index,pager V noop
 macro attach V \
 "\
-<pipe-entry>cat >/home/fneuhaus/.cache/mutt_mail.html\
+<pipe-entry>cat >$HOME/.cache/mutt_mail.html\
 && firefox ~/.cache/mutt_mail.html\
 && sleep 3\
 && rm ~/.cache/mutt_mail.html<enter>\
@@ -155,7 +155,7 @@ macro attach o \
 <enter-command>unset wait_key<enter>\
 <shell-escape>rm -f /tmp/mutt-attach<enter>\
 <save-entry><kill-line>/tmp/mutt-attach<enter>\
-<shell-escape> /tmp/mutt-attach &^A\
+<shell-escape>firefox /tmp/mutt-attach &<enter>\
 "
 
 
