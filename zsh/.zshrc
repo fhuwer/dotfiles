@@ -1,6 +1,9 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
+# Check for local pre init
+[[ -f "$HOME/.zsh_init_pre" ]] && source "$HOME/.zsh_init_pre"
+
 ZSH_THEME="agnoster"
 plugins=(git pass docker zsh-syntax-highlighting ssh-agent pj)
 

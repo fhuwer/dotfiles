@@ -1,6 +1,4 @@
 # ~/.zsh_init
-# Check for local pre init
-[[ -f "$HOME/.zsh_init_pre" ]] && source "$HOME/.zsh_init_pre"
 
 # Setup local bin
 export PATH=$HOME/bin:$HOME/.local/bin:$PATH
