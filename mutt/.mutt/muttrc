@@ -33,7 +33,6 @@ set sidebar_short_path
 set sidebar_delim_chars   = "/"
 set sidebar_folder_indent
 set sidebar_indent_string = "  "
-set sidebar_sort_method   = unsorted
 set mail_check_stats
 
 
@@ -124,8 +123,8 @@ bind index \CI next-new
 
 bind pager j next-line
 bind pager k previous-line
-bind pager g noop
-bind pager gr group-reply
+bind index,pager g noop
+bind index,pager gr group-reply
 bind pager gg top
 bind pager G bottom
 
