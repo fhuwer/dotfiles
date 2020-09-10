@@ -52,6 +52,7 @@ status.register("mem",
    warn_color='#ca4a15',
    alert_color='#dc312e'
 )
+status.register("taskwarrior")
 
 status.register("network",
    interface=lanInterface,
