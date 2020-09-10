@@ -35,12 +35,13 @@ set nobackup
 set nowritebackup
 " }}}
 
-" Indentation {{{
+" Indentation/Formatting {{{
 set autoindent
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
+set nojoinspaces
 " }}}
 
 " Folding {{{
@@ -145,16 +146,6 @@ inoremap <A-j> <Down>
 inoremap <A-k> <Up>
 inoremap <A-l> <Right>
 
-" Fast switching of windows
-nnoremap <S-h> <c-w>h
-nnoremap <S-j> <c-w>j
-nnoremap <S-k> <c-w>k
-nnoremap <S-l> <c-w>l
-" inoremap HH <Esc><c-w>h
-" inoremap JJ <Esc><c-w>j
-" inoremap KK <Esc><c-w>k
-" inoremap LL <Esc><c-w>l
-
 " Fast moving of windows
 nnoremap <C-H> <c-w>H
 nnoremap <C-J> <c-w>J
@@ -256,7 +247,7 @@ Plug 'inkarkat/vim-SpellCheck'
 Plug 'lervag/vimtex'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'troydm/zoomwintab.vim'
-Plug 'psf/black'
+Plug 'psf/black', { 'branch': 'stable' }
 
 if has('nvim')
    Plug 'neomake/neomake'
@@ -279,6 +270,7 @@ runtime custom/lightline.vim
 runtime custom/easyescape.vim
 runtime custom/vim_tmux_navigator.vim
 runtime custom/zoomwintab.vim
+runtime custom/vimtex.vim
 
 if has('nvim')
    runtime custom/neomake.vim
