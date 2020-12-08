@@ -1,6 +1,7 @@
 #______________________________________________________________________________
 #                                                                       GENERAL
 set header_cache = "~/.cache/mutt"
+# set display_filter = "exec sed -r \"s/^Date:\\s*(([F-Wa-u]{3},\\s*)?[[:digit:]]{1,2}\\s+[A-Sa-y]{3}\\s+[[:digit:]]{4}\\s+[[:digit:]]{1,2}:[[:digit:]]{1,2}(:[[:digit:]]{1,2})?\\s+[+-][[:digit:]]{4})/date +'Date: %a, %d %b %Y %H:%M:%S %z' -d '\\1'/e\""
 
 set print_command = "muttprint"
 set print = ask-yes
@@ -49,13 +50,21 @@ folder-hook $folder/friedemann@neuhaus-tech.de 'source ~/.mutt/friedemann@neuhau
 account-hook $folder/friedemann@neuhaus-tech.de "set imap_user=$imap_user imap_pass=$imap_pass"
 macro index <f1> <change-folder>$spoolfile<enter>
 
+source ~/.mutt/f@neuhaus-tech.de
+named-mailboxes "f@neuhaus-tech.de" =-f@neuhaus-tech.de-
+mailboxes =-f@neuhaus-tech.de-
+mailboxes `cat ~/.mutt/mailboxes | grep f@neuhaus-tech.de | tr '\n' ' '`
+folder-hook $folder/f@neuhaus-tech.de 'source ~/.mutt/f@neuhaus-tech.de'
+account-hook $folder/f@neuhaus-tech.de "set imap_user=$imap_user imap_pass=$imap_pass"
+macro index <f2> <change-folder>$spoolfile<enter>
+
 source ~/.mutt/f.neuhaus@yahoo.de
 named-mailboxes "f.neuhaus@yahoo.de" =-f.neuhaus@yahoo.de-
 mailboxes =-f.neuhaus@yahoo.de-
 mailboxes `cat ~/.mutt/mailboxes | grep f.neuhaus@yahoo.de | tr '\n' ' '`
 folder-hook $folder/f.neuhaus@yahoo.de 'source ~/.mutt/f.neuhaus@yahoo.de'
 account-hook $folder/f.neuhaus@yahoo.de "set imap_user=$imap_user imap_pass=$imap_pass"
-macro index <f2> <change-folder>$spoolfile<enter>
+macro index <f6> <change-folder>$spoolfile<enter>
 macro index <f12> <change-folder>$spoolfile/../Junk<enter>
 
 source ~/.mutt/neuhaus@uni-mainz.de
