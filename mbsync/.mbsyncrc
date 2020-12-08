@@ -26,6 +26,34 @@ Channel neuhaus-tech-default
 
 ################################################
 
+IMAPAccount fmail
+Host mail.neuhaus-tech.de
+User f@neuhaus-tech.de
+PassCmd "pass mail/f@neuhaus-tech.de"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore fmail-remote
+Account fmail
+
+MaildirStore fmail-local
+Subfolders Verbatim
+Path ~/mail/f@neuhaus-tech.de/
+Inbox ~/mail/f@neuhaus-tech.de/INBOX
+
+Channel fmail-default
+Master :fmail-remote:
+Slave :fmail-local:
+Patterns "INBOX" "INBOX/*" "Drafts" "Sent" "Junk"
+Create Both
+Expunge Both
+SyncState *
+
+Group f@neuhaus-tech.de
+Channel fmail-default
+
+################################################
+
 IMAPAccount yahoo
 Host mail.neuhaus-tech.de
 User friedemann_yahoo@neuhaus-tech.de
@@ -55,6 +83,7 @@ Channel yahoo-default
 ################################################
 IMAPAccount cern
 Host imap.cern.ch
+Port 993
 User fneuhaus
 PassCmd "pass mail/fneuhaus@cern.ch"
 SSLType IMAPS
