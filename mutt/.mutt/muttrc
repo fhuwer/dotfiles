@@ -145,10 +145,12 @@ bind index,pager \CV sidebar-toggle-virtual
 bind index,pager V noop
 macro attach V \
 "\
+:set wait_key=0<enter>\
 <pipe-entry>cat >$HOME/.cache/mutt_mail.html\
 && firefox ~/.cache/mutt_mail.html\
 && sleep 3\
 && rm ~/.cache/mutt_mail.html<enter>\
+:set wait_key=1<enter>\
 "
 
 macro attach s "<save-entry><bol>~/scratch/<eol>" "Save to scratch space"
@@ -157,15 +159,6 @@ macro index <f7> "<vfolder-from-query>" "vfolder from notmuch query"
 macro index <f8> "<entire-thread>" "read entire thread of the current message"
 macro pager,index <f10> ":set wait_key=0<enter><shell-escape>mbsync $from<enter>:set wait_key=1<enter>" "sync mailbox"
 macro pager,index <f11> ":set wait_key=0<enter><shell-escape>mbsync -a<enter>:set wait_key=1<enter>" "sync all mailboxes"
-
-macro attach o \
-"\
-<enter-command>unset wait_key<enter>\
-<shell-escape>rm -f /tmp/mutt-attach<enter>\
-<save-entry><kill-line>/tmp/mutt-attach<enter>\
-<shell-escape>firefox /tmp/mutt-attach &<enter>\
-"
-
 
 #______________________________________________________________________________
 #                                                                        COLORS
