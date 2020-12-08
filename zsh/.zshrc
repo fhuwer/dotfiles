@@ -5,7 +5,7 @@ export ZSH=~/.oh-my-zsh
 [[ -f "$HOME/.zsh_init_pre" ]] && source "$HOME/.zsh_init_pre"
 
 ZSH_THEME="agnoster"
-plugins=(git pass docker zsh-syntax-highlighting ssh-agent pj)
+plugins=(git taskwarrior pass docker zsh-syntax-highlighting ssh-agent pj)
 
 source $ZSH/oh-my-zsh.sh
 

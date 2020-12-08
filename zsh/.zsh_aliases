@@ -25,6 +25,9 @@ function gdp() {
 }
 compdef _git gdp=git-diff
 
+# Platform.IO
+alias pio=platformio
+
 # Space
 alias space="df -h"
 alias duf="du -d 1 -h -t 50M 2>/dev/null"
