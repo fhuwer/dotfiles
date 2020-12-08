@@ -147,10 +147,10 @@ inoremap <A-k> <Up>
 inoremap <A-l> <Right>
 
 " Fast moving of windows
-nnoremap <C-H> <c-w>H
-nnoremap <C-J> <c-w>J
-nnoremap <C-K> <c-w>K
-nnoremap <C-L> <c-w>L
+nnoremap <leader><C-H> <c-w>H
+nnoremap <leader><C-J> <c-w>J
+nnoremap <leader><C-K> <c-w>K
+nnoremap <leader><C-L> <c-w>L
 
 " Write file
 nnoremap <leader>w :update<CR>

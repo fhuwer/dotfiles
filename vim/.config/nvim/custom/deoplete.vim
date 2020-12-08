@@ -1,4 +1,9 @@
 let g:deoplete#enable_at_startup = 1
+
+call deoplete#custom#var('omni', 'input_patterns', {
+      \ 'tex': g:vimtex#re#deoplete
+      \})
+
 " let g:deoplete#auto_complete_delay = 500
 " call deoplete#custom#option("auto_complete_delay", 500)
 call deoplete#custom#option({
