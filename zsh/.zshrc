@@ -14,6 +14,16 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
 
+# Save history to second file where the cwd is included
+function zshaddhistory() {
+  if [ "${1%%$'\n'}" != "jog" ]; then
+    echo "${1%%$'\n'}|${PWD}   " >> ~/.zsh_history_ext
+  fi
+}
+function jog() {
+  /usr/bin/grep -a "${PWD}   " ~/.zsh_history_ext | cat | cut -f1 -d"|" | tail
+}
+
 # User configuration
 CASE_SENSITIVE="true"
 export VIRTUAL_ENV_DISABLE_PROMPT="true"

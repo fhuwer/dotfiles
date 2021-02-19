@@ -25,6 +25,9 @@ function gdp() {
 }
 compdef _git gdp=git-diff
 
+# Alias for git ls-files
+alias gls="exa --git-ignore"
+
 # Platform.IO
 alias pio=platformio
 
