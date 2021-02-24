@@ -10,6 +10,8 @@ plugins=(git taskwarrior pass docker zsh-syntax-highlighting ssh-agent pj)
 source $ZSH/oh-my-zsh.sh
 
 # Ignore duplicates in history
+HISTSIZE=400000
+SAVEHIST=$HISTSIZE
 setopt HIST_IGNORE_SPACE
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
