@@ -110,13 +110,30 @@ function! SetTabWidth(width)
 endfunc
 
 " Switch between source and header file (specific to athena based analysis projects)
+let g:code_switcher_headers = ["h", "hh"]
+let g:code_switcher_source = ["c", "cc", "cxx", "cpp"]
 function! AthenaSwitchHeaderSource()
   let folder=expand("%:p:h")
   let parentfolder=expand("%:p:h:h")
   let filename=expand("%:t:r")
   let extension=expand("%:e")
-  let otherfile=parentfolder . "/**/" . filename . "." . (extension == "h" ? "cxx" : "h")
-  exec 'edit' otherfile
+  if index(g:code_switcher_headers, extension) >= 0
+    for ext in g:code_switcher_source
+      let otherfile=globpath(parentfolder, "**/" . filename . "." . ext)
+      if filereadable(otherfile)
+        exec 'edit' otherfile
+        break
+      endif
+    endfor
+  elseif index(g:code_switcher_source, extension) >= 0
+    for ext in g:code_switcher_headers
+      let otherfile=globpath(parentfolder, "**/" . filename . "." . ext)
+      if filereadable(otherfile)
+        exec 'edit' otherfile
+        break
+      endif
+    endfor
+  endif
 endfunction
 command! THS call AthenaSwitchHeaderSource()
 map <F11> :call AthenaSwitchHeaderSource()<CR>
@@ -139,6 +156,20 @@ command! VT call VTerm()
 " }}}
 
 " Keybindings {{{
+
+" Make sure function keys will not insert something
+inoremap <F1> <nop>
+inoremap <F2> <nop>
+inoremap <F3> <nop>
+inoremap <F4> <nop>
+inoremap <F5> <nop>
+inoremap <F6> <nop>
+inoremap <F7> <nop>
+inoremap <F8> <nop>
+inoremap <F9> <nop>
+inoremap <F10> <nop>
+inoremap <F11> <nop>
+inoremap <F12> <nop>
 
 " Allow movement in insert mode with ALT
 inoremap <A-h> <Left>
@@ -271,6 +302,7 @@ runtime custom/easyescape.vim
 runtime custom/vim_tmux_navigator.vim
 runtime custom/zoomwintab.vim
 runtime custom/vimtex.vim
+runtime custom/vim-polyglot.vim
 
 if has('nvim')
    runtime custom/neomake.vim
