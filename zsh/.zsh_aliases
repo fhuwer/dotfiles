@@ -48,6 +48,15 @@ function mkslides() {
 # File handlers
 alias -s pdf="open"
 
+# CSV printer
+function lesscsv() {
+  if [ "$2" -eq "" ]; then
+    cat $1 | perl -pe 's/((?<=,)|(?<=^)),/ ,/g;' | column -t -s, | less -S
+  else
+    cat $1 | perl -pe 's/((?<=,)|(?<=^))$2/ $2/g;' | column -t -s$2 | less -S
+  fi
+}
+
 # tmux display setter
 tmuxad () {
 	tmuxd $1 $DISPLAY && tmux a -t $1
