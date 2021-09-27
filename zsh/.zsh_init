@@ -1,20 +1,45 @@
 # ~/.zsh_init
 
 # Setup local bin
-export PATH=$HOME/bin:$HOME/.local/bin:$PATH
+pathadd ${HOME}/bin
+pathadd ${HOME}/.local/bin
 
 # Try to load virtualenvwrapper (if not loaded already
 source virtualenvwrapper_lazy.sh
 
 # Try to setup ROOT
-if [ -f "${ROOT_PATH}/bin/thisroot.sh" ]; then
-  source "${ROOT_PATH}/bin/thisroot.sh"
-fi
-if `hash root 2>/dev/null`; then
+# if [ -f "${ROOT_PATH}/bin/thisroot.sh" ]; then
+#   source "${ROOT_PATH}/bin/thisroot.sh"
+# fi
+# if `hash root 2>/dev/null`; then
+#   alias root="root -l"
+#   alias tbrowser='root -x ~/bin/root_macros/TBrowserOpen.C'
+#   alias tb='tbrowser'
+# fi
+function load_root() {
+  # To be run if root is not loaded and load it
+  unalias root
+  if [ -f "${ROOT_PATH}/bin/thisroot.sh" ]; then
+    source "${ROOT_PATH}/bin/thisroot.sh"
+  fi
   alias root="root -l"
   alias tbrowser='root -x ~/bin/root_macros/TBrowserOpen.C'
-  alias tb='tbrowser'
-fi
+  unalias rootls
+
+  # Check which program to run
+  program=$1
+  shift
+  if [ "$program" == "root" ]; then
+    root -l $@
+  elif [ "$program" == "tbrowser" ]; then
+    root -l -x ~/bin/root_macros/TBrowserOpen.C
+  else
+    $program $@
+  fi
+}
+alias root="load_root root"
+alias tbrowser="load_root tbrowser"
+alias rootls="load_root rootls"
 
 # Check for exa and replace ls if so
 if `hash exa 2>/dev/null`; then

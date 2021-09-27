@@ -1,11 +1,18 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
+# Function to only add to PATH if not in there already
+pathadd() {
+  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+    PATH="$1${PATH:+":$PATH"}"
+  fi
+}
+
 # Check for local pre init
 [[ -f "$HOME/.zsh_init_pre" ]] && source "$HOME/.zsh_init_pre"
 
 ZSH_THEME="agnoster"
-plugins=(git taskwarrior pass docker zsh-syntax-highlighting ssh-agent pj)
+plugins=(git pass docker docker-compose zsh-syntax-highlighting ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 

@@ -74,7 +74,9 @@ if [[ -a "$HOME/.zsh_aliases_local" ]]; then
    source $HOME/.zsh_aliases_local
 fi
 
-alias rpass="< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;"
+alias rpass="< /dev/urandom tr -dc A-Za-z0-9 | head -c${1:-32};echo;"
 function lesscsv() {
-  cat $1 | perl -pe 's/((?<=,)|(?<=^)),/ ,/g;' | column -t -s, | less -s
+  cat $1 | perl -pe 's/((?<=,)|(?<=^)),/ ,/g;' | column -t -s, | less -S
 }
+
+alias c="docker-compose"
