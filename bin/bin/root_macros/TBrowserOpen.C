@@ -77,6 +77,15 @@ void tbrowser_draw_normed_same(TObject *c) {
   update_canvases();
 }
 
+void tbrowser_draw_normed_same_red(TObject *c) {
+  TH1F *h1 = (TH1F*)c;
+  TH1F *h2 = (TH1F*)h1->Clone();
+  h2->Scale(1 / h2->Integral());
+  h2->Draw(get_tbrowser_draw_option("same"));
+  h2->SetLineColor(kRed);
+  update_canvases();
+}
+
 void tbrowser_draw_row_normed(TObject *c) {
   TH2F *h = (TH2F*)c;
   for (int i = 1; i <= h->GetNbinsY(); i++) {
@@ -201,6 +210,7 @@ void TBrowserOpen() {
   for (auto class_name : {"TH1C", "TH1S", "TH1I", "TH1F", "TH1D"}) {
     add_item(class_name, "Draw normed", "tbrowser_draw_normed", "TObject*", 2);
     add_item(class_name, "Draw normed same", "tbrowser_draw_normed_same", "TObject*", 2);
+    add_item(class_name, "Draw normed same red", "tbrowser_draw_normed_same_red", "TObject*", 2);
   }
   for (auto class_name : {"TH2C", "TH2S", "TH2I", "TH2F", "TH2D"}) {
     add_item(class_name, "Draw row normed", "tbrowser_draw_row_normed", "TObject*", 2);

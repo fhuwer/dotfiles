@@ -16,8 +16,21 @@ fi
 # Basic settings
 xset -b
 setxkbmap us
-synclient VertScrollDelta=-100 HorizScrollDelta=-100 TapButton1=1 TapButton2=0 TapButton3=0 HorizTwoFingerScroll=1
+if `hash synclient 2>/dev/null`; then
+  synclient VertScrollDelta=-100 HorizScrollDelta=-100 TapButton1=1 TapButton2=0 TapButton3=0 HorizTwoFingerScroll=1
+fi
 xset r rate 500 33
+
+$HOME/.screenlayout/normal.sh
+
+setxkbmap -option ctrl:nocaps -option 'compose:menu'
+export GTK_IM_MODULE=xim
+# export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=xim
+
+# Gnome Keyring
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
 
 # Start desktop
 exec i3

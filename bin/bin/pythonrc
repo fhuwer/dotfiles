@@ -5,7 +5,10 @@ except ImportError:
 else:
     import rlcompleter
     readline.parse_and_bind("tab: complete")
-    readline.set_auto_history(True)
+    try:
+        readline.set_auto_history(True)
+    except AttributeError:
+        pass
 
 import atexit, os, readline, sys
 if sys.version_info >= (3, 0) and hasattr(sys, 'real_prefix'): # in a VirtualEnv
