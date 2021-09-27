@@ -14,8 +14,8 @@ Path ~/mail/friedemann@neuhaus-tech.de/
 Inbox ~/mail/friedemann@neuhaus-tech.de/INBOX
 
 Channel neuhaus-tech-default
-Master :neuhaus-tech-remote:
-Slave :neuhaus-tech-local:
+Far :neuhaus-tech-remote:
+Near :neuhaus-tech-local:
 Patterns "INBOX" "Drafts" "Sent" "Junk"
 Create Both
 Expunge Both
@@ -42,8 +42,8 @@ Path ~/mail/f@neuhaus-tech.de/
 Inbox ~/mail/f@neuhaus-tech.de/INBOX
 
 Channel fmail-default
-Master :fmail-remote:
-Slave :fmail-local:
+Far :fmail-remote:
+Near :fmail-local:
 Patterns "INBOX" "INBOX/*" "Drafts" "Sent" "Junk"
 Create Both
 Expunge Both
@@ -70,8 +70,8 @@ Path ~/mail/f.neuhaus@yahoo.de/
 Inbox ~/mail/f.neuhaus@yahoo.de/INBOX
 
 Channel yahoo-default
-Master :yahoo-remote:
-Slave :yahoo-local:
+Far :yahoo-remote:
+Near :yahoo-local:
 Patterns "INBOX" "INBOX/*" "Drafts" "Sent" "Junk"
 Create Both
 Expunge Both
@@ -98,15 +98,15 @@ Path ~/mail/fneuhaus@cern.ch/
 Inbox ~/mail/fneuhaus@cern.ch/INBOX
 
 Channel cern-default
-Master :cern-remote:
-Slave :cern-local:
+Far :cern-remote:
+Near :cern-local:
 Patterns "INBOX" "INBOX/*" "Drafts" "Junk E-Mail"
 Create Both
 Expunge Both
 SyncState *
 
 Channel cern-sent
-Master :cern-remote:"Sent Items"
+Far :cern-remote:"Sent Items"
 slave  :cern-local:"Sent"
 Expunge Both
 SyncState *
@@ -133,21 +133,21 @@ Path ~/mail/fneuhaus@students.uni-mainz.de/
 Inbox ~/mail/fneuhaus@students.uni-mainz.de/INBOX
 
 Channel students-default
-Master :students-remote:
-Slave :students-local:
+Far :students-remote:
+Near :students-local:
 Patterns "INBOX" "Junk-E-Mail"
 Create Both
 Expunge Both
 SyncState *
 
 Channel students-drafts
-Master :students-remote:"Entw&APw-rfe"
+Far :students-remote:"Entw&APw-rfe"
 slave  :students-local:Drafts
 Expunge Both
 SyncState *
 
 Channel students-sent
-Master :students-remote:"Gesendete Elemente"
+Far :students-remote:"Gesendete Elemente"
 slave  :students-local:Sent
 Expunge Both
 SyncState *
@@ -175,21 +175,21 @@ Path ~/mail/neuhaus@uni-mainz.de/
 Inbox ~/mail/neuhaus@uni-mainz.de/INBOX
 
 Channel frneuhau@uni-mainz.de-default
-Master :frneuhau@uni-mainz.de-remote:
-Slave :frneuhau@uni-mainz.de-local:
+Far :frneuhau@uni-mainz.de-remote:
+Near :frneuhau@uni-mainz.de-local:
 Patterns "INBOX" "Junk-E-Mail"
 Create Both
 Expunge Both
 SyncState *
 
 Channel frneuhau@uni-mainz.de-drafts
-Master :frneuhau@uni-mainz.de-remote:"Entw&APw-rfe"
+Far :frneuhau@uni-mainz.de-remote:"Entw&APw-rfe"
 slave  :frneuhau@uni-mainz.de-local:Drafts
 Expunge Both
 SyncState *
 
 Channel frneuhau@uni-mainz.de-sent
-Master :frneuhau@uni-mainz.de-remote:"Gesendete Elemente"
+Far :frneuhau@uni-mainz.de-remote:"Gesendete Elemente"
 slave  :frneuhau@uni-mainz.de-local:Sent
 Expunge Both
 SyncState *

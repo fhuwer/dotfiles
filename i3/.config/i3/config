@@ -26,19 +26,35 @@ for_window [class="Alacritty" title="floating"] "floating enable, border pixel 1
 font xft:Hack 8
 
 # Set colors (stolen from weinshec)
-set $bkg    #030105
-set $fgr    #343434
-set $pan    #1a1a1a
-set $brd    #767676
-set $fcs    #e98f21
-set $txt    #fefefe
-set $urg    #e89393
+# set $bkg    #030105
+# set $fgr    #343434
+# set $pan    #1a1a1a
+# set $brd    #767676
+# set $fcs    #e98f21
+# set $txt    #fefefe
+# set $urg    #e89393
+#
+# # Set colors                border     bkg         text
+# client.focused              $fcs       $fcs        $txt
+# client.unfocused            $bkg       $bkg        $txt
+# client.focused_inactive     $bkg       $bkg        $txt
+# client.urgent $urg $urg $txt
 
-# Set colors                border     bkg         text
-client.focused              $fcs       $fcs        $txt
-client.unfocused            $bkg       $bkg        $txt
-client.focused_inactive     $bkg       $bkg        $txt
-client.urgent $urg $urg $txt
+
+set $focused  #2a7a7a
+set $ftext    #FFFFFF
+set $bckg     #31414b
+set $btext    #FFFFFF
+set $factive  #88d4d4
+set $fatext   #000000
+set $urgent   #EC5f67
+set $utext    #1B2B34
+
+# Set colors              border     bkg         text      indicator
+client.focused            $focused   $focused    $ftext    $focused
+client.unfocused          $bckg      $bckg       $btext    $bckg
+client.focused_inactive   $bckg      $bckg       $factive  $bckg
+client.urgent             $urgent    $urgent     $utext    $urgent
 
 # Gaps
 for_window [class="^.*"] border pixel 1
@@ -153,10 +169,10 @@ set $mode_powerstates Power states: [s]uspend [h]ibernate [S]hutdown [R]eboot
 bindsym $mod+p mode "$mode_powerstates"
 
 mode "$mode_powerstates" {
-  bindsym s exec "systemctl suspend"
+  # bindsym s exec "systemctl suspend"
   bindsym h exec "systemctl hibernate"
-  bindsym shift+r exec "systemctl restart"
-  bindsym shift+s exec "systemctl halt"
+  # bindsym shift+r exec "systemctl restart"
+  # bindsym shift+s exec "systemctl halt"
 
   bindsym Escape mode "default"
   bindsym Return mode "default"
@@ -173,10 +189,12 @@ bindsym XF86Launch1 exec ~/bin/toggle_backlight
 bindsym $mod+ctrl+F8 "exec $LOCK_PATH"
 bindsym $mod+shift+d exec setxkbmap de
 bindsym $mod+shift+g exec setxkbmap us
-bindsym --release F12 "exec $KUAKE_PATH"
-bindsym $mod+F1 "exec $HOME/bin/audioctl move-all built-in"
-bindsym $mod+F2 "exec $HOME/bin/audioctl move-all hdmi"
+# bindsym --release F12 "exec $KUAKE_PATH"
+bindsym $mod+F1 "exec $HOME/bin/audioctl move-all starship"
+bindsym $mod+F2 "exec $HOME/bin/audioctl move-all \"fiio e10 analog stereo\""
 bindsym $mod+F3 "exec $HOME/bin/audioctl move-all mid"
+bindsym $mod+F4 "exec $HOME/bin/audioctl move-all tunnel"
+bindsym $mod+n "exec $HOME/bin/audioctl mute --toggle"
 # }}}
 # Workspaces {{{
 # switch to workspace
@@ -207,11 +225,23 @@ bindsym $mod+Shift+0 move container to workspace number 10
 bindsym $mod+m move workspace to output right
 # }}}
 # }}}
+# QMK Launcher combinations {{{
+bindsym --release $mod+shift+F1 exec "$KUAKE_PATH"
+bindsym --release $mod+shift+F2 exec "~/bin/scrot -sc"
+bindsym --release $mod+shift+F3 exec "thunar"
+bindsym --release $mod+shift+F4 exec "~/bin/hctl toggle stehlampe"
+bindsym --release $mod+shift+F5 exec "~/bin/hctl toggle led_sofa"
+bindsym --release $mod+shift+F6 exec "~/bin/hctl toggle socket03"
+bindsym --release $mod+shift+F7 exec "~/bin/hctl toggle stern"
+# }}}
 # Program specifics {{{
 for_window [ title="^pdfpc.*" window_role="presenter" ] move to output left, fullscreen
 for_window [ title="^pdfpc.*" window_role="presentation" ] move to output right, fullscreen
 for_window [title="^Canvas_.*_Editor$"] floating enable
 for_window [window_role="PictureInPicture"] sticky enable, exec "i3videofloat"
+# }}}
+# Layouts {{{
+exec --no-startup-id "[[ \"$(hostname)\" == \"sagarmatha\" ]] && i3-msg 'workspace 1 && append_layout /home/friedemann/.config/i3/workspace-1.json'"
 # }}}
 
 # Compton
@@ -221,6 +251,13 @@ exec --no-startup-id picom
 exec --no-startup-id ~/bin/autostart.sh
 
 bar {
+  colors {
+    background #000000
+
+    # Set colors       border    bckg      text    indicator
+    focused_workspace  $focused  $focused  $ftext  $focused
+    active_workspace   $factive  $factive  $fatext $factive
+  }
   status_command "python3 ~/.config/i3/i3mystatus.py"
   tray_output primary
 }
