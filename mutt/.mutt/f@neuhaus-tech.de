@@ -1,5 +1,5 @@
 set spoolfile = "+f@neuhaus-tech.de/INBOX"
-set record    = "+f@neuhaus-tech.de/Sent\ Items"
+set record    = "+f@neuhaus-tech.de/Sent"
 set postponed = "+f@neuhaus-tech.de/Drafts"
 
 set realname  = "Friedemann Neuhaus"
@@ -11,3 +11,5 @@ set imap_pass = `pass mail/f@neuhaus-tech.de`
 set smtp_url = smtps://$imap_user:$imap_pass@mail.neuhaus-tech.de:465
 
 source ~/.mutt/crypt_disable
+
+macro pager,index <f10> ":set wait_key=0<enter><shell-escape>mbsync $from<enter>:set wait_key=1<enter>" "sync mailbox"

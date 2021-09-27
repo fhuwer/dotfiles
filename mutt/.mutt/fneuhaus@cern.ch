@@ -12,3 +12,5 @@ set smtp_url = smtp://$imap_user:$imap_pass@smtp.cern.ch:587
 set ssl_starttls = yes
 
 source ~/.mutt/crypt_enable
+
+macro pager,index <f10> ":set wait_key=0<enter><shell-escape>mbsync $from<enter>:set wait_key=1<enter>" "sync mailbox"
