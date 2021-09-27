@@ -1,0 +1,83 @@
+snippet fig "figure environment"
+\begin{figure}[${5:ht}]
+	\includegraphics[width=${2:1.0}\textwidth]{$1}
+	\caption{%
+		$3
+	}\label{fig:$4}
+\end{figure}$0
+endsnippet
+
+snippet pfig "plot figure environment"
+\begin{figure}[${5:ht}]
+	\input{$1.pgf}
+	\caption{%
+		$3
+	}\label{fig:$4}
+\end{figure}$0
+endsnippet
+
+snippet subfig "subfigure environment"
+\begin{figure}[${7:htb}]
+	\subcaptionbox{$2}{%
+		\includegraphics[width=0.32\textwidth]{$1}}\hfill
+	\subcaptionbox{$4}{%
+		\includegraphics[width=0.32\textwidth]{$3}}\hfill
+	\caption{%
+		$5
+	}\label{fig:$6}
+\end{figure}
+endsnippet
+
+snippet psubfig "plot subfigure environment"
+\begin{figure}[${7:htb}]
+	\subcaptionbox{$2}{%
+		\input{$1.pgf}
+	\subcaptionbox{$4}{%
+		\input{$3.pgf}
+	\caption{%
+		$5
+	}\label{fig:$6}
+\end{figure}
+endsnippet
+
+snippet enum "Enumerate" b
+\begin{enumerate}
+	\item $0
+\end{enumerate}
+endsnippet
+
+snippet eq "Equation" b
+\begin{equation}
+	$0
+\end{equation}
+endsnippet
+
+snippet eq* "Equation star" b
+\begin{equation*}
+	$0
+\end{equation*}
+endsnippet
+
+snippet item "Itemize" b
+\begin{itemize}
+	\item $0
+\end{itemize}
+endsnippet
+
+snippet it "Item" b
+\item $0
+endsnippet
+
+snippet frame "Frame" b
+\begin{frame}{$1}
+	$2
+\end{frame}
+endsnippet
+
+snippet framei "Itemize  Frame" b
+\begin{frame}{$0}
+	\begin{itemize}
+		\item $1
+	\end{itemize}
+\end{frame}
+endsnippet
