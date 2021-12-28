@@ -102,6 +102,7 @@ set editor=`echo \$EDITOR`
 set edit_headers
 set send_charset = utf-8
 set user_agent = no
+set text_flowed = yes
 
 
 #______________________________________________________________________________
