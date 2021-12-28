@@ -1,7 +1,3 @@
-#include "AtlasStyle.C"
-#include "AtlasLabels.C"
-#include "AtlasUtils.C"
-
 TBrowser *browser;
 
 TString get_tbrowser_draw_option(std::string additional_option = "") {
@@ -86,6 +82,20 @@ void tbrowser_draw_normed_same_red(TObject *c) {
   update_canvases();
 }
 
+void tbrowser_draw_same_red(TObject *c) {
+  if (((std::string)c->ClassName()).rfind("TEfficiency", 0) == 0) {
+    TEfficiency *eff1 = (TEfficiency*)c;
+    eff1->SetMarkerColor(kRed);
+    eff1->SetLineColor(kRed);
+    eff1->Draw("same");
+  } else {
+    TH1F *h1 = (TH1F*)c;
+    h1->SetLineColor(kRed);
+    h1->Draw("same");
+  }
+  update_canvases();
+}
+
 void tbrowser_draw_row_normed(TObject *c) {
   TH2F *h = (TH2F*)c;
   for (int i = 1; i <= h->GetNbinsY(); i++) {
@@ -101,17 +111,6 @@ void tbrowser_draw_row_normed(TObject *c) {
   }
   h->Draw(get_tbrowser_draw_option("colz"));
   update_canvases();
-}
-
-void tbrowser_draw_atlas(TObject *c, double x, double y, char *label) {
-  SetAtlasStyle();
-  c->Draw();
-  ATLASLabel(x, y, label);
-  update_canvases();
-}
-
-void tbrowser_draw_atlas_upper_right(TObject *c, char *label) {
-  tbrowser_draw_atlas(c, 0.8, 0.8, label);
 }
 
 void tbrowser_set_red(TObject *c) {
@@ -200,12 +199,13 @@ void TBrowserOpen() {
     add_item(class_name, "Draw branch with xup", "tbrowser_draw_xup", "TObject*,double", 0);
     add_item(class_name, "Draw same", "tbrowser_branch_draw_same", "TObject*", 0);
   }
-  for (auto class_name : {"TH1C", "TH1S", "TH1I", "TH1F", "TH1D", "TH2C", "TH2S", "TH2I", "TH2F", "TH2D"}) {
-    add_item(class_name, "Draw same", "tbrowser_draw_same", "TObject*", 2);
-    add_item(class_name, "Set red", "tbrowser_set_red", "TObject*", 2);
-    add_item(class_name, "Create hist in console", "tbrowser_create_hist", "TObject*", 2);
-    add_item(class_name, "Draw ATLAS Style", "tbrowser_draw_atlas", "TObject*,double,double,char*", 0);
-    add_item(class_name, "Draw ATLAS Style (ur)", "tbrowser_draw_atlas_upper_right", "TObject*,char*", 0);
+  for (std::string class_name : {"TH1C", "TH1S", "TH1I", "TH1F", "TH1D", "TH2C", "TH2S", "TH2I", "TH2F", "TH2D", "TEfficiency"}) {
+    if (class_name != "TEfficiency") {
+      add_item(class_name, "Draw same", "tbrowser_draw_same", "TObject*", 2);
+      add_item(class_name, "Set red", "tbrowser_set_red", "TObject*", 2);
+      add_item(class_name, "Create hist in console", "tbrowser_create_hist", "TObject*", 2);
+    }
+    add_item(class_name, "Draw same red", "tbrowser_draw_same_red", "TObject*", 2);
   }
   for (auto class_name : {"TH1C", "TH1S", "TH1I", "TH1F", "TH1D"}) {
     add_item(class_name, "Draw normed", "tbrowser_draw_normed", "TObject*", 2);
