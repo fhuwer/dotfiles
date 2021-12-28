@@ -1,3 +1,3 @@
 require'lspconfig'.pylsp.setup{
-  cmd = { "/home/friedemann/.virtualenvs/neovim/bin/pylsp" }
+  cmd = { vim.fn.expand("$HOME/.virtualenvs/neovim/bin/pylsp") }
 }
