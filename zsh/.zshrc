@@ -12,7 +12,7 @@ pathadd() {
 [[ -f "$HOME/.zsh_init_pre" ]] && source "$HOME/.zsh_init_pre"
 
 ZSH_THEME="agnoster"
-plugins=(git pass docker docker-compose zsh-syntax-highlighting ssh-agent)
+plugins=(git pass docker docker-compose zsh-syntax-highlighting ssh-agent zsh-histdb)
 
 source $ZSH/oh-my-zsh.sh
 
