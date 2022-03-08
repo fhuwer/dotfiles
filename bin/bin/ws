@@ -24,7 +24,7 @@ def rename(argv):
     ws = workspaces[ws_num]
     if len(argv) == 2:
         subprocess.run(
-            'i3-msg "rename workspace {0} to {1}:{2}"'.format(
+            'i3-msg "rename workspace \'{0}\' to \'{1}\':{2}"'.format(
                 ws["name"], ws["num"], argv[1]
             ),
             shell=True,
