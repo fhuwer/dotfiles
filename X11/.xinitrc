@@ -10,6 +10,10 @@ fi
 # Xresoures
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 
+if [ -s ~/.Xmodmap ]; then
+  xmodmap ~/.Xmodmap
+fi
+
 # Load display settings
 [[ -f "$HOME/bin/setxrandr.sh" ]] && $HOME/bin/setxrandr.sh
 
