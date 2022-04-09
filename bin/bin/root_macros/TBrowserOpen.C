@@ -73,6 +73,15 @@ void tbrowser_draw_normed_same(TObject *c) {
   update_canvases();
 }
 
+void tbrowser_draw_normed_same_green(TObject *c) {
+  TH1F *h1 = (TH1F*)c;
+  TH1F *h2 = (TH1F*)h1->Clone();
+  h2->Scale(1 / h2->Integral());
+  h2->Draw(get_tbrowser_draw_option("same"));
+  h2->SetLineColor(kGreen);
+  update_canvases();
+}
+
 void tbrowser_draw_normed_same_red(TObject *c) {
   TH1F *h1 = (TH1F*)c;
   TH1F *h2 = (TH1F*)h1->Clone();
@@ -87,11 +96,11 @@ void tbrowser_draw_same_red(TObject *c) {
     TEfficiency *eff1 = (TEfficiency*)c;
     eff1->SetMarkerColor(kRed);
     eff1->SetLineColor(kRed);
-    eff1->Draw("same");
+    eff1->Draw(get_tbrowser_draw_option("same"));
   } else {
     TH1F *h1 = (TH1F*)c;
     h1->SetLineColor(kRed);
-    h1->Draw("same");
+    h1->Draw(get_tbrowser_draw_option("same"));
   }
   update_canvases();
 }
@@ -200,17 +209,18 @@ void TBrowserOpen() {
     add_item(class_name, "Draw same", "tbrowser_branch_draw_same", "TObject*", 0);
   }
   for (std::string class_name : {"TH1C", "TH1S", "TH1I", "TH1F", "TH1D", "TH2C", "TH2S", "TH2I", "TH2F", "TH2D", "TEfficiency"}) {
-    if (class_name != "TEfficiency") {
-      add_item(class_name, "Draw same", "tbrowser_draw_same", "TObject*", 2);
-      add_item(class_name, "Set red", "tbrowser_set_red", "TObject*", 2);
-      add_item(class_name, "Create hist in console", "tbrowser_create_hist", "TObject*", 2);
-    }
     add_item(class_name, "Draw same red", "tbrowser_draw_same_red", "TObject*", 2);
+    if (class_name != "TEfficiency") {
+      add_item(class_name, "Create hist in console", "tbrowser_create_hist", "TObject*", 2);
+      add_item(class_name, "Set red", "tbrowser_set_red", "TObject*", 2);
+      add_item(class_name, "Draw same", "tbrowser_draw_same", "TObject*", 2);
+    }
   }
   for (auto class_name : {"TH1C", "TH1S", "TH1I", "TH1F", "TH1D"}) {
-    add_item(class_name, "Draw normed", "tbrowser_draw_normed", "TObject*", 2);
-    add_item(class_name, "Draw normed same", "tbrowser_draw_normed_same", "TObject*", 2);
+    add_item(class_name, "Draw normed same green", "tbrowser_draw_normed_same_green", "TObject*", 2);
     add_item(class_name, "Draw normed same red", "tbrowser_draw_normed_same_red", "TObject*", 2);
+    add_item(class_name, "Draw normed same", "tbrowser_draw_normed_same", "TObject*", 2);
+    add_item(class_name, "Draw normed", "tbrowser_draw_normed", "TObject*", 2);
   }
   for (auto class_name : {"TH2C", "TH2S", "TH2I", "TH2F", "TH2D"}) {
     add_item(class_name, "Draw row normed", "tbrowser_draw_row_normed", "TObject*", 2);
