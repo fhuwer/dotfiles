@@ -44,8 +44,8 @@ alias rootls="load_root rootls"
 # Check for exa and replace ls if so
 if `hash exa 2>/dev/null`; then
   alias ls="exa"
-  alias ll="exa -l"
-  alias lg="exa -l --git"
+  alias ll="exa -lg"
+  alias lg="exa -lg --git"
 fi
 
 # FZF

@@ -194,7 +194,11 @@ prompt_dir() {
 prompt_virtualenv() {
   local virtualenv_path="$VIRTUAL_ENV"
   if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
-    prompt_segment 3 black "`basename $virtualenv_path`"
+    if [[ "${NODE_VIRTUAL_ENV}" == "${virtualenv_path}" ]]; then
+      prompt_segment 3 black "`basename $virtualenv_path`*"
+    else
+      prompt_segment 3 black "`basename $virtualenv_path`"
+    fi
   fi
 }
 
