@@ -237,18 +237,19 @@ bindsym --release $mod+shift+F2 exec "~/bin/scrot -sc"
 bindsym --release $mod+shift+F3 exec "thunar"
 bindsym --release $mod+shift+F4 exec "~/bin/hctl toggle stehlampe"
 bindsym --release $mod+shift+F5 exec "~/bin/hctl toggle led_sofa"
-bindsym --release $mod+shift+F6 exec "~/bin/hctl toggle socket03"
+bindsym --release $mod+shift+F6 exec "~/bin/hctl toggle edison_lampe"
 bindsym --release $mod+shift+F7 exec "~/bin/hctl toggle stern"
+bindsym --release $mod+shift+F13 exec "~/bin/antoniagui"
 # }}}
 # Program specifics {{{
 for_window [ title="^pdfpc.*" window_role="presenter" ] move to output left, fullscreen
 for_window [ title="^pdfpc.*" window_role="presentation" ] move to output right, fullscreen
 for_window [title="^Canvas_.*_Editor$"] floating enable
+# Sleep required as ROOT resets window position outside of the monitor boundaries otherwise
+for_window [instance="Fit Panel"] exec sleep 0.2 && i3-msg '[title="Fit Panel"] move position center'
 for_window [window_role="PictureInPicture"] sticky enable, exec "i3videofloat"
 for_window [title="^zoom$"] move scratchpad
-# }}}
-# Layouts {{{
-exec --no-startup-id "[[ \"$(hostname)\" == \"sagarmatha\" ]] && i3-msg 'workspace 1 && append_layout /home/friedemann/.config/i3/workspace-1.json'"
+for_window [class="Antoniagui"] "floating enable, border pixel 1"
 # }}}
 
 # Compton
