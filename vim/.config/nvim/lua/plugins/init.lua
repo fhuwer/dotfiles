@@ -48,6 +48,7 @@ return require('packer').startup(function()
 
   use {
     "hoob3rt/lualine.nvim",
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
     config = function()
       require "plugins.configs.lualine"
     end,
@@ -129,5 +130,18 @@ return require('packer').startup(function()
     end,
   }
 
+  use {
+    "max397574/better-escape.nvim",
+    config = function()
+      require("better_escape").setup()
+    end,
+  }
+
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require "plugins.configs.indent-blankline"
+    end,
+  }
 end)
 

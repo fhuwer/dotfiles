@@ -16,6 +16,6 @@ require'nvim-treesitter.configs'.setup {
 }
 
 vim.cmd([[
-autocmd FileType cpp,python set foldmethod=expr
-autocmd FileType cpp,python set foldexpr=nvim_treesitter#foldexpr()
+autocmd FileType c,cpp,python,js set foldmethod=expr
+autocmd FileType c,cpp,python,js set foldexpr=nvim_treesitter#foldexpr()
 ]])

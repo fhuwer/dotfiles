@@ -8,6 +8,10 @@ vim.g.NERDCustomDelimiters = {
       left = '//', 
       leftAlt = '/*',
       rightAlt = '*/'
+    },
+    htmldjango = {
+      left = '{#',
+      right = '#}'
     }
 }
 

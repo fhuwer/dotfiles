@@ -8,6 +8,8 @@ vim.o.shortmess = "atI"
 vim.o.splitright = true
 vim.o.splitbelow = true
 vim.o.textwidth = 99
+vim.o.modeline = true
+vim.o.modelines = 2
 
 -- Undo
 vim.o.undofile = true
@@ -30,6 +32,8 @@ vim.o.incsearch = true
 vim.o.wrapscan = true
 
 -- Folding
+-- vim.o.foldmethod="expr"
+-- vim.o.foldexpr="nvim_treesitter#foldexpr()"
 vim.o.foldlevel=99
 
 -- Use global clipboard
@@ -37,6 +41,7 @@ vim.o.clipboard="unnamedplus"
 
 -- Leader
 vim.g.mapleader = ";"
+vim.g.maplocalleader = ";"
 
 -- Python
 virtualenv_python = vim.fn.glob(vim.fn.expand("$WORKON_HOME/neovim/bin/python"))
