@@ -107,7 +107,7 @@ SyncState *
 
 Channel cern-sent
 Far :cern-remote:"Sent Items"
-slave  :cern-local:"Sent"
+Near  :cern-local:"Sent"
 Expunge Both
 SyncState *
 
@@ -142,13 +142,13 @@ SyncState *
 
 Channel students-drafts
 Far :students-remote:"Entw&APw-rfe"
-slave  :students-local:Drafts
+Near  :students-local:Drafts
 Expunge Both
 SyncState *
 
 Channel students-sent
 Far :students-remote:"Gesendete Elemente"
-slave  :students-local:Sent
+Near  :students-local:Sent
 Expunge Both
 SyncState *
 
@@ -184,13 +184,13 @@ SyncState *
 
 Channel frneuhau@uni-mainz.de-drafts
 Far :frneuhau@uni-mainz.de-remote:"Entw&APw-rfe"
-slave  :frneuhau@uni-mainz.de-local:Drafts
+Near  :frneuhau@uni-mainz.de-local:Drafts
 Expunge Both
 SyncState *
 
 Channel frneuhau@uni-mainz.de-sent
 Far :frneuhau@uni-mainz.de-remote:"Gesendete Elemente"
-slave  :frneuhau@uni-mainz.de-local:Sent
+Near  :frneuhau@uni-mainz.de-local:Sent
 Expunge Both
 SyncState *
 
