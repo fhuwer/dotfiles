@@ -1,11 +1,11 @@
 text/*;    less
 text/html; lynx -display_charset utf-8 -dump %s; nametemplate=%s.html; copiousoutput
 
-application/pdf; zathura %s
-application/vnd.ms-excel; soffice %s
-application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; soffice %s &!
-application/msword; soffice %s
-application/vnd.openxmlformats-officedocument.wordprocessingml.document; soffice %s &!
+application/pdf; zathura %s &> /dev/null &;
+application/vnd.ms-excel; soffice %s &> /dev/null &;
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; soffice %s &> /dev/null &;
+application/msword; soffice %s &> /dev/null &;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; soffice %s &> /dev/null &;
 
 
-image/jpeg; feh %s
+image/jpeg; feh %s &> /dev/null &;
