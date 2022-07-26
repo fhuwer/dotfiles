@@ -1,0 +1,4 @@
+#!/bin/bash
+
+notmuch tag -new +sent +work -- tag:new and folder:fneuhaus@cern.ch/Sent
+notmuch tag -new +inbox +work -- tag:new and folder:/fneuhaus@cern.ch/INBOX

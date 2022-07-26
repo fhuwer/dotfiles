@@ -50,7 +50,7 @@ mailboxes =-friedemann@neuhaus-tech.de-
 mailboxes `cat ~/.mutt/mailboxes | grep friedemann@neuhaus-tech.de | tr '\n' ' '`
 folder-hook $folder/friedemann@neuhaus-tech.de 'source ~/.mutt/friedemann@neuhaus-tech.de'
 account-hook $folder/friedemann@neuhaus-tech.de "set imap_user=$imap_user imap_pass=$imap_pass"
-macro index <f1> <change-folder>$spoolfile<enter>
+macro index,pager <f1> <change-folder>$spoolfile<enter>
 
 source ~/.mutt/f@neuhaus-tech.de
 named-mailboxes "f@neuhaus-tech.de" =-f@neuhaus-tech.de-
@@ -58,7 +58,7 @@ mailboxes =-f@neuhaus-tech.de-
 mailboxes `cat ~/.mutt/mailboxes | grep f@neuhaus-tech.de | tr '\n' ' '`
 folder-hook $folder/f@neuhaus-tech.de 'source ~/.mutt/f@neuhaus-tech.de'
 account-hook $folder/f@neuhaus-tech.de "set imap_user=$imap_user imap_pass=$imap_pass"
-macro index <f2> <change-folder>$spoolfile<enter>
+macro index,pager <f2> <change-folder>$spoolfile<enter>
 
 source ~/.mutt/f.neuhaus@yahoo.de
 named-mailboxes "f.neuhaus@yahoo.de" =-f.neuhaus@yahoo.de-
@@ -66,8 +66,7 @@ mailboxes =-f.neuhaus@yahoo.de-
 mailboxes `cat ~/.mutt/mailboxes | grep f.neuhaus@yahoo.de | tr '\n' ' '`
 folder-hook $folder/f.neuhaus@yahoo.de 'source ~/.mutt/f.neuhaus@yahoo.de'
 account-hook $folder/f.neuhaus@yahoo.de "set imap_user=$imap_user imap_pass=$imap_pass"
-macro index <f6> <change-folder>$spoolfile<enter>
-macro index <f12> <change-folder>$spoolfile/../Junk<enter>
+macro index,pager <f6> <change-folder>$spoolfile<enter>
 
 source ~/.mutt/neuhaus@uni-mainz.de
 named-mailboxes "neuhaus@uni-mainz.de" =-neuhaus@uni-mainz.de-
@@ -75,7 +74,7 @@ mailboxes =-neuhaus@uni-mainz.de-
 mailboxes `cat ~/.mutt/mailboxes | grep neuhaus@uni-mainz.de | tr '\n' ' '`
 folder-hook $folder/neuhaus@uni-mainz.de 'source ~/.mutt/neuhaus@uni-mainz.de'
 account-hook $folder/neuhaus@uni-mainz.de "set imap_user=$imap_user imap_pass=$imap_pass"
-macro index <f3> <change-folder>$spoolfile<enter>
+macro index,pager <f3> <change-folder>$spoolfile<enter>
 
 source ~/.mutt/fneuhaus@students.uni-mainz.de
 named-mailboxes "fneuhaus@students.uni-mainz.de" =-fneuhaus@students.uni-mainz.de-
@@ -83,7 +82,7 @@ mailboxes =-fneuhaus@students.uni-mainz.de-
 mailboxes `cat ~/.mutt/mailboxes | grep fneuhaus@students.uni-mainz.de | tr '\n' ' '`
 folder-hook $folder/fneuhaus@students.uni-mainz.de 'source ~/.mutt/fneuhaus@students.uni-mainz.de'
 account-hook $folder/fneuhaus@students.uni-mainz.de "set imap_user=$imap_user imap_pass=$imap_pass"
-macro index <f4> <change-folder>$spoolfile<enter>
+macro index,pager <f4> <change-folder>$spoolfile<enter>
 
 source ~/.mutt/fneuhaus@cern.ch
 named-mailboxes "fneuhaus@cern.ch" =-fneuhaus@cern.ch-
@@ -91,7 +90,7 @@ mailboxes =-fneuhaus@cern.ch-
 mailboxes `cat ~/.mutt/mailboxes | grep fneuhaus@cern.ch | tr '\n' ' '`
 folder-hook $folder/fneuhaus@cern.ch 'source ~/.mutt/fneuhaus@cern.ch'
 account-hook $folder/fneuhaus@cern.ch "set imap_user=$imap_user imap_pass=$imap_pass"
-macro index <f5> <change-folder>$spoolfile<enter>
+macro index,pager <f5> <change-folder>$spoolfile<enter>
 
 source ~/.mutt/neuhaus@uni-mainz.de
 # source ~/.mutt/notmuch
@@ -112,7 +111,7 @@ set sort_aux = last-date-received
 set collapse_all = no
 set date_format = "%b %d, %Y"
 # set index_format = "%4C [%Z] %?M?↳& ? %{%b %d} |%-30.30L| %g | %s"
-set index_format="%4C [%Z%@attachment@] %?M?↳& ? %9@date@ |%-30.30L| %g | %s"
+set index_format="%5C [%Z%@attachment@] %?M?↳& ? %9@date@ |%-30.30L| %g | %s"
 
 attachments -A application/pkcs7-signature
 
@@ -160,6 +159,10 @@ bind editor <Tab> complete-query
 bind index,pager @ compose-to-sender
 # bind index,pager \CV sidebar-toggle-virtual
 macro index,pager \CO "<sidebar-toggle-virtual>"
+
+bind index $ noop
+# bind index $ sync-mailbox
+macro index $ "<sync-mailbox><f10>"
 
 bind index,pager V noop
 macro attach V \

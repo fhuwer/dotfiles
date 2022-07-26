@@ -14,3 +14,4 @@ set ssl_starttls = yes
 source ~/.mutt/crypt_enable
 
 macro pager,index <f10> ":set wait_key=0<enter><shell-escape>mbsync $from<enter>:set wait_key=1<enter>" "sync mailbox"
+macro index,pager <f7> "<change-folder>$spoolfile/../Junk<enter>" "Open Junk-Folder"
