@@ -190,11 +190,11 @@ bindsym XF86Launch1 exec ~/bin/toggle_backlight
 bindsym $mod+ctrl+F8 "exec $LOCK_PATH"
 bindsym $mod+shift+d exec setxkbmap de
 bindsym $mod+shift+g exec setxkbmap us
-# bindsym --release F12 "exec $KUAKE_PATH"
+bindsym --release F12 "exec $KUAKE_PATH"
 bindsym $mod+F1 "exec $HOME/bin/audioctl move-all starship"
 bindsym $mod+F2 "exec $HOME/bin/audioctl move-all \"fiio e10 analog stereo\""
 bindsym $mod+F3 "exec $HOME/bin/audioctl move-all mid"
-bindsym $mod+F4 "exec $HOME/bin/audioctl move-all tunnel"
+bindsym $mod+F4 "exec $HOME/bin/audioctl move-all aeropex"
 bindsym $mod+n "exec $HOME/bin/audioctl mute --toggle"
 # }}}
 # Workspaces {{{
@@ -238,7 +238,7 @@ bindsym --release $mod+shift+F3 exec "thunar"
 bindsym --release $mod+shift+F4 exec "~/bin/hctl toggle stehlampe"
 bindsym --release $mod+shift+F5 exec "~/bin/hctl toggle led_sofa"
 bindsym --release $mod+shift+F6 exec "~/bin/hctl toggle edison_lampe"
-bindsym --release $mod+shift+F7 exec "~/bin/hctl toggle stern"
+bindsym --release $mod+shift+F7 exec "~/bin/hctl toggle socket03"
 bindsym --release $mod+shift+F13 exec "~/bin/antoniagui"
 # }}}
 # Program specifics {{{
@@ -249,6 +249,8 @@ for_window [title="^Canvas_.*_Editor$"] floating enable
 for_window [instance="Fit Panel"] exec sleep 0.2 && i3-msg '[title="Fit Panel"] move position center'
 for_window [window_role="PictureInPicture"] sticky enable, exec "i3videofloat"
 for_window [title="^zoom$"] move scratchpad
+for_window [title="^join.*"] move scratchpad
+# for_window [instance="join\?action=join.*" title="^join\?action=join.*$"] move scratchpad
 for_window [class="Antoniagui"] "floating enable, border pixel 1"
 # }}}
 
