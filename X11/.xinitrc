@@ -10,8 +10,8 @@ fi
 # Xresoures
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 
-if [ -s ~/.Xmodmap ]; then
-  xmodmap ~/.Xmodmap
+if [ -f "$HOME/.Xmodmap" ]; then
+  xmodmap "$HOME/.Xmodmap"
 fi
 
 # Load display settings
@@ -27,7 +27,7 @@ xset r rate 500 33
 
 $HOME/.screenlayout/normal.sh
 
-setxkbmap -option ctrl:nocaps -option 'compose:menu'
+setxkbmap -option "caps:escape" -option "compose:menu"
 export GTK_IM_MODULE=xim
 # export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=xim
