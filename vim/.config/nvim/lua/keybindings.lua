@@ -41,4 +41,22 @@ map("n", "<leader>n", ":nohlsearch<cr>", options)
 map("v", "<Tab>", ">gv", {noremap = false})
 map("v", "<S-Tab>", "<gv", {noremap = false})
 
-map("n", "<F4>", [[<Cmd>lua if vim.o.spell == true then print("Spell check disabled"); vim.o.spell = false; else print("Spell check enabled"); vim.o.spell=true; vim.o.spelllang="en_gb"; end<CR>]], options)
+-- Terminal bindings
+map("t", "<Esc>", "<C-\\><C-n>", {noremap = true})
+
+vim.keymap.set("n", "<F4>", function()
+  if vim.o.spell == true then
+    if vim.o.spelllang == "en_gb" then
+      vim.o.spelllang = "de"
+      print("Spell check set to german")
+    else
+      vim.o.spell = false
+      print("Spell check disabled")
+    end
+  else
+    vim.o.spell = true
+    vim.o.spelllang = "en_gb"
+    print("Spell check enabled")
+  end
+end, { noremap = false })
+-- map("n", "<F4>", [[<Cmd>lua if vim.o.spell == true then print("Spell check disabled"); vim.o.spell = false; else print("Spell check enabled"); vim.o.spell=true; vim.o.spelllang="en_gb"; end<CR>]], options)

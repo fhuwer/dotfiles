@@ -74,6 +74,28 @@ snippet frame "Frame" b
 \end{frame}
 endsnippet
 
+snippet sframe "Split bg frame" b
+\begin{frame}[splitbg, split=$1]{$2}
+	\begin{cols}
+		\begin{col}
+			$3
+		\end{col}
+		\begin{col}
+		\end{col}
+	\end{cols}
+\end{frame}
+endsnippet
+
+snippet cols "Columns" b
+\begin{cols}
+	\begin{col}
+		$0
+	\end{col}
+	\begin{col}
+	\end{col}
+\end{cols}
+endsnippet
+
 snippet framei "Itemize  Frame" b
 \begin{frame}{$0}
 	\begin{itemize}

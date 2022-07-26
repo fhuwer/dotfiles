@@ -15,6 +15,13 @@ return require('packer').startup(function()
     end,
   }
 
+  use({
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require "plugins.configs.lsp-lines"
+    end,
+  })
+
   use {
     "hrsh7th/cmp-nvim-lsp",
   }
@@ -99,7 +106,6 @@ return require('packer').startup(function()
 
   use {
     "psf/black",
-    branch = "stable",
     config = function()
       require "plugins.configs.black"
     end,
@@ -141,6 +147,13 @@ return require('packer').startup(function()
     "lukas-reineke/indent-blankline.nvim",
     config = function()
       require "plugins.configs.indent-blankline"
+    end,
+  }
+
+  use {
+    "petertriho/nvim-scrollbar",
+    config = function()
+      require("scrollbar").setup()
     end,
   }
 end)
