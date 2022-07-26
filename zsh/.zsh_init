@@ -19,7 +19,7 @@ source virtualenvwrapper_lazy.sh
 function load_root() {
   # To be run if root is not loaded and load it
   unalias root
-  if [ -f "${ROOT_PATH}/bin/thisroot.sh" ]; then
+  if [ -f "${ROOT_PATH:-/dev/null}/bin/thisroot.sh" ]; then
     source "${ROOT_PATH}/bin/thisroot.sh"
   fi
   alias root="root -l"
