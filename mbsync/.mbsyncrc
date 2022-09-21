@@ -87,6 +87,7 @@ Port 993
 User fneuhaus
 PassCmd "pass mail/fneuhaus@cern.ch"
 SSLType IMAPS
+AuthMechs PLAIN
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 IMAPStore cern-remote
