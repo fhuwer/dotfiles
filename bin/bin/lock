@@ -1,0 +1,54 @@
+#!/bin/sh
+icon="${HOME}/bin/assets/lockicon.png"
+factor=5
+
+revert() {
+  rm -f /tmp/screen.png
+
+  # Reactivate dunst if it was not already paused before locking the screen
+  if [[ "${DUNST_WAS_PAUSED}" != "true" ]]; then
+    dunstctl set-paused false
+  fi
+
+  # Restart audio player if it was playing before locking the screen
+  if [ "${WAS_PLAYING}" == "1" ]; then
+    playerctl play-pause
+  fi
+
+  xset dpms 0 0 0
+  setxkbmap ${KEYBOARD_LAYOUT}
+  xset -led 3
+}
+trap revert HUP INT TERM
+
+# Set to US layout
+KEYBOARD_LAYOUT=$(xkblayout-state print %s)
+setxkbmap us
+
+# Enable the scroll lock LED
+xset led 3
+
+# Stop audio player and remember if it was running
+WAS_PLAYING=0
+if [ "$(playerctl status)" == "Playing" ]; then
+  WAS_PLAYING=1
+  playerctl play-pause
+fi
+
+# Pause dunst notifications if it was not already
+DUNST_WAS_PAUSED="$(dunstctl is-paused)"
+dunstctl set-paused true
+
+# Turn screen off after 5 seconds
+xset +dpms dpms 5 5 5
+
+# Prepare the screenshot
+/usr/bin/scrot -o /tmp/screen.png
+convert /tmp/screen.png -scale ${factor}% -scale $(expr 10000 / ${factor})% /tmp/screen.png
+convert /tmp/screen.png ${icon} -gravity center -composite -matte /tmp/screen.png
+
+if [[ "${1}" == "suspend" ]]; then
+   systemctl suspend
+fi
+i3lock -n -i /tmp/screen.png
+revert
