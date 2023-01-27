@@ -44,6 +44,7 @@ map("v", "<S-Tab>", "<gv", {noremap = false})
 -- Terminal bindings
 map("t", "<Esc>", "<C-\\><C-n>", {noremap = true})
 
+-- Bindings for enabling / disabling spell check and changing the language
 vim.keymap.set("n", "<F4>", function()
   if vim.o.spell == true then
     if vim.o.spelllang == "en_gb" then
@@ -59,4 +60,7 @@ vim.keymap.set("n", "<F4>", function()
     print("Spell check enabled")
   end
 end, { noremap = false })
--- map("n", "<F4>", [[<Cmd>lua if vim.o.spell == true then print("Spell check disabled"); vim.o.spell = false; else print("Spell check enabled"); vim.o.spell=true; vim.o.spelllang="en_gb"; end<CR>]], options)
+
+vim.keymap.set("n", "<S-F4>", function()
+  vim.o.spell = false
+end, { remap = false })
