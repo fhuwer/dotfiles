@@ -41,6 +41,12 @@ require('lspconfig').ccls.setup {
     compilationDatabaseDirectory = "build";
   }
 }
+
+if vim.fn.filereadable(vim.fn.expand("$HOME/.cargo/bin/openscad-language-server")) > 0 then
+  require'lspconfig'.openscad_ls.setup{
+    cmd = { vim.fn.expand("$HOME/.cargo/bin/openscad-language-server") }
+  }
+end
 -- vim.diagnostic.config({
 --   virtual_text = {
 --     source = "always",  -- Or "if_many"
