@@ -1,0 +1,16 @@
+#compdef use-tool
+
+_use-tool() {
+  local existing_args
+  existing_args=("${(@)words[1,CURRENT-1]}")
+
+  local available_tools
+  available_tools=( $(GET_COMPLETIONS="y" use-tool) )
+
+  for ex in ${existing_args[@]}; do
+    available_tools=( "${available_tools[@]/${ex}}" )
+  done
+  compadd "$@" ${available_tools}
+}
+
+_use-tool "$@"

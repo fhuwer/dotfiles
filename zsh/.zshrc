@@ -58,6 +58,11 @@ if [[ -d "$HOME/.zsh/completion" ]]; then
    autoload -U compinit
    compinit
 fi
+if [[ -d "${HOME}/bin/completion" ]]; then
+  fpath=("${HOME}/bin/completion" $fpath)
+  autoload -U compinit
+  compinit
+fi
 
 # Source init script
 [[ -a "$HOME/.zsh_init" ]] && source "$HOME/.zsh_init"

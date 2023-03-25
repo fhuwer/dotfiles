@@ -1,0 +1,24 @@
+#!/bin/bash
+export TOOLCHAIN_PATH="/home/friedemann/toolchains"
+
+if [ ! -z "${GET_COMPLETIONS+x}" ]; then
+  for folder in $(ls -1 "${TOOLCHAIN_PATH}"); do
+    if [ -f "${TOOLCHAIN_PATH}/${folder}/activate.sh" ]; then
+      echo $folder
+    fi
+  done
+  exit
+fi
+
+for tool in $@; do
+  if [ ! -d "${TOOLCHAIN_PATH}/${tool}" ]; then
+    echo "There is no toolchain called ${tool} in the toolchain folder!"
+    continue
+  fi
+  if [ ! -f "${TOOLCHAIN_PATH}/${tool}/activate.sh" ]; then
+    echo "The toolchain \"${tool}\" exists in the toolchain folder, but it does not have an activate.sh script!"
+    continue
+  fi
+  source "${TOOLCHAIN_PATH}/${tool}/activate.sh"
+  echo "Activated ${tool}"
+done

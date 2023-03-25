@@ -74,9 +74,41 @@ if [[ -a "$HOME/.zsh_aliases_local" ]]; then
    source $HOME/.zsh_aliases_local
 fi
 
-alias rpass="< /dev/urandom tr -dc A-Za-z0-9 | head -c${1:-32};echo;"
+function rpass() {
+  LEN="${1}"
+  [ "${LEN}" == "" ] && LEN=32
+  < /dev/urandom tr -dc 'A-Za-z0-9\/\-!@#\$%&\*\(\);\.' | head -c${1:-${LEN}};echo;
+}
+alias x="tr -d '\n' | xclip -selection clipboard"
+alias rpasso="< /dev/urandom tr -dc A-Za-z0-9 | head -c${1:-32};echo;"
 function lesscsv() {
   cat $1 | perl -pe 's/((?<=,)|(?<=^)),/ ,/g;' | column -t -s, | less -S
 }
 
 alias c="docker-compose"
+
+function use-tool() {
+  TOOLCHAIN_PATH="${HOME}/toolchains"
+
+  if [ ! -z "${GET_COMPLETIONS+x}" ]; then
+    for folder in $(ls -1 "${TOOLCHAIN_PATH}"); do
+      if [ -f "${TOOLCHAIN_PATH}/${folder}/activate.sh" ]; then
+        echo $folder
+      fi
+    done
+    exit
+  fi
+
+  for tool in $@; do
+    if [ ! -d "${TOOLCHAIN_PATH}/${tool}" ]; then
+      echo "There is no toolchain called ${tool} in the toolchain folder!"
+      continue
+    fi
+    if [ ! -f "${TOOLCHAIN_PATH}/${tool}/activate.sh" ]; then
+      echo "The toolchain \"${tool}\" exists in the toolchain folder, but it does not have an activate.sh script!"
+      continue
+    fi
+    source "${TOOLCHAIN_PATH}/${tool}/activate.sh"
+    echo "Activated ${tool}"
+  done
+}
