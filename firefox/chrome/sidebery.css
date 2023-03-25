@@ -1,0 +1,39 @@
+/* Sidebery (05.02.2023) */
+/* Fully hide header of sidebar if it is showing Sideberry */
+#sidebar-box[sidebarcommand~="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] #sidebar-header {
+  max-height: 1px !important;
+  opacity: 0.5 !important;
+  padding: 0px !important;
+  
+}
+
+#sidebar-box[sidebarcommand~="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] #sidebar-header #sidebar-switcher-target,
+#sidebar-box[sidebarcommand~="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] #sidebar-header #sidebar-close {
+  opacity: 0 !important;
+  display: none !important;
+  padding: 0px !important;
+}
+
+/* Partially hide */
+/*
+#sidebar-box #sidebar-header {
+  transition: 0.5s;
+  max-height: 50px;
+}
+
+#sidebar-box[sidebarcommand~="_3c078156-979c-498b-8990-85f7987dd929"] #sidebar-header {
+  max-height: 0px !important;
+}
+
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]) #sidebar-header:not(:hover):not(:has(.active)) {
+  max-height: 5px !important;
+  padding: 0 !important;
+  background-color: #7ad !important;
+  opacity: 0.5 !important;
+}
+#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"]):not(:has(.active))
+  #sidebar-header:not(:hover) #sidebar-switcher-target,
+  #sidebar-header:not(:hover) #sidebar-close {
+  opacity: 0 !important;
+}
+*/

@@ -1,0 +1,4 @@
+/* Correct favicon only tabs */
+.tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected="true"]), .tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]) {
+  background-position: center bottom calc(2.5px + var(--tabs-navbar-shadow-size)) !important;
+}
