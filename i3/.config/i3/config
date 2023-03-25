@@ -18,7 +18,7 @@ workspace_auto_back_and_forth yes
 
 # Terminal
 bindsym $mod+Return exec $TERMINAL
-bindsym $mod+shift+Return exec "$TERMINAL --title floating -o window.dimensions.columns=93 -o window.dimensions.lines=26"
+bindsym $mod+shift+Return exec "$TERMINAL --title floating -o window.dimensions.columns=125 -o window.dimensions.lines=35"
 for_window [class="URxvt" title="floating"] "floating enable, border pixel 1"
 for_window [class="Alacritty" title="floating"] "floating enable, border pixel 1"
 
