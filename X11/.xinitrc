@@ -32,6 +32,11 @@ export GTK_IM_MODULE=xim
 # export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=xim
 
+# Make VA-API use NVIDIA NVDEC
+if [[ "$(hostnamectl hostname)" == "sagarmatha" ]]; then
+  export LIBVA_DRIVER_NAME=nvidia
+fi
+
 # Gnome Keyring
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
