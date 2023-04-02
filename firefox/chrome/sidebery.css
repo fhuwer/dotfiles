@@ -14,6 +14,24 @@
   padding: 0px !important;
 }
 
+/*
+ * Auto hide tab-bar, when Sidebery is open
+ *
+ * Note: Requires the "preface" feature to be activated and set to "[SB] " under Sidebery >
+ * Settings > Help
+ */
+#main-window #TabsToolbar {
+  height: 33px !important;
+  overflow: hidden;
+  transition: height .6s .6s !important;
+}
+#main-window[titlepreface*="[SB] "] #TabsToolbar {
+  height: 0 !important;
+}
+#main-window[titlepreface*="[SB] "] #tabbrowser-tabs {
+  z-index: 0 !important;
+}
+
 /* Partially hide */
 /*
 #sidebar-box #sidebar-header {
