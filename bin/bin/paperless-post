@@ -1,0 +1,48 @@
+#!/usr/bin/env python
+import sys
+from subprocess import check_output, CalledProcessError
+
+import click
+import requests
+
+
+URL = "https://docs.home"
+
+
+@click.command()
+@click.argument("file", default="-", type=click.File("rb"))
+@click.option("-t", "--title")
+@click.option("-c", "--created")
+def cli(file, title, created):
+    if file.name == "<stdin>" and sys.stdin.isatty():
+        print("You must specify a filename or pipe a file into paperless-post")
+        exit(1)
+
+    try:
+        token = check_output(["pass", "home/docs.home/token"]).decode().strip()
+    except CalledProcessError:
+        print("The token could not be loaded, aborting...")
+        exit(1)
+
+    meta = {}
+    if title is not None:
+        meta["title"] = title
+    if created is not None:
+        meta["created"] = created
+
+    r = requests.post(
+        f"{URL}/api/documents/post_document/",
+        headers={"Authorization": f"Token {token}"},
+        data=meta,
+        files={"document": file},
+        verify=False,
+    )
+    if r.status_code != 200:
+        print(f"The document could not be uploaded ({r.status_code} - {r.reason})")
+        exit(1)
+
+    print(f"The document was uploaded with ID={r.text}")
+
+
+if __name__ == "__main__":
+    cli()
