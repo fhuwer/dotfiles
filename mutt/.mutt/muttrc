@@ -156,9 +156,12 @@ bind index G last-entry
 
 bind editor <Tab> complete-query
 
+macro index t <tag-entry><previous-entry><next-undeleted>
+
 bind index,pager @ compose-to-sender
 # bind index,pager \CV sidebar-toggle-virtual
 macro index,pager \CO "<sidebar-toggle-virtual>"
+macro pager,index \cu |urlscan\n
 
 bind index $ noop
 # bind index $ sync-mailbox
@@ -175,6 +178,9 @@ macro attach V \
 :set wait_key=1<enter>\
 "
 
+macro attach P ":set wait_key=0<enter><pipe-entry>$HOME/bin/paperless-post<enter>:set wait_key=1<enter>"
+
+bind attach S save-entry
 macro attach s "<save-entry><bol>~/scratch/<eol>" "Save to scratch space"
 
 bind index,pager b modify-labels
