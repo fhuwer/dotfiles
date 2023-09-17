@@ -1,6 +1,18 @@
 #!/usr/bin/env python3
 import click
-from pulsectl import Pulse, PulseStateEnum
+from pulsectl import Pulse, PulseIndexError
+
+
+DEVICES = {
+    "Starship": "alsa_output.pci-0000_2d_00.4.analog-stereo",
+    "Headphone": "alsa_output.usb-FIIO_FiiO_USB_DAC-E10-01.analog-stereo",
+    "MID": "bluez_sink.2C_4D_79_47_37_CA.a2dp_sink",
+    "Aeropex": "bluez_sink.20_74_CF_D3_E9_A5.a2dp_sink",
+    "ZOOM": "alsa_input.usb-ZOOM_Corporation_H4-00.iec958-stereo",
+    "Micro": "alsa_input.pci-0000_2d_00.4.analog-stereo",
+}
+DEVICES_REV = {device_name: name for name, device_name in DEVICES.items()}
+DEVICES_LC = {name.lower(): device_name for name, device_name in DEVICES.items()}
 
 
 pass_pulse = click.make_pass_decorator(Pulse)
@@ -23,9 +35,12 @@ def _get_source_by_name(pulse, name, device_class="sound"):
 
 
 def _get_sink_by_name(pulse, target_name):
-    for sink in pulse.sink_list():
-        if target_name in sink.description.lower():
-            return sink
+    try:
+        return pulse.get_sink_by_name(DEVICES_LC.get(target_name.lower(), None))
+    except (TypeError, PulseIndexError):
+        for sink in pulse.sink_list():
+            if target_name in sink.description.lower():
+                return sink
     raise IOError("Unknown sink")
 
 
@@ -65,12 +80,16 @@ def ls(pulse, source):
 
 @cli.command()
 @pass_pulse
+def active_source(pulse):
+    name = pulse.server_info().default_source_name
+    print(DEVICES_REV.get(name, name))
+
+
+@cli.command()
+@pass_pulse
 def active_sink(pulse):
-    try:
-        sink = [s for s in pulse.sink_list() if s.state == PulseStateEnum.running][0]
-        print(f"{sink.name} ({sink.description})")
-    except IndexError:
-        print("No active sink")
+    name = pulse.server_info().default_sink_name
+    print(DEVICES_REV.get(name, name))
 
 
 if __name__ == "__main__":

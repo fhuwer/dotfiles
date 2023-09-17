@@ -3,3 +3,4 @@ bin/bin/root_macros/Atlas*.C
 bin/bin/root_macros/Atlas*.h
 *.css.map
 .sass-cache
+bin/bin/__pycache__/

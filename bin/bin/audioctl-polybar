@@ -1,0 +1,41 @@
+#!/usr/bin/env python
+from uuid import uuid4
+
+import asyncio
+import signal
+from contextlib import suppress
+import pulsectl
+import pulsectl_asyncio
+import audioctl
+
+
+loop = None
+
+
+async def print_active_sink(pulse):
+    name = (await pulse.server_info()).default_sink_name
+    print(audioctl.DEVICES_REV.get(name, name), flush=True)
+
+
+async def listen():
+    async with pulsectl_asyncio.PulseAsync(f"audioctl-polybar-{uuid4()}") as pulse:
+        await print_active_sink(pulse)
+        async for event in pulse.subscribe_events(
+            pulsectl.PulseEventMaskEnum.sink_input
+        ):
+            await print_active_sink(pulse)
+
+
+async def main():
+    listen_task = asyncio.create_task(listen())
+
+    for sig in (signal.SIGTERM, signal.SIGHUP, signal.SIGINT):
+        loop.add_signal_handler(sig, listen_task.cancel)
+
+    with suppress(asyncio.CancelledError):
+        await listen_task
+
+
+if __name__ == "__main__":
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main())
