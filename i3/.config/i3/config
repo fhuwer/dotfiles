@@ -259,15 +259,16 @@ exec --no-startup-id picom
 
 # Autostart
 exec --no-startup-id ~/bin/autostart.sh
+exec_always --no-startup-id sleep 1; polybar-run
 
-bar {
-  colors {
-    background #000000
+# bar {
+#   colors {
+#     background #000000
 
-    # Set colors       border    bckg      text    indicator
-    focused_workspace  $focused  $focused  $ftext  $focused
-    active_workspace   $factive  $factive  $fatext $factive
-  }
-  status_command "python3 ~/.config/i3/i3mystatus.py"
-  tray_output primary
-}
+#     # Set colors       border    bckg      text    indicator
+#     focused_workspace  $focused  $focused  $ftext  $focused
+#     active_workspace   $factive  $factive  $fatext $factive
+#   }
+#   status_command "python3 ~/.config/i3/i3mystatus.py"
+#   tray_output primary
+# }

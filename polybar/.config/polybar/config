@@ -1,0 +1,285 @@
+;=====================================================
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;=====================================================
+;[include]
+include-file = $HOME/.config/polybar/config_local_sagarmatha
+
+[colors]
+background     = #222222
+background-alt = #444444
+foreground     = #dfdfdf
+icon           = #555555
+primary        = #ffb52a
+secondary      = #e60053
+alert          = #982334
+high           = #2a7a7a
+
+
+[settings]
+screenchange-reload = true
+
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+
+[bar/main]
+bottom = true
+width = 100%
+height = 19
+radius = 0.0
+fixed-center = true
+
+monitor = ${env:MONITOR:}
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+border-size = 1
+border-color = #00000000
+
+spacing = 1
+padding-left = 0
+padding-right = 2
+module-margin-left = 0
+module-margin-right = 2
+
+font-0 = Hack:pixelsize=8;2
+font-1 = RobotoMono Nerd Font Mono:pixelsize=12;3
+
+modules-left = i3
+modules-center = date
+modules-right = ${local.modules}
+
+tray-position = ${env:TRAY_POSITION:}
+tray-maxsize = 14
+tray-padding = 1
+tray-background = ${colors.background}
+
+
+[module/eth]
+type = internal/network
+interface = ${local.netif_eth}
+interval = 1.0
+
+format-connected = <label-connected>
+format-connected-underline = ${colors.high}
+format-connected-prefix = " "
+format-connected-foreground = ${colors.icon}
+label-connected = "%{A1:nm-connection-editor:}%ifname%: %local_ip%%{A}"
+label-connected-foreground = ${colors.foreground}
+
+format-disconnected = <label-disconnected>
+format-disconnected-underline = ${colors.alert}
+format-disconnected-prefix = " "
+format-disconnected-foreground = ${colors.icon}
+label-disconnected = "offline"
+label-disconnected-foreground = ${colors.icon}
+
+
+[module/wlan]
+type = internal/network
+interface = ${local.netif_wlan}
+interval = 3.0
+
+format-connected = <label-connected>
+format-connected-underline = ${colors.high}
+format-connected-prefix = " "
+format-connected-foreground = ${colors.icon}
+label-connected = %essid%
+label-connected-foreground = ${colors.high}
+
+format-disconnected = <label-disconnected>
+format-disconnected-underline = ${colors.alert}
+format-disconnected-prefix = " "
+format-disconnected-foreground = ${colors.icon}
+label-disconnected = "offline"
+label-disconnected-foreground = ${colors.icon}
+
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+
+format = <label>
+format-prefix = ""
+format-prefix-foreground = ${colors.icon}
+
+label = %percentage:2%%
+
+
+[module/temperature]
+type = internal/temperature
+interval = 1
+thermal-zone = 0
+warn-temperature = 85
+
+format = <label>
+format-warn = <label-warn>
+format-warn-underline = ${colors.alert}
+format-prefix = " "
+format-prefix-foreground = ${colors.icon}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.alert}
+
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 95
+time-format = %H:%M
+
+format-full = <label-full>
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.icon}
+format-full-underline = ${colors.high}
+label-full = 100%
+
+format-charging = <label-charging>
+format-charging-prefix = " "
+format-charging-prefix-foreground = ${colors.icon}
+format-charging-underline = ${colors.high}
+label-charging = %percentage%% (%time%)
+
+format-discharging = <label-discharging>
+format-discharging-prefix = " "
+format-discharging-prefix-foreground = ${colors.icon}
+format-discharging-underline = ${colors.primary}
+label-discharging = %percentage%% (%time%)
+
+[module/volume]
+type = internal/pulseaudio
+mapped = true
+interval = 1
+
+format-volume = <label-volume>
+format-volume-prefix = " "
+format-volume-prefix-foreground = ${colors.icon}
+format-volume-underline = ${colors.high}
+label-volume = %percentage%%
+
+format-muted-prefix = " "
+format-muted-foreground = ${colors.icon}
+format-muted-underline = ${colors.alert}
+label-muted = mute
+
+click-right = pavucontrol
+
+[module/audio-device]
+type = custom/script
+exec = $HOME/bin/audioctl-polybar
+tail = true
+interval = 1
+
+
+[module/date]
+type = internal/date
+interval = 1
+
+; date = %d-%b-%Y
+date = %Y-%m-%d
+time = %H:%M:%S
+
+; format-prefix = "TS "
+; format-prefix-foreground = ${colors.icon}
+; format-underline = ${colors.high}
+
+label = %date%  %time%
+
+[module/memory]
+type = internal/memory
+interval = 1
+warn-percentage = 50
+
+format = <label>
+format-prefix = "󰍛 "
+format-prefix-foreground = ${colors.icon}
+label = "RAM: %percentage_used%%%{O3}/%{O3}%gb_total%"
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = false
+strip-wsnumbers = false
+fuzzy-match = true
+pin-workspaces = true
+
+; Formatting options
+padding = 1
+label = %name%
+; label = %icon%
+
+;
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+; ws-icon-3 = W4; 4
+ws-icon-4 = W5; 5
+ws-icon-5 = W6; 6
+ws-icon-6 = SETS;
+ws-icon-7 = PLAY;
+ws-icon-8 = PERS;
+ws-icon-9 = MAIL;
+ws-icon-10 = W11; F1
+ws-icon-11 = W12; F2
+ws-icon-12 = W13; F3
+ws-icon-13 = W14; F4
+ws-icon-14 = W15; F5
+ws-icon-15 = W16; F6
+ws-icon-16 = W17; F7
+ws-icon-17 = W18; F8
+ws-icon-18 = W19; F9
+ws-icon-19 = W20; F10
+
+label-mode-padding = ${module/i3.padding}
+label-mode-foreground = ${colors.primary}
+label-mode-background = ${colors.background}
+
+; focused = Active workspace on focused monitor
+label-focused = ${module/i3.label}
+label-focused-foreground = #ffffff
+label-focused-background = ${colors.high}
+label-focused-padding = ${module/i3.padding}
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = ${module/i3.label}
+label-unfocused-padding = ${module/i3.padding}
+label-unfocused-foreground = #7e7e7e
+
+; visible = Active workspace on unfocused monitor
+label-visible = ${module/i3.label}
+label-visible-padding = ${module/i3.padding}
+label-visible-foreground = #88d4d4
+label-visible-background = #31414b
+
+; urgent = Workspace with urgency hint set
+label-urgent = ${module/i3.label}
+label-urgent-foreground = ${colors.foreground}
+label-urgent-background = ${colors.alert}
+label-urgent-padding = ${module/i3.padding}
+
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+
+format = <label>
+format-prefix = " "
+format-prefix-foreground = ${colors.icon}
+format-underline = ${colors.high}
+
+label = %percentage%%
+
+
+
+; vim:ft=dosini

@@ -1,0 +1,13 @@
+#!/bin/sh
+POLYBAR_ARGS="main"
+
+killall -9 polybar >/dev/null 2>&1
+TRAY_MONITOR=$(grep "tray_monitor" ~/.config/polybar/config_local_sagarmatha | awk -F= '{print substr($2, 2,length($2)-2)}')
+
+for m in $(polybar --list-monitors | cut -d":" -f1); do
+  TRAY_POSITION="none"
+  if [ "${m}" == "${TRAY_MONITOR}" ]; then
+    TRAY_POSITION="right"
+  fi
+  MONITOR=$m TRAY_POSITION=${TRAY_POSITION} polybar ${POLYBAR_ARGS} &
+done

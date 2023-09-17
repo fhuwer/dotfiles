@@ -1,0 +1,7 @@
+[local]
+
+;modules = eth cpu temperature battery volume backlight xkeyboard
+modules = volume audio-device eth memory cpu 
+
+tray_monitor="DP-2"
+netif_eth = enp4s0
