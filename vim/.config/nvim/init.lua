@@ -2,6 +2,7 @@ require("settings")
 require("plugins")
 require("functions")
 require("keybindings")
+require("macros")
 
 vim.cmd("cabbr <expr> %% expand('%:p:h')")
 

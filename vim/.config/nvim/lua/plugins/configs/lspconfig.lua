@@ -34,11 +34,12 @@ require'lspconfig'.pylsp.setup{
   }
 }
 require('lspconfig').ccls.setup {
+  filetypes = { "c", "cpp", "objc", "objcpp", "arduino" },
   init_options = {
     cache = {
       directory = "/tmp/ccls-cache";
     };
-    compilationDatabaseDirectory = "build";
+    -- compilationDatabaseDirectory = "build";
   }
 }
 
