@@ -44,7 +44,7 @@ vim.g.mapleader = ";"
 vim.g.maplocalleader = ";"
 
 -- Python
-virtualenv_python = vim.fn.glob(vim.fn.expand("$WORKON_HOME/neovim/bin/python"))
+virtualenv_python = vim.fn.glob(vim.fn.expand("$HOME/.virtualenvs/neovim/bin/python"))
 if virtualenv_python ~= "" then
   vim.g["python3_host_prog"] = virtualenv_python
 end
