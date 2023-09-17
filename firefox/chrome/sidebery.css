@@ -23,10 +23,11 @@
 #main-window #TabsToolbar {
   height: 33px !important;
   overflow: hidden;
-  transition: height .6s .6s !important;
+  transition: height .6s .6s, max-height .6s .6s !important;
 }
 #main-window[titlepreface*="[SB] "] #TabsToolbar {
   height: 0 !important;
+  max-height: 0px !important;
 }
 #main-window[titlepreface*="[SB] "] #tabbrowser-tabs {
   z-index: 0 !important;
