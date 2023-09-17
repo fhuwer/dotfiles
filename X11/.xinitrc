@@ -19,7 +19,7 @@ fi
 
 # Basic settings
 xset -b
-setxkbmap us
+setxkbmap 'de(us)'
 if `hash synclient 2>/dev/null`; then
   synclient VertScrollDelta=-100 HorizScrollDelta=-100 TapButton1=1 TapButton2=0 TapButton3=0 HorizTwoFingerScroll=1
 fi
