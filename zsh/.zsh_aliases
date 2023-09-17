@@ -33,7 +33,7 @@ alias pio=platformio
 
 # Space
 alias space="df -h"
-alias dud="du -d 1 -h -t 50M 2>/dev/null"
+alias duf="du -d 1 -h -t 50M 2>/dev/null"
 function dufs() { du -d 1 -h -t 50M $1 2>/dev/null | sort -h -r }
 
 # Remote Desktop
