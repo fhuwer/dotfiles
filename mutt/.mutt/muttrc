@@ -13,14 +13,17 @@ set new_mail_command = "notify-send 'New e-mail' '%n new message(s)' &"
 set abort_noattach = ask-yes
 set abort_noattach_regex = "\\<(attach(|ed|ments?)|(anhang|anhänge|hängt an))\\>"
 
+set wait_key = no
+
 source ~/.mutt/colors
 
 
 #______________________________________________________________________________
 #                                                                        CRYPTO
 #
-set pgp_self_encrypt_as      = 8BD4FEA704D8292CE92DA3AAEF8F0819EF2AB094
-set pgp_sign_as              = 8BD4FEA704D8292CE92DA3AAEF8F0819EF2AB094
+# set pgp_self_encrypt_as      = 8BD4FEA704D8292CE92DA3AAEF8F0819EF2AB094
+# set pgp_sign_as              = 8BD4FEA704D8292CE92DA3AAEF8F0819EF2AB094
+# set pgp_sign_as = 0xB5E86612863F1BDD
 source ~/.mutt/crypt_enable
 
 
@@ -44,20 +47,20 @@ set mail_check_stats
 set mbox_type=Maildir
 set folder = "~/mail"
 
-source ~/.mutt/friedemann@neuhaus-tech.de
-named-mailboxes "friedemann@neuhaus-tech.de" =-friedemann@neuhaus-tech.de-
-mailboxes =-friedemann@neuhaus-tech.de-
-mailboxes `cat ~/.mutt/mailboxes | grep friedemann@neuhaus-tech.de | tr '\n' ' '`
-folder-hook $folder/friedemann@neuhaus-tech.de 'source ~/.mutt/friedemann@neuhaus-tech.de'
-account-hook $folder/friedemann@neuhaus-tech.de "set imap_user=$imap_user imap_pass=$imap_pass"
+source ~/.mutt/friedemann@huwer.xyz
+named-mailboxes "friedemann@huwer.xyz" =-friedemann@huwer.xyz-
+mailboxes =-friedemann@huwer.xyz-
+mailboxes `cat ~/.mutt/mailboxes | grep friedemann@huwer.xyz | tr '\n' ' '`
+folder-hook $folder/friedemann@huwer.xyz 'source ~/.mutt/friedemann@huwer.xyz'
+account-hook $folder/friedemann@huwer.xyz "set imap_user=$imap_user imap_pass=$imap_pass"
 macro index,pager <f1> <change-folder>$spoolfile<enter>
 
-source ~/.mutt/f@neuhaus-tech.de
-named-mailboxes "f@neuhaus-tech.de" =-f@neuhaus-tech.de-
-mailboxes =-f@neuhaus-tech.de-
-mailboxes `cat ~/.mutt/mailboxes | grep f@neuhaus-tech.de | tr '\n' ' '`
-folder-hook $folder/f@neuhaus-tech.de 'source ~/.mutt/f@neuhaus-tech.de'
-account-hook $folder/f@neuhaus-tech.de "set imap_user=$imap_user imap_pass=$imap_pass"
+source ~/.mutt/f@huwer.xyz
+named-mailboxes "f@huwer.xyz" =-f@huwer.xyz-
+mailboxes =-f@huwer.xyz-
+mailboxes `cat ~/.mutt/mailboxes | grep f@huwer.xyz | tr '\n' ' '`
+folder-hook $folder/f@huwer.xyz 'source ~/.mutt/f@huwer.xyz'
+account-hook $folder/f@huwer.xyz "set imap_user=$imap_user imap_pass=$imap_pass"
 macro index,pager <f2> <change-folder>$spoolfile<enter>
 
 source ~/.mutt/f.neuhaus@yahoo.de
@@ -92,7 +95,7 @@ folder-hook $folder/fneuhaus@cern.ch 'source ~/.mutt/fneuhaus@cern.ch'
 account-hook $folder/fneuhaus@cern.ch "set imap_user=$imap_user imap_pass=$imap_pass"
 macro index,pager <f5> <change-folder>$spoolfile<enter>
 
-source ~/.mutt/neuhaus@uni-mainz.de
+source ~/.mutt/f@huwer.xyz
 # source ~/.mutt/notmuch
 
 #______________________________________________________________________________
@@ -170,15 +173,13 @@ macro index $ "<sync-mailbox><f10>"
 bind index,pager V noop
 macro attach V \
 "\
-:set wait_key=0<enter>\
 <pipe-entry>cat >$HOME/.cache/mutt_mail.html\
 && firefox ~/.cache/mutt_mail.html\
 && sleep 3\
 && rm ~/.cache/mutt_mail.html<enter>\
-:set wait_key=1<enter>\
 "
 
-macro attach P ":set wait_key=0<enter><pipe-entry>$HOME/bin/paperless-post<enter>:set wait_key=1<enter>"
+macro attach P "<pipe-entry>$HOME/bin/paperless-post<enter>"
 
 bind attach S save-entry
 macro attach s "<save-entry><bol>~/scratch/<eol>" "Save to scratch space"
@@ -186,7 +187,7 @@ macro attach s "<save-entry><bol>~/scratch/<eol>" "Save to scratch space"
 bind index,pager b modify-labels
 macro index <f7> "<vfolder-from-query>" "vfolder from notmuch query"
 macro index <f8> "<entire-thread>" "read entire thread of the current message"
-macro pager,index <f11> ":set wait_key=0<enter><shell-escape>mbsync -a<enter>:set wait_key=1<enter>" "sync all mailboxes"
+macro pager,index <f11> "<shell-escape>mbsync -a<enter>" "sync all mailboxes"
 
 #______________________________________________________________________________
 #                                                                        COLORS

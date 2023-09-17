@@ -1,0 +1,17 @@
+set spoolfile = "+friedemann@huwer.xyz/INBOX"
+set record    = "+friedemann@huwer.xyz/Sent"
+set postponed = "+friedemann@huwer.xyz/Drafts"
+
+set realname  = "Friedemann Huwer"
+set from      = "friedemann@huwer.xyz"
+set signature = "~/.mutt/friedemann@huwer.xyz.signature"
+
+set imap_user = friedemann@huwer.xyz
+set imap_pass = `pass mail/friedemann@huwer.xyz`
+set smtp_url = smtps://$imap_user:$imap_pass@mail.huwer.xyz:465
+set ssl_starttls = yes
+
+source ~/.mutt/crypt_enable
+
+macro pager,index <f10> ":set wait_key=0<enter><shell-escape>mbsync $from<enter>:set wait_key=1<enter>" "sync mailbox"
+macro index,pager <f7> "<change-folder>$spoolfile/../Junk<enter>" "Open Junk-Folder"

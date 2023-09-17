@@ -1,56 +1,56 @@
-IMAPAccount neuhaus-tech
-Host mail.neuhaus-tech.de
-User friedemann@neuhaus-tech.de
-PassCmd "pass mail/friedemann@neuhaus-tech.de"
+IMAPAccount friedemann@huwer.xyz
+Host mail.huwer.xyz
+User friedemann@huwer.xyz
+PassCmd "pass mail/friedemann@huwer.xyz"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
-IMAPStore neuhaus-tech-remote
-Account neuhaus-tech
+IMAPStore friedemann@huwer.xyz-remote
+Account friedemann@huwer.xyz
 
-MaildirStore neuhaus-tech-local
+MaildirStore friedemann@huwer.xyz-local
 Subfolders Verbatim
-Path ~/mail/friedemann@neuhaus-tech.de/
-Inbox ~/mail/friedemann@neuhaus-tech.de/INBOX
+Path ~/mail/friedemann@huwer.xyz/
+Inbox ~/mail/friedemann@huwer.xyz/INBOX
 
-Channel neuhaus-tech-default
-Far :neuhaus-tech-remote:
-Near :neuhaus-tech-local:
+Channel friedemann@huwer.xyz-default
+Far :friedemann@huwer.xyz-remote:
+Near :friedemann@huwer.xyz-local:
 Patterns "INBOX" "Drafts" "Sent" "Junk"
 Create Both
 Expunge Both
 SyncState *
 
-Group friedemann@neuhaus-tech.de
-Channel neuhaus-tech-default
+Group friedemann@huwer.xyz
+Channel friedemann@huwer.xyz-default
 
 ################################################
 
-IMAPAccount fmail
-Host mail.neuhaus-tech.de
-User f@neuhaus-tech.de
-PassCmd "pass mail/f@neuhaus-tech.de"
+IMAPAccount f@huwer.xyz
+Host mail.huwer.xyz
+User f@huwer.xyz
+PassCmd "pass mail/f@huwer.xyz"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
-IMAPStore fmail-remote
-Account fmail
+IMAPStore f@huwer.xyz-remote
+Account f@huwer.xyz
 
-MaildirStore fmail-local
+MaildirStore f@huwer.xyz-local
 Subfolders Verbatim
-Path ~/mail/f@neuhaus-tech.de/
-Inbox ~/mail/f@neuhaus-tech.de/INBOX
+Path ~/mail/f@huwer.xyz/
+Inbox ~/mail/f@huwer.xyz/INBOX
 
-Channel fmail-default
-Far :fmail-remote:
-Near :fmail-local:
+Channel f@huwer.xyz-default
+Far :f@huwer.xyz-remote:
+Near :f@huwer.xyz-local:
 Patterns "INBOX" "INBOX/*" "Drafts" "Sent" "Junk"
 Create Both
 Expunge Both
 SyncState *
 
-Group f@neuhaus-tech.de
-Channel fmail-default
+Group f@huwer.xyz
+Channel f@huwer.xyz-default
 
 ################################################
 
@@ -82,12 +82,12 @@ Channel yahoo-default
 
 ################################################
 IMAPAccount cern
-Host imap.cern.ch
+Host outlook.office365.com
 Port 993
-User fneuhaus
-PassCmd "pass mail/fneuhaus@cern.ch"
+User friedemann.neuhaus@cern.ch
+PassCmd /home/friedemann/.local/bin/oauth2ms
 SSLType IMAPS
-AuthMechs PLAIN
+AuthMechs XOAUTH2
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 IMAPStore cern-remote
@@ -101,14 +101,15 @@ Inbox ~/mail/fneuhaus@cern.ch/INBOX
 Channel cern-default
 Far :cern-remote:
 Near :cern-local:
-Patterns "INBOX" "INBOX/*" "Drafts" "Junk E-Mail"
+Patterns "INBOX" "INBOX/*" "Junk-E-Mail"
 Create Both
 Expunge Both
 SyncState *
 
 Channel cern-sent
-Far :cern-remote:"Sent Items"
+Far :cern-remote:"Gesendete Elemente"
 Near  :cern-local:"Sent"
+Create Both
 Expunge Both
 SyncState *
 
@@ -157,45 +158,3 @@ Group fneuhaus@students.uni-mainz.de
 Channel students-default
 Channel students-drafts
 Channel students-sent
-
-################################################
-
-IMAPAccount frneuhau@uni-mainz.de
-Host mail.uni-mainz.de
-User frneuhau@uni-mainz.de
-PassCmd "pass mail/neuhaus@uni-mainz.de"
-SSLType IMAPS
-CertificateFile /etc/ssl/certs/ca-certificates.crt
-
-IMAPStore frneuhau@uni-mainz.de-remote
-Account frneuhau@uni-mainz.de
-
-MaildirStore frneuhau@uni-mainz.de-local
-Subfolders Verbatim
-Path ~/mail/neuhaus@uni-mainz.de/
-Inbox ~/mail/neuhaus@uni-mainz.de/INBOX
-
-Channel frneuhau@uni-mainz.de-default
-Far :frneuhau@uni-mainz.de-remote:
-Near :frneuhau@uni-mainz.de-local:
-Patterns "INBOX" "Junk-E-Mail"
-Create Both
-Expunge Both
-SyncState *
-
-Channel frneuhau@uni-mainz.de-drafts
-Far :frneuhau@uni-mainz.de-remote:"Entw&APw-rfe"
-Near  :frneuhau@uni-mainz.de-local:Drafts
-Expunge Both
-SyncState *
-
-Channel frneuhau@uni-mainz.de-sent
-Far :frneuhau@uni-mainz.de-remote:"Gesendete Elemente"
-Near  :frneuhau@uni-mainz.de-local:Sent
-Expunge Both
-SyncState *
-
-Group neuhaus@uni-mainz.de
-Channel frneuhau@uni-mainz.de-default
-Channel frneuhau@uni-mainz.de-drafts
-Channel frneuhau@uni-mainz.de-sent

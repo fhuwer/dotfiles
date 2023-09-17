@@ -1,7 +1,7 @@
-set pgp_self_encrypt         = yes
+# set pgp_self_encrypt         = yes
 set crypt_use_gpgme          = yes
-set crypt_autosign           = yes
-set crypt_replysign          = yes
-set crypt_replyencrypt       = yes
-set crypt_replysignencrypted = yes
-set postpone_encrypt         = yes
+# set crypt_autosign           = yes
+# set crypt_replysign          = yes
+# set crypt_replyencrypt       = yes
+# set crypt_replysignencrypted = yes
+# set postpone_encrypt         = yes

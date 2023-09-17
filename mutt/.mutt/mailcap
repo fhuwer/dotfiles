@@ -1,6 +1,9 @@
 text/*;    less
 text/html; lynx -display_charset utf-8 -dump %s; nametemplate=%s.html; copiousoutput
 
+application/gzip; file-roller %s >/dev/null &
+application/x-gzip; file-roller %s
+
 application/pdf; zathura %s &> /dev/null &;
 application/vnd.ms-excel; soffice %s &> /dev/null &;
 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; soffice %s &> /dev/null &;
