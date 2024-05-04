@@ -1,6 +1,7 @@
 text/*;    less
 text/html; lynx -display_charset utf-8 -dump %s; nametemplate=%s.html; copiousoutput
 
+application/zip; file-roller %s >/dev/null &
 application/gzip; file-roller %s >/dev/null &
 application/x-gzip; file-roller %s
 
