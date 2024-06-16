@@ -163,5 +163,7 @@ return require('packer').startup(function()
       require "leap".set_default_keymaps()
     end,
   }
+
+  use {'kaarmu/typst.vim', ft = {'typst'}}
 end)
 
