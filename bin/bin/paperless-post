@@ -6,7 +6,7 @@ import click
 import requests
 
 
-URL = "https://docs.home"
+URL = "https://docs.huwer.xyz"
 
 
 @click.command()
@@ -35,7 +35,6 @@ def cli(file, title, created):
         headers={"Authorization": f"Token {token}"},
         data=meta,
         files={"document": file},
-        verify=False,
     )
     if r.status_code != 200:
         print(f"The document could not be uploaded ({r.status_code} - {r.reason})")
