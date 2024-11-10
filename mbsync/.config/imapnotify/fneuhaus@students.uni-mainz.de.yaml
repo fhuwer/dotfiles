@@ -1,0 +1,14 @@
+configurations:
+  -
+    host: mail.uni-mainz.de
+    port: 993
+    tls: true
+    tlsOptions:
+      rejectUnauthorized: true
+      starttls: false
+    username: fneuhaus@uni-mainz.de
+    passwordCMD: 'pass mail/fneuhaus@students.uni-mainz.de | head -n1'
+    xoAuth2: false
+    onNewMail: 'mbsync fneuhaus@students.uni-mainz.de'
+    boxes:
+      - mailbox: INBOX

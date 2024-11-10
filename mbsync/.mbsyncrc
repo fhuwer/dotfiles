@@ -2,7 +2,7 @@ IMAPAccount friedemann@huwer.xyz
 Host mail.huwer.xyz
 User friedemann@huwer.xyz
 PassCmd "pass mail/friedemann@huwer.xyz"
-SSLType IMAPS
+TLSType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 IMAPStore friedemann@huwer.xyz-remote
@@ -30,7 +30,7 @@ IMAPAccount f@huwer.xyz
 Host mail.huwer.xyz
 User f@huwer.xyz
 PassCmd "pass mail/f@huwer.xyz"
-SSLType IMAPS
+TLSType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 IMAPStore f@huwer.xyz-remote
@@ -58,7 +58,7 @@ IMAPAccount yahoo
 Host mail.neuhaus-tech.de
 User friedemann_yahoo@neuhaus-tech.de
 PassCmd "pass mail/f.neuhaus@yahoo.de"
-SSLType IMAPS
+TLSType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 IMAPStore yahoo-remote
@@ -86,7 +86,7 @@ Host outlook.office365.com
 Port 993
 User friedemann.neuhaus@cern.ch
 PassCmd /home/friedemann/.local/bin/oauth2ms
-SSLType IMAPS
+TLSType IMAPS
 AuthMechs XOAUTH2
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
@@ -123,7 +123,7 @@ IMAPAccount students
 Host mail.uni-mainz.de
 User fneuhaus@uni-mainz.de
 PassCmd "pass mail/fneuhaus@students.uni-mainz.de"
-SSLType IMAPS
+TLSType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 IMAPStore students-remote
@@ -139,12 +139,6 @@ Far :students-remote:
 Near :students-local:
 Patterns "INBOX" "Junk-E-Mail"
 Create Both
-Expunge Both
-SyncState *
-
-Channel students-drafts
-Far :students-remote:"Entw&APw-rfe"
-Near  :students-local:Drafts
 Expunge Both
 SyncState *
 

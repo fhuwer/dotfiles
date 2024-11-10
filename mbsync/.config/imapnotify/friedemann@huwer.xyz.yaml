@@ -1,0 +1,14 @@
+configurations:
+  -
+    host: mail.huwer.xyz
+    port: 993
+    tls: true
+    tlsOptions:
+      rejectUnauthorized: true
+      starttls: false
+    username: friedemann@huwer.xyz
+    passwordCMD: 'pass mail/friedemann@huwer.xyz | head -n1'
+    xoAuth2: false
+    onNewMail: 'mbsync friedemann@huwer.xyz'
+    boxes:
+      - mailbox: INBOX
