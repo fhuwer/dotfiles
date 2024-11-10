@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import click
-from pulsectl import Pulse, PulseIndexError
+from pulsectl import Pulse, PulseIndexError, PulseSinkInfo
 
 
 DEVICES = {
@@ -63,10 +63,28 @@ def mute(pulse, name, toggle):
 @pass_pulse
 def move_all(pulse, name):
     """Set default sink and move all inputs to specified sink."""
-    target_sink = _get_sink_by_name(pulse, name.lower())
+    if type(name) is not PulseSinkInfo:
+        target_sink = _get_sink_by_name(pulse, name.lower())
+    else:
+        target_sink = name
+
     pulse.sink_default_set(target_sink)
     for sink_input in pulse.sink_input_list():
         pulse.sink_input_move(sink_input.index, target_sink.index)
+
+
+@cli.command()
+@pass_pulse
+def move_next(pulse):
+    """Move to the next sink"""
+    pulse_list = [s for s in pulse.sink_list() if s.name in DEVICES_REV]
+    current_sink = pulse.server_info().default_sink_name
+    for active_index, sink in enumerate(pulse_list):
+        if sink.name == current_sink:
+            break
+    next_sink = pulse_list[(active_index + 1) % len(pulse_list)]
+    print(type(next_sink))
+    move_all.callback(next_sink)
 
 
 @cli.command()
