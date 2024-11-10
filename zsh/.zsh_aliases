@@ -3,7 +3,7 @@
 
 # Common terminal aliases
 # ls
-alias ll='ls -ahlF'
+alias ll='ls -ahlgF'
 alias la='ls -A'
 alias l='ls -hl'
 
@@ -43,6 +43,14 @@ alias rzdv="rdesktop -u frneuhau@uni-mainz.de -g 1366x768 rds.zdv.uni-mainz.de -
 alias rmtex="latexmk -C --quiet && rm -f *.bbl *.run.xml"
 function mkslides() {
   cp -r $HOME/cloud/projects/latex_templates/neuhaus-beamer-template/ $1
+}
+function mkletter() {
+  LETTER_NAME="${1}"
+  FOLDER_NAME="$(date +%Y_%m_%d)_${LETTER_NAME}"
+  cp -r "${HOME}/cloud/documents/letters/0000_00_00_template_typst" "${FOLDER_NAME}"
+  sed -i "s/%PROJECT_NAME%/$LETTER_NAME/" "${FOLDER_NAME}/Makefile"
+  mv "${FOLDER_NAME}/template.typ" "${FOLDER_NAME}/${LETTER_NAME}.typ"
+  cd "${FOLDER_NAME}"
 }
 
 # File handlers
