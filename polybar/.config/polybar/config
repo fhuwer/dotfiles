@@ -179,6 +179,7 @@ type = custom/script
 exec = $HOME/bin/audioctl-polybar
 tail = true
 interval = 1
+click-left = $HOME/bin/audioctl move-next
 
 
 [module/date]
