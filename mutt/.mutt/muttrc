@@ -175,7 +175,7 @@ macro attach V \
 "\
 <pipe-entry>cat >$HOME/.cache/mutt_mail.html\
 && firefox ~/.cache/mutt_mail.html\
-&& sleep 3\
+&& sleep 0.5\
 && rm ~/.cache/mutt_mail.html<enter>\
 "
 
@@ -188,6 +188,9 @@ bind index,pager b modify-labels
 macro index <f7> "<vfolder-from-query>" "vfolder from notmuch query"
 macro index <f8> "<entire-thread>" "read entire thread of the current message"
 macro pager,index <f11> "<shell-escape>mbsync -a<enter>" "sync all mailboxes"
+
+bind index A noop
+macro index A "<limit>all<enter>" "Clear limit"
 
 #______________________________________________________________________________
 #                                                                        COLORS
