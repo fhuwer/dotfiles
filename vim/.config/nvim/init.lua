@@ -1,5 +1,5 @@
 require("settings")
-require("plugins")
+require("package-manager")
 require("functions")
 require("keybindings")
 require("macros")

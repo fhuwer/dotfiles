@@ -1,3 +1,5 @@
+local M = { "majutsushi/tagbar" }
+
 vim.g.tagbar_autoclose = 1
 vim.g.tagbar_autofocus = 0
 vim.g.tagbar_sort = 0
@@ -11,4 +13,4 @@ vim.g.tagbar_type_python = {
   }
 }
 
-vim.api.nvim_set_keymap("n", "tt", ":TagbarToggle<cr>", {noremap = false})
+return M
