@@ -13,4 +13,6 @@ vim.g.tagbar_type_python = {
   }
 }
 
+vim.keymap.set("n", "tt", ":TagbarToggle<cr>", { noremap=false, desc="Toggle Tagbar" })
+
 return M

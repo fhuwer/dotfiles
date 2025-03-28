@@ -4,12 +4,12 @@ M.opts = {
   padding = true,
   sticky = true,
   toggler = {
-    line = 'gcc',
+    line = ';c<space>',
     block = 'gbc',
   },
   opleader = {
     line = ';c<space>',
-    line = ';cc',
+    block = ';cc',
   },
   mappings = {
     basic = true,
