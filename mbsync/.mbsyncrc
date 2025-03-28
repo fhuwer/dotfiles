@@ -81,43 +81,6 @@ Group f.neuhaus@yahoo.de
 Channel yahoo-default
 
 ################################################
-IMAPAccount cern
-Host outlook.office365.com
-Port 993
-User friedemann.neuhaus@cern.ch
-PassCmd /home/friedemann/.local/bin/oauth2ms
-TLSType IMAPS
-AuthMechs XOAUTH2
-CertificateFile /etc/ssl/certs/ca-certificates.crt
-
-IMAPStore cern-remote
-Account cern
-
-MaildirStore cern-local
-Subfolders Verbatim
-Path ~/mail/fneuhaus@cern.ch/
-Inbox ~/mail/fneuhaus@cern.ch/INBOX
-
-Channel cern-default
-Far :cern-remote:
-Near :cern-local:
-Patterns "INBOX" "INBOX/*" "Junk-E-Mail"
-Create Both
-Expunge Both
-SyncState *
-
-Channel cern-sent
-Far :cern-remote:"Gesendete Elemente"
-Near  :cern-local:"Sent"
-Create Both
-Expunge Both
-SyncState *
-
-Group fneuhaus@cern.ch
-Channel cern-default
-Channel cern-sent
-
-################################################
 
 IMAPAccount students
 Host mail.uni-mainz.de
@@ -150,5 +113,4 @@ SyncState *
 
 Group fneuhaus@students.uni-mainz.de
 Channel students-default
-Channel students-drafts
 Channel students-sent
