@@ -179,7 +179,7 @@ macro attach V \
 && rm ~/.cache/mutt_mail.html<enter>\
 "
 
-macro attach P "<pipe-entry>$HOME/bin/paperless-post<enter>"
+macro attach P "<pipe-entry>$HOME/.local/bin/paperless-post<enter>"
 
 bind attach S save-entry
 macro attach s "<save-entry><bol>~/scratch/<eol>" "Save to scratch space"
