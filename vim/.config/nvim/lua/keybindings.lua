@@ -31,9 +31,6 @@ map("n", "<leader><C-L>", "<c-w>L", options)
 -- Write file
 map("n", "<leader>w", ":update<cr>", options)
 
--- Run black on the file
-map("n", "<leader>b", ":Black<cr>", options)
-
 -- Hide search highlight
 map("n", "<leader>n", ":nohlsearch<cr>", options)
 
