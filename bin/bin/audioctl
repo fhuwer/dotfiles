@@ -45,10 +45,23 @@ def _get_sink_by_name(pulse, target_name):
 
 
 @cli.command()
+@click.option("--toggle", is_flag=True)
+@pass_pulse
+def mute(pulse, toggle):
+    """Mute or toggle the active source."""
+    try:
+        sink = pulse.get_sink_by_name(pulse.server_info().default_sink_name)
+        pulse.mute(sink, not sink.mute if toggle else True)
+    except IOError as e:
+        print(e)
+        exit(1)
+
+
+@cli.command()
 @click.argument("name", default="handy recorder")
 @click.option("--toggle", is_flag=True)
 @pass_pulse
-def mute(pulse, name, toggle):
+def mute_source(pulse, name, toggle):
     """Mute or toggle the given source."""
     try:
         source = _get_source_by_name(pulse, name.lower())
