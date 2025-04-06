@@ -1,0 +1,120 @@
+@define-color background rgb (34, 34, 34);
+@define-color background-alt rgb (68, 68, 68);
+@define-color foreground rgb (223, 223, 223);
+@define-color icon rgb (85, 85, 85);
+@define-color primary rgb (255, 181, 42);
+@define-color secondary rgb (230, 0, 83);
+@define-color urgent rgb (152, 35, 52);
+@define-color high rgb (42, 122, 122);
+@define-color inactive rgb (126, 126, 126);
+
+* {
+  font-family: 'Hack Nerd Font Propo', Helvetica, Arial, sans-serif;
+  font-size: 8pt;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  min-height: 0;
+}
+
+window#waybar {
+  color: @foreground;
+  background-color: @background;
+  transition-property: background-color;
+  transition-duration: .5s;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+#workspaces {
+  margin: 0;
+  padding: 0;
+}
+
+#workspaces button {
+  padding: 0px;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  color: @inactive;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.focused {
+  background-color: @high;
+  color: @foreground;
+}
+
+#workspaces button.urgent {
+  background-color: @urgent;
+}
+
+#mode {
+  background-color: #64727D;
+}
+
+.icon,
+i {
+  color: @icon;
+  color: red;
+}
+
+label.module {
+  padding: 0px 6px;
+  color: @foreground;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+  margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+  margin-right: 0;
+}
+
+#battery.charging, #battery.plugged {
+  color: #ffffff;
+  background-color: #26A65B;
+}
+
+label:focus {
+  background-color: #000000;
+}
+
+#network.disconnected {
+  background-color: #f53c3c;
+}
+
+#pulseaudio.muted {
+  background-color: #90b1b1;
+  color: #2a5c45;
+}
+
+#tray {
+  margin-left: 4px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: #eb4d4b;
+}
+
+#idle_inhibitor {
+  min-width: 15px;
+}
+
+#idle_inhibitor.activated {
+  color: @primary;
+}
