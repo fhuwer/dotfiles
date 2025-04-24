@@ -7,6 +7,8 @@
 @define-color urgent rgb (152, 35, 52);
 @define-color high rgb (42, 122, 122);
 @define-color inactive rgb (126, 126, 126);
+@define-color visible-foreground rgb (136, 212, 212);
+@define-color visible-background rgb (49, 65, 75);
 
 * {
   font-family: 'Hack Nerd Font Propo', Helvetica, Arial, sans-serif;
@@ -44,6 +46,11 @@ window#waybar.hidden {
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
   background: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.visible {
+  background-color: @visible-background;
+  color: @visible-foreground;
 }
 
 #workspaces button.focused {
