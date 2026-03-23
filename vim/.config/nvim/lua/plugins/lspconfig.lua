@@ -1,29 +1,35 @@
 local M = { "neovim/nvim-lspconfig" }
-local function opts(description, buffer)
-  return { noremap=true, silent=true, desc=description, buffer=buffer }
-end
 
 M.dependencies = {
   "hrsh7th/cmp-nvim-lsp",
 }
 
-local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts("Open floating diagnostics"))
-vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts("Jump to previous diagnostic"))
-vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts("Jump to next diagnostic"))
-vim.keymap.set("n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts("Open diagnostic buffer"))
-vim.keymap.set("n", "<leader>b", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts("Format buffer"))
-
-local on_attach = function(client, bufnr)
-  vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts("Goto declaration", bufnr))
-  vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts("Goto definition", bufnr))
-  vim.keymap.set("n", "gh", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts("Show signature help", bufnr))
-  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename symbol", bufnr))
-end
-
 function M.config()
-  local lspconfig = require("lspconfig")
+  vim.api.nvim_create_autocmd('LspAttach', {
+    desc = 'LSP actions',
+    callback = function(event)
+      local function opts(description)
+        return { noremap=true, silent=true, desc=description, buffer=event.buf }
+      end
+
+      local lsp = vim.lsp.buf
+
+      vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts("Open floating diagnostics"))
+      vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts("Jump to previous diagnostic"))
+      vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts("Jump to next diagnostic"))
+      vim.keymap.set("n", "<leader>b", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts("Format buffer"))
+
+      vim.keymap.set('n', 'gD', lsp.declaration, opts("Goto declaration"))
+      vim.keymap.set('n', 'gd', lsp.definition, opts("Goto definition"))
+      vim.keymap.set('n', 'gh', lsp.signature_help, opts("Show signature help"))
+      vim.keymap.set('n', 'gi', lsp.implementation, opts('List implementations (qf)'))
+      vim.keymap.set('n', 'go', lsp.type_definition, opts('Goto type definition'))
+      vim.keymap.set('n', 'gr', lsp.references, opts('List references (qf)'))
+      vim.keymap.set('n', 'gs', lsp.signature_help, opts('Display signature help'))
+      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename symbol"))
+      vim.keymap.set('n', '<leader>ca', lsp.code_action, opts('Show code actions'))
+    end
+  })
 
   vim.diagnostic.config({
     update_in_insert = true,
@@ -31,27 +37,16 @@ function M.config()
     virtual_text = true,
   })
 
-  lspconfig.pylsp.setup{
-    on_attach = on_attach,
-    cmd = { vim.fn.expand("$HOME/.virtualenvs/neovim/bin/pylsp") },
-    settings = {
-      pylsp = {
-        plugins = {
-          pylint = { enabled = false },
-          flake8 = { enabled = false },
-          autopep8 = { enabled = false },
-          yapf = { enabled = false },
-          pycodestyle = { enabled = false },
-          pyflakes = { enabled = false },
-          rope = { enabled = true }
-        }
-      }
-    }
-  }
-  lspconfig.ruff.setup({
-    on_attach = on_attach,
-    capabilities = cmp_capabilities,
-    cmd = { vim.fn.expand("$HOME/.virtualenvs/neovim/bin/ruff"), "server" },
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+  vim.lsp.enable("ty")
+  vim.lsp.config("ty", {
+    capabilities = capabilities,
+  })
+
+  vim.lsp.enable("ruff")
+  vim.lsp.config("ruff", {
+    capabilities = capabilities,
     init_options = {
       settings = {
         lineLength = 100,
@@ -64,11 +59,30 @@ function M.config()
       }
     }
   })
-  lspconfig.tinymist.setup{
+
+  vim.lsp.enable("pylsp")
+  vim.lsp.config("pylsp", {
+    cmd = { vim.fn.expand("$HOME/.virtualenvs/neovim/bin/pylsp") },
+    settings = {
+      pylsp = {
+        plugins = {
+          pylint = { enabled = false },
+          flake8 = { enabled = false },
+          pycodestyle = { enabled = false },
+          pyflakes = { enabled = false },
+          rope = { enabled = true }
+        }
+      }
+    }
+  })
+
+  vim.lsp.enable("tinymist")
+  vim.lsp.config("tinymist", {
     capabilities = cmp_capabilities,
-  }
-  lspconfig.ccls.setup {
-    on_attach = on_attach,
+  })
+
+  vim.lsp.enable("ccls")
+  vim.lsp.config("ccls", {
     capabilities = cmp_capabilities,
     filetypes = { "c", "cpp", "objc", "objcpp", "arduino" },
     init_options = {
@@ -77,7 +91,9 @@ function M.config()
       };
       -- compilationDatabaseDirectory = "build";
     }
-  }
+  })
+  
+
 end
 
 return M
